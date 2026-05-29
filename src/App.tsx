@@ -9,7 +9,6 @@ import JavaAppsSection from './components/JavaAppsSection'
 import PythonAppsSection from './components/PythonAppsSection'
 import AboutSection from './components/AboutSection'
 import NetworkingSection from './components/NetworkingSection'
-import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
 import GardenSection from './components/GardenSection'
 import Footer from './components/Footer'
@@ -183,7 +182,6 @@ function App() {
         <PythonAppsSection onOpenDownloadModal={openDownloadModal} />
         <AboutSection onOpenCertModal={openCertModal} />
         <NetworkingSection onOpenDeviceModal={openDeviceModal} />
-        <TestimonialsSection />
         <ContactSection
           formData={formData}
           formStatus={formStatus}

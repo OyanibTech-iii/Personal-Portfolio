@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip } from 'recharts'
-import GitHubLanguageProgress from './GitHubLanguageProgress'
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
+import { ProgressBarCircle } from "@/components/base/progress-indicators/progress-circles"
 import profileImg from '../assets/profile.png'
 import img01 from '../assets/01.png'
 import img02 from '../assets/02.png'
@@ -13,6 +13,7 @@ import cert2Img from '../assets/e-cert-2.png'
 import cisspCertImg from '../assets/cissp certification.png'
 import isc2Cert1Img from '../assets/isc2 cert/cc domain 1.png'
 import isc2Cert2Img from '../assets/isc2 cert/cc domain 2.png'
+import { Button } from './ui/button'
 
 interface AboutSectionProps {
   onOpenCertModal: (cert: { src: string; title: string; issuer: string; year: string; url?: string }) => void
@@ -25,6 +26,12 @@ const skillData = [
   { subject: 'Cybersecurity', A: 80, fullMark: 100 },
   { subject: 'Networking', A: 75, fullMark: 100 },
   { subject: 'Mobile Dev', A: 85, fullMark: 100 },
+];
+
+const focusData = [
+  { name: 'Symfony', value: 40 },
+  { name: 'Docker', value: 37 },
+  { name: 'Sys Admin', value: 36 },
 ];
 
 export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
@@ -83,7 +90,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
 
         <div className="md:col-span-2">
           <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">Professional Profile</h2>
-          <p className="mt-6 max-w-prose text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed text-balance">
+          <p className="mt-6 max-w-prose text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed text-balance text-left">
             I'm a versatile software engineer and cybersecurity enthusiast focused on building secure, fast,
             and visually cohesive digital ecosystems. I specialize in bridging the gap between robust backend 
             logic and delightful user experiences through clean code and modern design systems.
@@ -97,59 +104,58 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
             ))}
           </div>
 
-          <div className="mt-10">
-            <GitHubLanguageProgress username="OyanibTech-iii" />
-          </div>
-
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            <div className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800">
-              <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-4">Core Competencies</h3>
-              <div className="space-y-3">
-                {[
-                  { label: 'Full-Stack Development', level: 90 },
-                  { label: 'Cybersecurity Auditing', level: 85 },
-                  { label: 'Cloud Infrastructure', level: 75 },
-                ].map(item => (
-                  <div key={item.label}>
-                    <div className="flex justify-between text-xs mb-1">
-                      <span className="text-neutral-600 dark:text-neutral-400">{item.label}</span>
-                      <span className="text-shamrock-600 font-bold">{item.level}%</span>
-                    </div>
-                    <div className="h-1.5 w-full bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
-                      <motion.div 
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${item.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: 'easeOut' }}
-                        className="h-full bg-shamrock-500 rounded-full"
-                      />
-                    </div>
-                  </div>
-                ))}
+            <div className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800">
+              <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-8 uppercase tracking-widest text-center">Core Competencies</h3>
+              <div className="flex flex-wrap justify-center gap-6">
+                <ProgressBarCircle size="xs" label="Full-Stack Development" min={0} max={100} value={90} />
+                <ProgressBarCircle size="xs" label="Cybersecurity Auditing" min={0} max={100} value={85} />
+                <ProgressBarCircle size="xs" label="Cloud Infrastructure" min={0} max={100} value={75} />
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800">
-              <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-4">Current Focus</h3>
-              <ul className="space-y-2">
-                {[
-                  'Advanced LLM Integration',
-                  'Vulnerability Assessment',
-                  'Network Architecture Design',
-                  'PWA Performance Optimization'
-                ].map(focus => (
-                  <li key={focus} className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-shamrock-500 mr-2" />
-                    {focus}
-                  </li>
-                ))}
-              </ul>
+            <div className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800">
+              <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-6 uppercase tracking-widest text-center">Current Focus</h3>
+              <div className="h-48 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart layout="vertical" data={focusData} margin={{ left: -20, right: 30, top: 10, bottom: 10 }}>
+                    <XAxis type="number" hide domain={[0, 100]} />
+                    <YAxis 
+                      dataKey="name" 
+                      type="category" 
+                      tick={{ fill: 'var(--color-neutral-500)', fontSize: 12, fontWeight: 600 }}
+                      width={80}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <Tooltip 
+                      cursor={{ fill: 'transparent' }}
+                      contentStyle={{ 
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)', 
+                        borderRadius: '8px', 
+                        border: 'none',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' 
+                      }}
+                    />
+                    <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={24}>
+                      {focusData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill="var(--color-shamrock-500)" fillOpacity={0.6 + (index * 0.1)} />
+                      ))}
+                      <LabelList 
+                        dataKey="value" 
+                        position="right" 
+                        formatter={(value: number) => `${value}%`} 
+                        className="fill-neutral-500 dark:fill-neutral-400 text-[10px] font-bold" 
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Rest of the workshops and certificates remain same or enhanced as needed */}
       <div className="mx-auto mt-16 max-w-5xl">
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-xl font-bold text-neutral-900 dark:text-white">Workshops & Training</h3>
@@ -194,6 +200,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
           ))}
         </div>
       </div>
+      <div className="pointer-events-none absolute -right-24 -top-24 -z-10 h-56 w-56 rounded-full bg-shamrock-100 opacity-60 blur-3xl dark:bg-shamrock-800/40" />
     </section>
   )
 }
