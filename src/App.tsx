@@ -9,6 +9,7 @@ import JavaAppsSection from './components/JavaAppsSection'
 import PythonAppsSection from './components/PythonAppsSection'
 import AboutSection from './components/AboutSection'
 import NetworkingSection from './components/NetworkingSection'
+import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
 import GardenSection from './components/GardenSection'
 import Footer from './components/Footer'
@@ -171,17 +172,18 @@ function App() {
   }
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-950 dark:to-neutral-950">
+    <div className="min-h-dvh bg-background text-foreground">
       <Header />
       <main id="home" className="mx-auto max-w-6xl px-6">
         <Hero />
-        <GraphicsSection />
+        <GraphicsSection onOpenDeviceModal={openDeviceModal} />
         <WebAPKsSection />
         <YouTubeTutorialsSection />
         <JavaAppsSection onOpenDownloadModal={openDownloadModal} />
         <PythonAppsSection onOpenDownloadModal={openDownloadModal} />
         <AboutSection onOpenCertModal={openCertModal} />
         <NetworkingSection onOpenDeviceModal={openDeviceModal} />
+        <TestimonialsSection />
         <ContactSection
           formData={formData}
           formStatus={formStatus}

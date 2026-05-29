@@ -1,70 +1,122 @@
 import { motion } from 'framer-motion'
-import { Code, MessageCircle } from 'react-feather'
+import { ExternalLink, Layout, Quote, QrCode, ShieldAlert, Sprout } from 'lucide-react'
+import { Button } from './ui/button'
 
 export default function WebAPKsSection() {
   const apks = [
     {
+      name: 'Growfico',
+      description: 'An innovative agriculture and sustainability platform designed to optimize crop management and promote eco-friendly farming practices.',
+      link: 'https://web-dev-deployment-production.up.railway.app',
+      icon: Sprout,
+      tags: ['Agriculture', 'Sustainability', 'Tech']
+    },
+    {
+      name: 'Vulnerable Test Space',
+      description: 'A purposefully vulnerable web application designed as a controlled environment for penetration testing, security auditing, and ethical hacking practice.',
+      link: 'https://oyanibtestspace-1.onrender.com',
+      icon: ShieldAlert,
+      tags: ['PHP', 'Security', 'Pentesting']
+    },
+    {
+      name: 'Styled QR',
+      description: 'A sophisticated QR code generator that allows for custom styling, branding, and high-resolution exports for professional use.',
+      link: 'https://styledqr.onrender.com',
+      icon: QrCode,
+      tags: ['Next.js', 'Utility', 'Design']
+    },
+    {
       name: 'Web App Launcher',
-      description: 'A progressive web app for launching and managing web applications.',
+      description: 'A robust progressive web app platform designed for seamless launching and centralized management of multiple web applications.',
       link: 'https://webapplaucher.netlify.app/',
-      icon: Code
+      icon: Layout,
+      tags: ['React', 'PWA', 'Productivity']
     },
     {
       name: 'Random Quote Generator',
-      description: 'A web app that generates random quotes for inspiration and motivation.',
+      description: 'An inspirational digital space that algorithmically delivers curated quotes for focus, motivation, and creative spark.',
       link: 'https://randomqt-quotegenerator.netlify.app/',
-      icon: MessageCircle
+      icon: Quote,
+      tags: ['API', 'Frontend', 'Design']
     }
   ]
 
   return (
-    <section id="web-apks" className="mt-14 rounded-3xl border border-neutral-200/80 bg-white/70 p-8 shadow-sm backdrop-blur-sm transition-colors duration-300 dark:border-neutral-800 dark:bg-neutral-900/50 sm:p-12">
+    <section id="web-apks" className="mt-20 py-12">
       <div className="mx-auto max-w-5xl">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight">Web APKs</h2>
-            <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">Progressive web app recently built.</p>
-          </div>
+        <div className="flex flex-col items-center text-center mb-12">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold tracking-tight sm:text-4xl">Web Applications</motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-lg">
+            High-performance Progressive Web Apps (PWAs) built with modern frameworks to deliver native-like experiences.
+          </motion.p>
         </div>
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           {apks.map((apk, i) => {
             const IconComponent = apk.icon
             return (
-              <motion.div key={i} whileHover={{ y: -8 }} transition={{ duration: 0.3 }} className="group relative overflow-hidden rounded-xl bg-white/60 shadow-sm dark:bg-neutral-900/50">
-                <a href={apk.link} target="_blank" rel="noreferrer" className="block">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <motion.div
-                        className="inline-flex items-center justify-center rounded-lg bg-shamrock-100 p-3 dark:bg-shamrock-900/30"
-                        whileHover={{ rotate: 6, scale: 1.1 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <IconComponent className="h-6 w-6 text-shamrock-600 dark:text-shamrock-400" />
-                      </motion.div>
-                      <h3 className="mt-4 text-lg font-semibold transition-colors group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400">{apk.name}</h3>
-                      <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{apk.description}</p>
-                      <motion.div
-                        className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-shamrock-500 px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:shadow-lg"
-                        whileHover={{ x: 4 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <span>Visit App</span>
-                        <motion.span
-                          className="ml-1"
-                          animate={{ x: [0, 2, 0] }}
-                          transition={{ duration: 0.8, repeat: Infinity }}
-                        >
-                          →
-                        </motion.span>
-                      </motion.div>
-                    </div>
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group relative flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
+              >
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400">
+                    <IconComponent className="h-6 w-6" />
                   </div>
-                </a>
+                  <div className="flex gap-2">
+                    {apk.tags.map(tag => (
+                      <span key={tag} className="inline-flex items-center rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white transition-colors group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400">
+                    {apk.name}
+                  </h3>
+                  <p className="mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    {apk.description}
+                  </p>
+                </div>
+
+                <div className="mt-8">
+                  <a href={apk.link} target="_blank" rel="noreferrer" className="inline-block w-full">
+                    <Button variant="outline" className="w-full group/btn rounded-xl transition-all duration-300 hover:bg-shamrock-500 hover:text-white dark:hover:bg-shamrock-600 border-neutral-200 dark:border-neutral-700">
+                      Visit Live Application
+                      <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                    </Button>
+                  </a>
+                </div>
               </motion.div>
             )
           })}
         </div>
-        <p className="mt-6 text-xs text-neutral-500 dark:text-neutral-400">More APKs coming soon...</p>
+        
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center"
+        >
+          <p className="text-sm font-medium text-neutral-500 dark:text-neutral-500 animate-pulse">
+            Upcoming: Cloud-integrated Dashboard & Real-time Messenger
+          </p>
+        </motion.div>
       </div>
     </section>
   )
