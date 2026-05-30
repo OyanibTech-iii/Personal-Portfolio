@@ -1,10 +1,39 @@
 import { motion } from 'framer-motion'
+import { 
+  Network, 
+  Layers, 
+  Globe, 
+  ShieldCheck, 
+  Terminal, 
+  Settings, 
+  Cpu, 
+  Server, 
+  Activity, 
+  ArrowRight,
+  Database,
+  Search,
+  Zap
+} from 'lucide-react'
 import multilayerSwitch from '../assets/multilayer-switch.png'
 import routerImg from '../assets/router.png'
 
-const staggerItem = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
 }
 
 interface NetworkingSectionProps {
@@ -13,159 +42,218 @@ interface NetworkingSectionProps {
 
 export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSectionProps) {
   const fundamentals = [
-    { title: 'OSI Model', desc: '7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application' },
-    { title: 'TCP/IP Model', desc: '4 layers: Link, Internet, Transport, Application - modern network architecture' },
-    { title: 'TCP vs UDP', desc: 'TCP: reliable, ordered, connection-based | UDP: fast, connectionless, unreliable' },
-    { title: 'LAN vs WAN', desc: 'LAN: local networks (home/office) | WAN: wide area networks (internet)' },
-    { title: 'Client-Server', desc: 'Centralized model where clients request services from servers' },
-    { title: 'Peer-to-Peer', desc: 'Distributed model where devices act as both clients and servers' }
+    { title: 'OSI Model', desc: '7 layers of network communication from Physical to Application.', icon: <Layers className="w-5 h-5" /> },
+    { title: 'TCP/IP Model', desc: 'The backbone of the modern internet architecture.', icon: <Globe className="w-5 h-5" /> },
+    { title: 'TCP vs UDP', desc: 'Reliable connection-based vs fast connectionless transport.', icon: <Activity className="w-5 h-5" /> },
+    { title: 'LAN vs WAN', desc: 'Local area networks versus wide area connectivity.', icon: <Network className="w-5 h-5" /> },
+    { title: 'Architecture', desc: 'Client-Server and Peer-to-Peer distribution models.', icon: <Server className="w-5 h-5" /> },
   ]
 
   const devices = [
-    { src: multilayerSwitch, title: 'Multilayer Switch', desc: 'Layer 2/3 switch for VLAN configuration, switching, and routing' },
-    { src: routerImg, title: 'Network Router', desc: 'Routes traffic between networks using routing protocols' }
+    { src: multilayerSwitch, title: 'Multilayer Switch', desc: 'Layer 2/3 switch for VLANs, switching, and routing.' },
+    { src: routerImg, title: 'Network Router', desc: 'Directs traffic between networks using intelligent protocols.' }
   ]
 
   const ipAddressing = [
-    { title: 'IPv4 Structure', desc: '32-bit address: 4 octets (0-255) e.g., 192.168.1.1' },
-    { title: 'Public vs Private IPs', desc: 'Public: routable on internet | Private: 10.x.x.x, 172.16-31.x.x, 192.168.x.x' },
-    { title: 'CIDR Notation', desc: 'Classless Inter-Domain Routing: /24 = 255.255.255.0 subnet mask' },
-    { title: 'Subnetting', desc: '/24 = 256 IPs, /26 = 64 IPs, /28 = 16 IPs - dividing networks efficiently' }
+    { title: 'IPv4 & IPv6', desc: '32-bit and 128-bit addressing schemes for global identification.', icon: <Settings className="w-5 h-5" /> },
+    { title: 'Public vs Private', desc: 'Routable public IPs vs internal private address spaces.', icon: <ShieldCheck className="w-5 h-5" /> },
+    { title: 'CIDR & Subnetting', desc: 'Efficient network division using classless routing notation.', icon: <Zap className="w-5 h-5" /> },
   ]
 
   const protocols = [
-    { title: 'HTTP/HTTPS', desc: 'Web protocol | HTTPS adds encryption for secure communication' },
-    { title: 'FTP', desc: 'File Transfer Protocol - transferring files between systems' },
-    { title: 'DNS', desc: 'Domain Name System - translates domain names to IP addresses' },
-    { title: 'DHCP', desc: 'Automatic IP assignment to devices on a network' },
-    { title: 'ARP', desc: 'Address Resolution Protocol - maps IP addresses to MAC addresses' },
-    { title: 'ICMP (Ping)', desc: 'Internet Control Message Protocol - tests connectivity between devices' }
+    { title: 'HTTP/HTTPS', desc: 'Web protocols with TLS/SSL encryption.', icon: <Globe className="w-4 h-4" /> },
+    { title: 'DNS', desc: 'Domain name resolution service.', icon: <Search className="w-4 h-4" /> },
+    { title: 'DHCP', desc: 'Dynamic IP address allocation.', icon: <Cpu className="w-4 h-4" /> },
+    { title: 'ARP', desc: 'IP to MAC address resolution.', icon: <Database className="w-4 h-4" /> },
+    { title: 'ICMP', desc: 'Network diagnostics and connectivity testing.', icon: <Activity className="w-4 h-4" /> },
+    { title: 'FTP/SSH', desc: 'Secure file transfer and remote access.', icon: <Terminal className="w-4 h-4" /> }
   ]
 
   const tools = [
-    { tool: 'Cisco Packet Tracer', desc: 'Network simulation - core tool for all projects' },
-    { tool: 'Cisco CLI', desc: 'Command-line configuration of routers and switches' },
-    { tool: 'Wireshark', desc: 'Packet analysis and network protocol inspection' },
-    { tool: 'Ping / Ipconfig', desc: 'Basic troubleshooting utilities' },
-    { tool: 'GNS3', desc: 'Advanced network emulation (alternative to Packet Tracer)' },
-    { tool: 'React & Git', desc: 'Portfolio and version control' }
+    { name: 'Cisco Packet Tracer', desc: 'Network simulation', icon: <Terminal className="w-4 h-4" /> },
+    { name: 'Cisco CLI', desc: 'Router/Switch config', icon: <Terminal className="w-4 h-4" /> },
+    { name: 'Wireshark', desc: 'Packet analysis', icon: <Search className="w-4 h-4" /> },
+    { name: 'GNS3', desc: 'Advanced emulation', icon: <Cpu className="w-4 h-4" /> },
+    { name: 'Kali Linux', desc: 'Security testing', icon: <ShieldCheck className="w-4 h-4" /> },
+    { name: 'Network Utilities', desc: 'Ping, Traceroute', icon: <Activity className="w-4 h-4" /> }
   ]
 
   return (
-    <section id="networking" className="mt-14 rounded-3xl border border-neutral-200/80 bg-white/70 p-8 shadow-sm backdrop-blur-sm transition-colors duration-300 dark:border-neutral-800 dark:bg-neutral-900/50 sm:p-12">
-      <div className="mx-auto max-w-5xl">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight">Core Networking Knowledge</h2>
-            <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">Cisco Packet Tracer projects showcasing practical networking concepts and theory.</p>
-          </div>
-        </div>
-
-        <div className="mt-8 space-y-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Network Fundamentals</h3>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {fundamentals.map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={staggerItem}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-50px" }}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                  className="rounded-lg border border-neutral-200/70 bg-white/60 p-4 dark:border-neutral-800/70 dark:bg-neutral-900/50">
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.1 }}
-                    className="font-medium text-neutral-900 dark:text-white">{item.title}</motion.p>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.15 }}
-                    className="mt-1 text-xs text-neutral-600 dark:text-neutral-300">{item.desc}</motion.p>
-                </motion.div>
-              ))}
+    <section id="networking" className="mt-20 py-12">
+      <div className="mx-auto max-w-6xl px-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-shamrock-100 dark:bg-shamrock-900/30 text-shamrock-600 dark:text-shamrock-400">
+              <Network className="w-6 h-6" />
             </div>
+            <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">Core Networking</h2>
+          </div>
+          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
+            Specializing in Cisco network design and implementation, covering everything from fundamental theory to advanced practical configurations.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Knowledge Column */}
+          <div className="lg:col-span-2 space-y-12">
+            {/* Fundamentals */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+                <Layers className="w-5 h-5 text-shamrock-500" />
+                Network Fundamentals
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {fundamentals.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.02, translateY: -5 }}
+                    className="group relative p-5 rounded-2xl border border-neutral-200/60 bg-white/50 dark:border-neutral-800/60 dark:bg-neutral-900/40 backdrop-blur-md overflow-hidden transition-all duration-300"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-shamrock-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="relative flex items-start gap-4">
+                      <div className="mt-1 p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 group-hover:bg-shamrock-100 dark:group-hover:bg-shamrock-900/30 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">{item.title}</h4>
+                        <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* IP Addressing */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+                <Settings className="w-5 h-5 text-shamrock-500" />
+                IP Addressing & Subnetting
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {ipAddressing.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.02 }}
+                    className="p-5 rounded-2xl border border-neutral-200/60 bg-white/50 dark:border-neutral-800/60 dark:bg-neutral-900/40 backdrop-blur-md"
+                  >
+                    <div className="mb-3 text-shamrock-500">{item.icon}</div>
+                    <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">{item.title}</h4>
+                    <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Protocols */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+                <Globe className="w-5 h-5 text-shamrock-500" />
+                Key Protocols
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {protocols.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    variants={itemVariants}
+                    className="flex items-center gap-3 p-3 rounded-xl border border-neutral-200/50 bg-white/30 dark:border-neutral-800/50 dark:bg-neutral-900/20 hover:border-shamrock-200 dark:hover:border-shamrock-900/50 transition-colors"
+                  >
+                    <span className="text-shamrock-500 shrink-0">{item.icon}</span>
+                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{item.title}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Networking Devices & Equipment</h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {devices.map((device, i) => (
-                <figure key={i} className="group relative overflow-hidden rounded-xl border border-neutral-200/70 bg-white/60 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-neutral-800/70 dark:bg-neutral-900/50">
-                  <img src={device.src} alt={device.title} className="h-40 w-full object-cover rounded-md" loading="lazy" />
-                  <figcaption className="mt-3">
-                    <div className="flex items-baseline justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">{device.title}</p>
-                        <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-300">{device.desc}</p>
-                      </div>
+          {/* Sidebar: Devices & Tools */}
+          <div className="space-y-12">
+            {/* Devices */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+                <Cpu className="w-5 h-5 text-shamrock-500" />
+                Hardware
+              </h3>
+              <div className="space-y-4">
+                {devices.map((device, i) => (
+                  <motion.div 
+                    key={i}
+                    whileHover={{ y: -5 }}
+                    className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 dark:border-neutral-800/70 dark:bg-neutral-900/50 shadow-sm"
+                  >
+                    <div className="h-32 w-full overflow-hidden">
+                      <img 
+                        src={device.src} 
+                        alt={device.title} 
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">{device.title}</h4>
+                      <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">{device.desc}</p>
                       <button
                         onClick={() => onOpenDeviceModal(device)}
-                        className="ml-4 inline-flex items-center rounded-md border border-shamrock-200/70 bg-shamrock-50 px-2 py-1 text-xs font-medium text-shamrock-700 hover:bg-shamrock-100"
-                        type="button"
+                        className="mt-3 flex items-center gap-1.5 text-xs font-bold text-shamrock-600 dark:text-shamrock-400 hover:text-shamrock-700 dark:hover:text-shamrock-300 transition-colors"
                       >
-                        View
+                        Technical Specs <ArrowRight className="w-3 h-3" />
                       </button>
                     </div>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4"> IP Addressing & Subnetting</h3>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {ipAddressing.map((item, i) => (
-                <div key={i} className="rounded-lg border border-neutral-200/70 bg-white/60 p-4 dark:border-neutral-800/70 dark:bg-neutral-900/50">
-                  <p className="font-medium text-neutral-900 dark:text-white">{item.title}</p>
-                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-300">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-4"> Key Protocols</h3>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {protocols.map((item, i) => (
-                <div key={i} className="rounded-lg border border-neutral-200/70 bg-white/60 p-4 dark:border-neutral-800/70 dark:bg-neutral-900/50">
-                  <p className="font-medium text-neutral-900 dark:text-white">{item.title}</p>
-                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-300">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className=" text-lg font-semibold mb-4">Tools & Technologies</h3>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {tools.map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={staggerItem}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-50px" }}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                  className="rounded-lg border border-neutral-200/70 bg-white/60 p-4 dark:border-neutral-800/70 dark:bg-neutral-900/50">
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.1 }}
-                    className="font-medium text-neutral-900 dark:text-white">{item.tool}</motion.p>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.15 }}
-                    className="mt-1 text-xs text-neutral-600 dark:text-neutral-300">{item.desc}</motion.p>
-                </motion.div>
-              ))}
-            </div>
+            {/* Tools */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-6 rounded-2xl border border-neutral-200/70 bg-white/60 dark:border-neutral-800/70 dark:bg-neutral-900/50 backdrop-blur-md"
+            >
+              <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-neutral-900 dark:text-white">
+                <Terminal className="w-5 h-5 text-shamrock-500" />
+                Toolbox
+              </h3>
+              <div className="space-y-4">
+                {tools.map((tool, i) => (
+                  <div key={i} className="flex items-center gap-3 group">
+                    <div className="p-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-shamrock-600 dark:text-shamrock-400 group-hover:bg-shamrock-100 dark:group-hover:bg-shamrock-900/30 transition-colors">
+                      {tool.icon}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">{tool.name}</p>
+                      <p className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">{tool.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

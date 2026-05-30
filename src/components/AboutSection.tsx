@@ -29,9 +29,9 @@ const skillData = [
 ];
 
 const focusData = [
+  { name: 'Sys Admin', value: 45 },
   { name: 'Symfony', value: 40 },
   { name: 'Docker', value: 37 },
-  { name: 'Sys Admin', value: 36 },
 ];
 
 export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
@@ -46,7 +46,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
   const workshops = [img01, img02, img03, img04, img05, img06]
 
   return (
-    <section id="about" className="relative isolate overflow-hidden rounded-3xl border border-neutral-200/80 bg-white/70 p-8 shadow-sm backdrop-blur-sm transition-colors duration-300 dark:border-neutral-800 dark:bg-neutral-900/50 sm:p-12">
+    <section id="about" className="relative isolate overflow-hidden rounded-3xl bg-white/70 p-8 backdrop-blur-sm transition-colors duration-300 dark:bg-neutral-900/50 sm:p-12">
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-12 md:grid-cols-3">
         <div className="md:col-span-1 space-y-6">
           <motion.img
@@ -59,14 +59,13 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
             loading="lazy"
           />
           
-          <div className="h-64 w-full">
-            <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-4">Expertise Map</h3>
+          <div className="h-64 w-full ">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart cx="50%" cy="50%" outerRadius="70%" data={skillData}>
-                <PolarGrid stroke="var(--color-neutral-300)" strokeOpacity={0.5} />
+                <PolarGrid stroke="var(--color-shamrock-500)" strokeOpacity={0.6} />
                 <PolarAngleAxis 
                   dataKey="subject" 
-                  tick={{ fill: 'var(--color-neutral-500)', fontSize: 10, fontWeight: 500 }} 
+                  tick={{ fill: 'var(--color-muted-foreground)', fontSize: 10, fontWeight: 600 }} 
                 />
                 <Radar
                   name="Proficiency"
@@ -77,11 +76,13 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                 />
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+                    backgroundColor: 'var(--color-background)', 
                     borderRadius: '12px', 
-                    border: 'none',
-                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' 
+                    border: '1px solid var(--color-border)',
+                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+                    color: 'var(--color-foreground)'
                   }}
+                  itemStyle={{ color: 'var(--color-foreground)' }}
                 />
               </RadarChart>
             </ResponsiveContainer>
@@ -118,13 +119,13 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
               <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-6 uppercase tracking-widest text-center">Current Focus</h3>
               <div className="h-48 w-full">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart layout="vertical" data={focusData} margin={{ left: -20, right: 30, top: 10, bottom: 10 }}>
+                  <BarChart layout="vertical" data={focusData} margin={{ left: 10, right: 30, top: 10, bottom: 10 }}>
                     <XAxis type="number" hide domain={[0, 100]} />
                     <YAxis 
                       dataKey="name" 
                       type="category" 
                       tick={{ fill: 'var(--color-neutral-500)', fontSize: 12, fontWeight: 600 }}
-                      width={80}
+                      width={100}
                       axisLine={false}
                       tickLine={false}
                     />
@@ -144,7 +145,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                       <LabelList 
                         dataKey="value" 
                         position="right" 
-                        formatter={(value: number) => `${value}%`} 
+                        formatter={(value: any) => `${value}%`} 
                         className="fill-neutral-500 dark:fill-neutral-400 text-[10px] font-bold" 
                       />
                     </Bar>
@@ -159,7 +160,6 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
       <div className="mx-auto mt-16 max-w-5xl">
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-xl font-bold text-neutral-900 dark:text-white">Workshops & Training</h3>
-          <span className="text-xs font-bold text-shamrock-600 uppercase tracking-widest bg-shamrock-500/10 px-2 py-1 rounded">Archive</span>
         </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {workshops.map((src, i) => (
@@ -200,7 +200,6 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
           ))}
         </div>
       </div>
-      <div className="pointer-events-none absolute -right-24 -top-24 -z-10 h-56 w-56 rounded-full bg-shamrock-100 opacity-60 blur-3xl dark:bg-shamrock-800/40" />
     </section>
   )
 }

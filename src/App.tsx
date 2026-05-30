@@ -10,7 +10,6 @@ import PythonAppsSection from './components/PythonAppsSection'
 import AboutSection from './components/AboutSection'
 import NetworkingSection from './components/NetworkingSection'
 import ContactSection from './components/ContactSection'
-import GardenSection from './components/GardenSection'
 import Footer from './components/Footer'
 import CertificateModal from './components/CertificateModal'
 import DeviceModal from './components/DeviceModal'
@@ -173,8 +172,10 @@ function App() {
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <Header />
-      <main id="home" className="mx-auto max-w-6xl px-6">
-        <Hero />
+      <main className="mx-auto max-w-6xl px-6">
+        <section id="home">
+          <Hero />
+        </section>
         <GraphicsSection onOpenDeviceModal={openDeviceModal} />
         <WebAPKsSection />
         <YouTubeTutorialsSection />
@@ -190,7 +191,6 @@ function App() {
           onFormChange={handleFormChange}
           onFormSubmit={handleFormSubmit}
         />
-        <GardenSection />
       </main>
       <Footer />
       <CertificateModal cert={modalCert} onClose={closeCertModal} />

@@ -7,7 +7,7 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
-    () => ["Web Dev", "Java Apps", "Python", "Networking", "Graphics"],
+    () => ["Sys Admin", "Web Dev", "Java Apps", "Python", "Networking", "Graphics"],
     []
   );
 
@@ -29,12 +29,12 @@ function Hero() {
           <div className="flex gap-4 flex-col">
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-shamrock-500">Building Solutions in</span>
-              <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
+              <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1 min-h-[1.2em]">
                 &nbsp;
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-semibold"
+                    className="absolute font-semibold left-0 right-0"
                     initial={{ opacity: 0, y: "-100" }}
                     transition={{ type: "spring", stiffness: 50 }}
                     animate={
