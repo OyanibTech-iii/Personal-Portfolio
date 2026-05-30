@@ -7,7 +7,9 @@ const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Graphics', href: '#graphics' },
-  { label: 'Apps', href: '#java-desktop' },
+  { label: 'Web', href: '#web-apks' },
+  { label: 'Mobile', href: '#mobile-apps' },
+  { label: 'Networking', href: '#networking' },
   { label: 'Contact', href: '#contact' },
 ]
 

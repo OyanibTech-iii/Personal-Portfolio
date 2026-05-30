@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Flat } from '@alptugidin/react-circular-progress-bar'
+import { Skeleton } from './ui/skeleton'
 
 function formatPercent(value: number) {
   return Math.round(value)
@@ -11,25 +12,46 @@ export default function GitHubLanguageProgress({ username = 'OyanibTech-iii' }: 
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    // Manual data provided by user with all languages (divided by 2 for proper percentages)
-    const manualData = [
-      { lang: 'HTML', bytes: 42, pct: 42 },
-      { lang: 'CSS', bytes: 26, pct: 26 },
-      { lang: 'JavaScript', bytes: 10.5, pct: 10.5 },
-      { lang: 'TypeScript', bytes: 10, pct: 10 },
-      { lang: 'PHP', bytes: 35, pct: 35 },
-      { lang: 'MySQL', bytes: 20, pct: 20 },
-      { lang: 'Java', bytes: 30, pct: 30 },
-      { lang: 'C++', bytes: 25, pct: 25 }
-    ]
+    // Simulated loading delay
+    const timer = setTimeout(() => {
+      const manualData = [
+        { lang: 'HTML', bytes: 42, pct: 42 },
+        { lang: 'CSS', bytes: 26, pct: 26 },
+        { lang: 'JavaScript', bytes: 10.5, pct: 10.5 },
+        { lang: 'TypeScript', bytes: 10, pct: 10 },
+        { lang: 'PHP', bytes: 35, pct: 35 },
+        { lang: 'MySQL', bytes: 20, pct: 20 },
+        { lang: 'Java', bytes: 30, pct: 30 },
+        { lang: 'C++', bytes: 25, pct: 25 }
+      ]
+      setData(manualData)
+      setLoading(false)
+      setError(null)
+    }, 1500)
 
-    // Use manual data directly without fetching
-    setData(manualData)
-    setLoading(false)
-    setError(null)
+    return () => clearTimeout(timer)
   }, [username])
 
-  if (loading) return <div className="mt-4">Loading GitHub language analytics…</div>
+  if (loading) {
+    return (
+      <div className="mt-6">
+        <Skeleton className="h-5 w-48 mb-2" />
+        <Skeleton className="h-3 w-64 mb-6" />
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-4">
+          {[...Array(8)].map((_, i) => (
+            <div key={i} className="flex flex-col items-center gap-4">
+              <Skeleton className="h-[110px] w-[110px] rounded-full" />
+              <div className="flex flex-col items-center gap-2">
+                <Skeleton className="h-4 w-16" />
+                <Skeleton className="h-3 w-8" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   if (error) return <div className="mt-4 text-sm text-red-600">Error: {error}</div>
   if (!data || data.length === 0) return <div className="mt-4 text-sm text-neutral-600">No language data available.</div>
 

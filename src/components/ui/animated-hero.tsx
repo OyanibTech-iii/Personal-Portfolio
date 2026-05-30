@@ -55,12 +55,12 @@ function Hero() {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
+            <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center my-6">
               Versatile software developer and network specialist dedicated to building robust applications and seamless digital solutions. Explore my projects spanning across multiple platforms and technologies.
             </p>
           </div>
 
-          <div className="mt-4 flex flex-col items-center gap-6">
+          <div className="mt-12 flex flex-col items-center gap-6">
             <Dock>
               <DockIcon name="PHP" href="#web-apks" src="https://cdn.simpleicons.org/php" />
               <DockIcon name="Laravel" href="#web-apks" src="https://cdn.simpleicons.org/laravel" />

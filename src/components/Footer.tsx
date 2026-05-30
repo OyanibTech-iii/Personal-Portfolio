@@ -16,7 +16,9 @@ export default function Footer() {
         { name: "Home", href: "#home" },
         { name: "About", href: "#about" },
         { name: "Graphics", href: "#graphics" },
-        { name: "Apps", href: "#java-desktop" },
+        { name: "Web", href: "#web-apks" },
+        { name: "Mobile", href: "#mobile-apps" },
+        { name: "Networking", href: "#networking" },
         { name: "Contact", href: "#contact" },
       ],
     },
@@ -24,6 +26,7 @@ export default function Footer() {
       title: "Projects",
       links: [
         { name: "Web APKs", href: "#web-apks" },
+        { name: "Mobile Apps", href: "#mobile-apps" },
         { name: "Java Apps", href: "#java-desktop" },
         { name: "Python Apps", href: "#python-apps" },
         { name: "Networking", href: "#networking" },

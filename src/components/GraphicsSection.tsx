@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { ImageWithSkeleton } from './ui/image-with-skeleton'
 import artboard1 from '../assets/Artboard 1.png'
 import lanyard from '../assets/lanyard.png'
 import frameBahalaNani from '../assets/Frame Bahala nani.png'
@@ -59,10 +60,11 @@ export default function GraphicsSection({ onOpenDeviceModal }: GraphicsSectionPr
                 'md:col-span-1 md:row-span-1'
               }`}
             >
-              <img
+              <ImageWithSkeleton
                 src={item.src}
                 alt={item.title}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                containerClassName="h-full w-full"
                 loading="lazy"
               />
               

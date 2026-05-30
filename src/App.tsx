@@ -7,6 +7,7 @@ import WebAPKsSection from './components/WebAPKsSection'
 import YouTubeTutorialsSection from './components/YouTubeTutorialsSection'
 import JavaAppsSection from './components/JavaAppsSection'
 import PythonAppsSection from './components/PythonAppsSection'
+import ReactNativeAppsSection from './components/ReactNativeAppsSection'
 import AboutSection from './components/AboutSection'
 import NetworkingSection from './components/NetworkingSection'
 import ContactSection from './components/ContactSection'
@@ -176,12 +177,13 @@ function App() {
         <section id="home">
           <Hero />
         </section>
+        <AboutSection onOpenCertModal={openCertModal} />
         <GraphicsSection onOpenDeviceModal={openDeviceModal} />
         <WebAPKsSection />
         <YouTubeTutorialsSection />
+        <ReactNativeAppsSection onOpenDownloadModal={openDownloadModal} />
         <JavaAppsSection onOpenDownloadModal={openDownloadModal} />
         <PythonAppsSection onOpenDownloadModal={openDownloadModal} />
-        <AboutSection onOpenCertModal={openCertModal} />
         <NetworkingSection onOpenDeviceModal={openDeviceModal} />
         <ContactSection
           formData={formData}

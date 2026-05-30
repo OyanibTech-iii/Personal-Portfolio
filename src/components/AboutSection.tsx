@@ -13,6 +13,9 @@ import cert2Img from '../assets/e-cert-2.png'
 import cisspCertImg from '../assets/cissp certification.png'
 import isc2Cert1Img from '../assets/isc2 cert/cc domain 1.png'
 import isc2Cert2Img from '../assets/isc2 cert/cc domain 2.png'
+import isc2Cert3Img from '../assets/isc2 cert/cc domain 3.png'
+import isc2Cert4Img from '../assets/isc2 cert/cc domain 4.png'
+import isc2Cert5Img from '../assets/isc2 cert/cc domain 5.png'
 import { Button } from './ui/button'
 
 interface AboutSectionProps {
@@ -40,7 +43,10 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
     { src: cert2Img, title: 'Internet of Things', issuer: 'Mindoro State University', year: '2025' },
     { src: cisspCertImg, title: 'CISSP Certification', issuer: 'Cisco', year: '2025' },
     { src: isc2Cert1Img, title: 'Certified in Cybersecurity Domain 1', issuer: 'ISC2', year: '2026' },
-    { src: isc2Cert2Img, title: 'Certified in Cybersecurity Domain 2', issuer: 'ISC2', year: '2026' }
+    { src: isc2Cert2Img, title: 'Certified in Cybersecurity Domain 2', issuer: 'ISC2', year: '2026' },
+    { src: isc2Cert3Img, title: 'Certified in Cybersecurity Domain 3', issuer: 'ISC2', year: '2026' },
+    { src: isc2Cert4Img, title: 'Certified in Cybersecurity Domain 4', issuer: 'ISC2', year: '2026' },
+    { src: isc2Cert5Img, title: 'Certified in Cybersecurity Domain 5', issuer: 'ISC2', year: '2026' }
   ]
 
   const workshops = [img01, img02, img03, img04, img05, img06]

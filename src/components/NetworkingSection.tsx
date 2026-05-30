@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { 
   Network, 
   Layers, 
@@ -17,7 +17,7 @@ import {
 import multilayerSwitch from '../assets/multilayer-switch.png'
 import routerImg from '../assets/router.png'
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -27,7 +27,7 @@ const containerVariants = {
   }
 }
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
@@ -88,9 +88,6 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
           className="mb-12"
         >
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 rounded-xl bg-shamrock-100 dark:bg-shamrock-900/30 text-shamrock-600 dark:text-shamrock-400">
-              <Network className="w-6 h-6" />
-            </div>
             <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">Core Networking</h2>
           </div>
           <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
@@ -109,7 +106,6 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
               viewport={{ once: true, margin: "-100px" }}
             >
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
-                <Layers className="w-5 h-5 text-shamrock-500" />
                 Network Fundamentals
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -143,7 +139,6 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
               viewport={{ once: true, margin: "-100px" }}
             >
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
-                <Settings className="w-5 h-5 text-shamrock-500" />
                 IP Addressing & Subnetting
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -170,7 +165,6 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
               viewport={{ once: true, margin: "-100px" }}
             >
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
-                <Globe className="w-5 h-5 text-shamrock-500" />
                 Key Protocols
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -197,7 +191,6 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
               viewport={{ once: true }}
             >
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
-                <Cpu className="w-5 h-5 text-shamrock-500" />
                 Hardware
               </h3>
               <div className="space-y-4">
