@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Smartphone, Download, ShieldCheck, Zap } from 'lucide-react'
+import { Smartphone, Download, ShieldCheck, Zap, type LucideIcon } from 'lucide-react'
 import { Button } from './ui/button'
 import growfico3dLogo from '../assets/3d logo.png'
 
@@ -7,8 +7,16 @@ interface ReactNativeAppsSectionProps {
   onOpenDownloadModal: (project: { title: string; downloadLink: string }) => void
 }
 
+interface AppItem {
+  title: string
+  description: string
+  technologies: string[]
+  downloadLink: string
+  icon: string | LucideIcon
+}
+
 export default function ReactNativeAppsSection({ onOpenDownloadModal }: ReactNativeAppsSectionProps) {
-  const apps = [
+  const apps: AppItem[] = [
     {
       title: 'Growfico Mobile',
       description: 'The React Native mobile version of Growfico, designed for on-the-go agriculture management. Features real-time crop monitoring, sustainability tracking, and offline data support.',

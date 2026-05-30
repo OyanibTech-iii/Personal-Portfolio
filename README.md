@@ -1,5 +1,3 @@
-# Pacifico M. Oyanib III - Professional Portfolio
-
 ## Overview
 This repository contains the source code for my professional portfolio, showcasing a diverse range of projects in software engineering, cybersecurity, and network administration. The application is built using modern web technologies to provide a high-performance, responsive, and visually cohesive user experience.
 
