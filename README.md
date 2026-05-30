@@ -1,78 +1,52 @@
-# React + TypeScript + Vite
-``PORTFOLIOv.02`` 
+# Pacifico M. Oyanib III - Professional Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This repository contains the source code for my professional portfolio, showcasing a diverse range of projects in software engineering, cybersecurity, and network administration. The application is built using modern web technologies to provide a high-performance, responsive, and visually cohesive user experience.
 
-Currently, two official plugins are available:
+## Core Competencies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Software Development
+*   **Frontend:** Expertise in React, TypeScript, Next.js, and Tailwind CSS for building dynamic, type-safe user interfaces.
+*   **Backend:** Proficiency in Laravel, PHP, and Python for robust server-side logic and API development.
+*   **Mobile:** Experience in React Native CLI for developing high-performance, cross-platform mobile applications.
+*   **Desktop:** Skilled in Java (OOP) and Python for creating efficient desktop utility software.
 
-## React Compiler
+### Cybersecurity and Networking
+*   **Cybersecurity:** Certified in multiple ISC2 Cybersecurity domains, focusing on secure system architecture and auditing.
+*   **Networking:** Specializing in Cisco network design and implementation, including OSI/TCP-IP models, IP addressing, and protocol configuration.
+*   **Infrastructure:** Experience with Docker, VMware, and Kali Linux for environment management and security testing.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Key Projects
 
-## Expanding the ESLint configuration
+### Mobile Applications
+*   **Growfico Mobile:** A React Native CLI application designed for on-the-go agriculture management, featuring real-time monitoring and sustainability tracking.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Web Applications
+*   **Growfico Web:** An innovative agriculture and sustainability platform optimized for crop management.
+*   **Vulnerable Test Space:** A purposefully vulnerable web application for penetration testing and security auditing practice.
+*   **Styled QR:** A sophisticated QR code generator with custom branding and high-resolution export capabilities.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Desktop Applications
+*   **ATM System (Java):** A comprehensive application demonstrating advanced Object-Oriented Programming principles and transaction management.
+*   **Movie Booking System (Java):** A desktop application featuring seat selection and reservation management.
+*   **Determinant Calculator (Python):** A utility application for advanced mathematical computations.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Technical Stack
+*   **Frameworks:** React 19, Vite, Framer Motion
+*   **Styling:** Tailwind CSS, Lucide React Icons
+*   **State Management:** React Hooks
+*   **Deployment:** Optimized for modern cloud environments
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Accreditations
+*   Certified in Cybersecurity (ISC2) - Domains 1 through 5
+*   CISSP Certification (Cisco)
+*   Intellectual Property and IoT Certifications (Mindoro State University)
 
-## Projects ✅
+## Contact Information
+*   **Email:** pacificooyanib@gmail.com
+*   **Facebook:** Pacifico M. Oyanib III
+*   **GitHub:** oyanibTech-iii
+*   **Website:** [Pacifico Oyanib Portfolio](https://oyanibtech-iii.github.io/Portfolio/)
 
-- **Determinant Calculator** (Python desktop APK; APK name: *Determinant calculator*) — Download: [determinantAPKv4.0.zip](https://github.com/OyanibTech-iii/Determinant-Calculator-/archive/refs/tags/determinantAPKv4.0.zip)
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+All rights reserved. © 2026 Pacifico M. Oyanib III.
