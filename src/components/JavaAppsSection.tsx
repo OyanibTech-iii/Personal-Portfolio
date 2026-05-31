@@ -60,7 +60,7 @@ export default function JavaAppsSection({ onOpenDownloadModal }: JavaAppsSection
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400">
                     <IconComponent className="h-6 w-6" />
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {project.technologies.map(tech => (
                       <span key={tech} className="inline-flex items-center rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">
                         {tech}

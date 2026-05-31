@@ -60,8 +60,8 @@ function Hero() {
             </p>
           </div>
 
-          <div className="mt-12 flex flex-col items-center gap-6">
-            <Dock>
+          <div className="mt-12 flex w-full max-w-full flex-col items-center gap-6 px-4">
+            <Dock className="max-w-full">
               <DockIcon name="PHP" href="#web-apks" src="https://cdn.simpleicons.org/php" />
               <DockIcon name="Laravel" href="#web-apks" src="https://cdn.simpleicons.org/laravel" />
               <DockIcon name="Symfony" href="#web-apks" src="https://cdn.simpleicons.org/symfony" />

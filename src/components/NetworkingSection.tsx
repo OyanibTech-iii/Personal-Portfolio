@@ -172,7 +172,7 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
                   <motion.div
                     key={i}
                     variants={itemVariants}
-                    className="flex items-center gap-3 p-3 rounded-xl border border-neutral-200/50 bg-white/30 dark:border-neutral-800/50 dark:bg-neutral-900/20 hover:border-shamrock-200 dark:hover:border-shamrock-900/50 transition-colors"
+                    className="flex flex-wrap items-center gap-3 p-3 rounded-xl border border-neutral-200/50 bg-white/30 dark:border-neutral-800/50 dark:bg-neutral-900/20 hover:border-shamrock-200 dark:hover:border-shamrock-900/50 transition-colors"
                   >
                     <span className="text-shamrock-500 shrink-0">{item.icon}</span>
                     <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{item.title}</span>
