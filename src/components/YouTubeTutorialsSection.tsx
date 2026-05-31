@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { Play, ExternalLink, Monitor, Server, Video } from 'lucide-react'
-import { FaYoutube } from 'react-icons/fa'
+import { Play, ExternalLink, Monitor, Server } from 'lucide-react'
 import { Button } from './ui/button'
 
 export default function YouTubeTutorialsSection() {

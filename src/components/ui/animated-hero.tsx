@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { MoveRight, PhoneCall, Code2, Coffee, Terminal, Network, Palette } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/ui/dock";
 
 function Hero() {

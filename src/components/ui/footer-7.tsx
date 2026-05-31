@@ -1,5 +1,5 @@
 import { type ReactElement } from "react";
-import { FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 interface Footer7Props {
   logo?: {

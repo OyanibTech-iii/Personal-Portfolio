@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Terminal, Download, Calculator, Code2, Cpu } from 'lucide-react'
+import { Download, Calculator } from 'lucide-react'
 import { Button } from './ui/button'
 
 interface PythonAppsSectionProps {

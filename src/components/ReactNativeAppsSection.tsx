@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Smartphone, Download, ShieldCheck, Zap, type LucideIcon } from 'lucide-react'
+import { Download, type LucideIcon } from 'lucide-react'
 import { Button } from './ui/button'
 import growfico3dLogo from '../assets/3d logo.png'
 
@@ -30,7 +30,6 @@ export default function ReactNativeAppsSection({ onOpenDownloadModal }: ReactNat
     <section id="mobile-apps" className="mt-20 py-12">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col items-center text-center mb-12">
-
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

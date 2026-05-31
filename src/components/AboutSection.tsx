@@ -145,7 +145,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                       }}
                     />
                     <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={24}>
-                      {focusData.map((entry, index) => (
+                      {focusData.map((_, index) => (
                         <Cell key={`cell-${index}`} fill="var(--color-shamrock-500)" fillOpacity={0.6 + (index * 0.1)} />
                       ))}
                       <LabelList 

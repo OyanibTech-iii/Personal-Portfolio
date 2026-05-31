@@ -7,11 +7,9 @@ import {
   AlertCircle, 
   Loader2, 
   Send, 
-  ArrowRight,
-  ExternalLink,
-  MessageCircle
+  ExternalLink
 } from 'lucide-react'
-import { Facebook, GitHub as Github, Linkedin } from 'react-feather'
+import { Facebook, GitHub as Github } from 'react-feather'
 
 interface ContactSectionProps {
   formData: { name: string; email: string; message: string }
@@ -39,7 +37,7 @@ const itemVariants = {
     x: 0,
     transition: { duration: 0.5, ease: "easeOut" }
   }
-}
+} as const
 
 export default function ContactSection({
   formData,

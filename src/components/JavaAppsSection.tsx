@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Coffee, Download, Code2, Database, Terminal, FileCode } from 'lucide-react'
+import { Download, Database, FileCode } from 'lucide-react'
 import { Button } from './ui/button'
 
 interface JavaAppsSectionProps {
