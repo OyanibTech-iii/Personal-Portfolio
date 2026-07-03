@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, Layout, Quote, QrCode, ShieldAlert, Sprout } from 'lucide-react'
 import { Button } from './ui/button'
 
 export default function WebAPKsSection() {
+  const [showAll, setShowAll] = useState(false)
   const apks = [
     {
       name: 'Growfico',
@@ -61,7 +63,7 @@ export default function WebAPKsSection() {
         </div>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-          {apks.map((apk, i) => {
+          {apks.slice(0, showAll ? apks.length : 4).map((apk, i) => {
             const IconComponent = apk.icon
             return (
               <motion.div 
@@ -73,7 +75,7 @@ export default function WebAPKsSection() {
                 className="group relative flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
               >
                 <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400">
                     <IconComponent className="h-6 w-6" />
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -106,7 +108,24 @@ export default function WebAPKsSection() {
             )
           })}
         </div>
-        
+
+        {apks.length > 4 && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mt-8 text-center"
+          >
+            <Button
+              variant="outline"
+              onClick={() => setShowAll(!showAll)}
+              className="rounded-xl px-8 hover:bg-shamrock-500 hover:text-white dark:hover:bg-shamrock-600"
+            >
+              {showAll ? 'Show Less' : 'Show More'}
+            </Button>
+          </motion.div>
+        )}
+
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

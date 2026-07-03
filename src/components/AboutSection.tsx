@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
 import { ProgressBarCircle } from "@/components/base/progress-indicators/progress-circles"
@@ -39,6 +40,8 @@ const focusData = [
 ];
 
 export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
+  const [showWorkshops, setShowWorkshops] = useState(false)
+  const [showAccreditations, setShowAccreditations] = useState(false)
   const certificates = [
     { src: certImg, title: 'Intellectual Property', issuer: 'Mindoro State University', year: '2025' },
     { src: cert2Img, title: 'Internet of Things', issuer: 'Mindoro State University', year: '2025' },
@@ -165,57 +168,73 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
       </div>
       
       <div className="mx-auto mt-16 max-w-5xl">
-        <div className="flex items-center justify-between mb-8">
-          <h3 className="text-xl font-bold text-neutral-900 dark:text-white">Workshops & Training</h3>
-        </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {workshops.map((src, i) => (
-            <motion.figure
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 shadow-sm transition-all duration-300 dark:border-neutral-800/70 dark:bg-neutral-900/50"
-            >
-              <ImageWithSkeleton
-                src={src}
-                alt={`Workshop ${i + 1}`}
-                className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                containerClassName="h-full w-full"
-                loading="lazy"
-              />
-            </motion.figure>
-          ))}
-        </div>
+        <button 
+          onClick={() => setShowWorkshops(!showWorkshops)}
+          className="flex items-center justify-between w-full mb-8 group"
+        >
+          <h3 className="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">Workshops & Training</h3>
+          <span className="text-sm text-neutral-500 dark:text-neutral-400 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">{showWorkshops ? 'Hide' : 'Show'} Images</span>
+        </button>
+        {showWorkshops && (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {workshops.map((src, i) => (
+              <motion.figure
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 shadow-sm transition-all duration-300 dark:border-neutral-800/70 dark:bg-neutral-900/50"
+              >
+                <ImageWithSkeleton
+                  src={src}
+                  alt={`Workshop ${i + 1}`}
+                  className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                  containerClassName="h-full w-full"
+                  loading="lazy"
+                />
+              </motion.figure>
+            ))}
+          </div>
+        )}
       </div>
       
       <div className="mx-auto mt-16 max-w-5xl">
-        <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-8">Accreditations</h3>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {certificates.map((c, i) => (
-            <motion.figure 
-              key={i} 
-              whileHover={{ y: -5 }}
-              className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 p-4 shadow-sm transition-all duration-300 dark:border-neutral-800/70 dark:bg-neutral-900/50"
-            >
-              <img src={c.src} alt={c.title} className="h-40 w-full object-cover rounded-xl mb-4" loading="lazy" />
-              <figcaption>
-                <p className="text-sm font-bold text-neutral-900 dark:text-white line-clamp-1">{c.title}</p>
-                <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{c.issuer} • {c.year}</p>
-                <Button
-                  onClick={() => onOpenCertModal(c)}
-                  variant="outline"
-                  size="sm"
-                  className="mt-4 w-full rounded-xl hover:bg-shamrock-500 hover:text-white"
-                >
-                  View Credential
-                </Button>
-              </figcaption>
-            </motion.figure>
-          ))}
-        </div>
+        <button 
+          onClick={() => setShowAccreditations(!showAccreditations)}
+          className="flex items-center justify-between w-full mb-8 group"
+        >
+          <h3 className="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">Accreditations</h3>
+          <span className="text-sm text-neutral-500 dark:text-neutral-400 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">{showAccreditations ? 'Hide' : 'Show'} Images</span>
+        </button>
+        {showAccreditations && (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {certificates.map((c, i) => (
+              <motion.figure 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 p-4 shadow-sm transition-all duration-300 dark:border-neutral-800/70 dark:bg-neutral-900/50"
+              >
+                <img src={c.src} alt={c.title} className="h-40 w-full object-cover rounded-xl mb-4" loading="lazy" />
+                <figcaption>
+                  <p className="text-sm font-bold text-neutral-900 dark:text-white line-clamp-1">{c.title}</p>
+                  <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{c.issuer} • {c.year}</p>
+                  <Button
+                    onClick={() => onOpenCertModal(c)}
+                    variant="outline"
+                    size="sm"
+                    className="mt-4 w-full rounded-xl hover:bg-shamrock-500 hover:text-white"
+                  >
+                    View Credential
+                  </Button>
+                </figcaption>
+              </motion.figure>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
