@@ -16,6 +16,7 @@ import isc2Cert2Img from '../assets/isc2 cert/cc domain 2.png'
 import isc2Cert3Img from '../assets/isc2 cert/cc domain 3.png'
 import isc2Cert4Img from '../assets/isc2 cert/cc domain 4.png'
 import isc2Cert5Img from '../assets/isc2 cert/cc domain 5.png'
+import { ImageWithSkeleton } from './ui/image-with-skeleton'
 import { Button } from './ui/button'
 
 interface AboutSectionProps {
@@ -169,12 +170,22 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
         </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {workshops.map((src, i) => (
-            <motion.figure 
-              key={i} 
+            <motion.figure
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
               whileHover={{ scale: 1.02 }}
               className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 shadow-sm transition-all duration-300 dark:border-neutral-800/70 dark:bg-neutral-900/50"
             >
-              <img src={src} alt={`Workshop ${i + 1}`} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" loading="lazy" />
+              <ImageWithSkeleton
+                src={src}
+                alt={`Workshop ${i + 1}`}
+                className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                containerClassName="h-full w-full"
+                loading="lazy"
+              />
             </motion.figure>
           ))}
         </div>

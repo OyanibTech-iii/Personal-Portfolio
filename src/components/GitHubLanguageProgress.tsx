@@ -76,7 +76,7 @@ export default function GitHubLanguageProgress({ username = 'OyanibTech-iii' }: 
                   valueSize: 16,
                   textSize: 11,
                   fontWeight: 'bold',
-                  strokeColor: '#059669',
+                  strokeColor: '#737373',
                   bgStrokeColor: '#d1d5db',
                   valueColor: '#ffffff',
                   textColor: '#111827',
@@ -86,14 +86,14 @@ export default function GitHubLanguageProgress({ username = 'OyanibTech-iii' }: 
                   loadingTime: 1200,
                   valueAnimation: true,
                   intersectionEnabled: false,
-                  miniCircleColor: '#059669',
+                  miniCircleColor: '#737373',
                   miniCircleSize: 8
                 }}
               />
             </div>
             <div className="text-center">
               <div className="text-sm font-bold text-neutral-900 dark:text-neutral-100">{d.lang}</div>
-              <div className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">{formatPercent(d.pct)}%</div>
+              <div className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">{formatPercent(d.pct)}%</div>
             </div>
           </div>
         ))}

@@ -1,6 +1,46 @@
 <!doctype html>
 <html lang="en">
   <head>
+      <script>
+    (function () {
+
+      document.addEventListener('keydown', function (e) {
+        const key = e.key ? e.key.toUpperCase() : '';
+
+        const blocked =
+          key === 'F12' ||
+          (e.ctrlKey && e.shiftKey && ['I', 'J', 'C', 'K'].includes(key)) ||
+          (e.ctrlKey && key === 'U') ||
+          (e.ctrlKey && key === 'S') ||
+          (e.ctrlKey && key === 'P') ||
+          (e.ctrlKey && key === 'A') ||
+          (e.ctrlKey && key === 'C') ||
+          (e.metaKey && e.altKey && ['I', 'J', 'C'].includes(key)) ||
+          (e.ctrlKey && e.shiftKey && key === 'R');
+
+        if (blocked) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      }, true);
+
+      // Right-click / context menu
+      document.addEventListener('contextmenu', e => { e.preventDefault(); }, true);
+
+      // Drag (image/text dragging out of page)
+      document.addEventListener('dragstart', e => { e.preventDefault(); }, true);
+
+      // Text selection (optional — hurts accessibility/usability)
+      document.addEventListener('selectstart', e => { e.preventDefault(); }, true);
+
+      // Copy / cut
+      document.addEventListener('copy', e => { e.preventDefault(); }, true);
+      document.addEventListener('cut', e => { e.preventDefault(); }, true);
+
+      console.log('%cAtleast you reach here', 'color: red; font-weight: bold;');
+    })();
+  </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

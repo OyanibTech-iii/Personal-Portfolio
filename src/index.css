@@ -11,17 +11,17 @@
 
 @theme {
   --font-gondola: "Gondola", sans-serif;
-  --color-shamrock-50: #c3fee1;
-  --color-shamrock-100: #4bfbb9;
-  --color-shamrock-200: #41dda3;
-  --color-shamrock-300: #3bcb95;
-  --color-shamrock-400: #33b283;
-  --color-shamrock-500: #29976e;
-  --color-shamrock-600: #207a58;
-  --color-shamrock-700: #165c42;
-  --color-shamrock-800: #0c3f2c;
-  --color-shamrock-900: #042317;
-  --color-shamrock-950: #02140c;
+  --color-shamrock-50: #fafafa;
+  --color-shamrock-100: #f5f5f5;
+  --color-shamrock-200: #e5e5e5;
+  --color-shamrock-300: #d4d4d4;
+  --color-shamrock-400: #a3a3a3;
+  --color-shamrock-500: #737373;
+  --color-shamrock-600: #525252;
+  --color-shamrock-700: #404040;
+  --color-shamrock-800: #262626;
+  --color-shamrock-900: #171717;
+  --color-shamrock-950: #0a0a0a;
 
   --color-background: white;
   --color-foreground: var(--color-neutral-800);
@@ -78,7 +78,7 @@
   }
 
   ::selection {
-    background-color: rgb(75 251 185 / 0.35); /* shamrock-100 with opacity */
+    background-color: rgb(165 165 165 / 0.35); /* gray with opacity */
   }
 }
 
@@ -120,11 +120,11 @@
     @apply inline-flex items-center gap-2 rounded-xl bg-shamrock-500 px-4 py-3 text-white font-medium transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shamrock-300;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(41, 151, 110, 0.3);
+    box-shadow: 0 4px 15px rgba(115, 115, 115, 0.3);
   }
 
   .btn-glow:hover {
-    box-shadow: 0 8px 25px rgba(41, 151, 110, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(115, 115, 115, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   .btn-glow::before {
@@ -150,7 +150,7 @@
 
   .btn-scale:hover {
     transform: scale(1.08);
-    box-shadow: 0 10px 25px rgba(41, 151, 110, 0.4);
+    box-shadow: 0 10px 25px rgba(115, 115, 115, 0.4);
   }
 
   .btn-scale:active {
@@ -160,13 +160,13 @@
   /* Gradient button */
   .btn-gradient {
     @apply inline-flex items-center gap-2 rounded-xl px-4 py-3 text-white font-medium transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shamrock-300;
-    background: linear-gradient(135deg, #29976e 0%, #207a58 100%);
-    box-shadow: 0 4px 20px rgba(41, 151, 110, 0.3);
+    background: linear-gradient(135deg, #737373 0%, #525252 100%);
+    box-shadow: 0 4px 20px rgba(115, 115, 115, 0.3);
   }
 
   .btn-gradient:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(41, 151, 110, 0.5);
+    box-shadow: 0 8px 30px rgba(115, 115, 115, 0.5);
   }
 
   .btn-gradient:active {

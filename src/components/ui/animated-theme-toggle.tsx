@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { Button } from "./button";
 
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
@@ -7,6 +7,24 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { MoonIcon, SunIcon, SunMoonIcon } from "lucide-react";
 
 type Theme = "system" | "light" | "dark";
+
+const ThemeOption = ({ value, label, icon, selected, onSelect }: { value: Theme; label: string; icon: ReactNode; selected: boolean; onSelect: () => void }) => {
+  return (
+    <button
+      className={cn(
+        "flex items-center gap-2 w-full px-3 py-2 rounded-md text-sm transition-colors",
+        selected
+          ? "bg-accent text-accent-foreground"
+          : "hover:bg-accent/50 hover:text-accent-foreground text-muted-foreground"
+      )}
+      onClick={onSelect}
+    >
+      <span className="w-4 h-4">{icon}</span>
+      <span>{label}</span>
+      {selected && <div className="ml-auto w-2 h-2 rounded-full bg-primary" />}
+    </button>
+  );
+};
 
 export const AnimatedThemeToggle = ({ className }: { className?: string }) => {
   const [theme, setTheme] = useState<Theme>(() => {

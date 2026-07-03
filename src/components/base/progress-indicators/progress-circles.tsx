@@ -28,7 +28,7 @@ export const ProgressBarCircle = ({ size, label, min, max, value }: ProgressBarC
           sign={{ value: '%', position: 'end' }}
           showValue={true}
           sx={{
-            strokeColor: '#29976e', // shamrock-500
+            strokeColor: '#737373',
             bgStrokeColor: 'rgba(0,0,0,0.05)',
             barWidth: 8,
             shape: 'full',
