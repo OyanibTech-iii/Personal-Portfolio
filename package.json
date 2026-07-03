@@ -12,6 +12,7 @@
   "dependencies": {
     "@alptugidin/react-circular-progress-bar": "^1.0.0",
     "@emailjs/browser": "^4.4.1",
+    "@radix-ui/react-popover": "^1.1.10",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/vite": "^4.1.13",
     "class-variance-authority": "^0.7.1",
