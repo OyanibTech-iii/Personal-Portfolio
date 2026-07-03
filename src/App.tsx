@@ -17,6 +17,7 @@ import CertificateModal from './components/CertificateModal'
 import DeviceModal from './components/DeviceModal'
 import DownloadModal from './components/DownloadModal'
 import ToastNotification from './components/ToastNotification'
+import ChatBot from './components/ChatBot'
 import { NotFound } from './components/NotFound'
 
 function Portfolio() {
@@ -201,6 +202,7 @@ function Portfolio() {
       <DeviceModal device={modalDevice} onClose={closeDeviceModal} />
       <DownloadModal project={downloadModalProject} onClose={closeDownloadModal} />
       <ToastNotification toast={toast} />
+      <ChatBot />
     </div>
   )
 }
