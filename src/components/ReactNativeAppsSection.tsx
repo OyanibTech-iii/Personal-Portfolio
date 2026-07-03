@@ -57,7 +57,7 @@ export default function ReactNativeAppsSection({ onOpenDownloadModal }: ReactNat
                 className="group relative flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
               >
                 <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-12 w-12 md:h-16 md:w-16 items-center justify-center rounded-2xl bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400 overflow-hidden shadow-inner">
+                  <div className="flex h-12 w-12 md:h-16 md:w-16 items-center justify-center rounded-full bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400 overflow-hidden shadow-inner">
                     {typeof app.icon === 'string' ? (
                       <img src={app.icon} alt={app.title} className="h-full w-full object-cover p-1" />
                     ) : (

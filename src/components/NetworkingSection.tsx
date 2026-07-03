@@ -1,19 +1,5 @@
 import { motion, type Variants } from 'framer-motion'
-import { 
-  Network, 
-  Layers, 
-  Globe, 
-  ShieldCheck, 
-  Terminal, 
-  Settings, 
-  Cpu, 
-  Server, 
-  Activity, 
-  ArrowRight,
-  Database,
-  Search,
-  Zap
-} from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import multilayerSwitch from '../assets/multilayer-switch.png'
 import routerImg from '../assets/router.png'
 
@@ -42,11 +28,11 @@ interface NetworkingSectionProps {
 
 export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSectionProps) {
   const fundamentals = [
-    { title: 'OSI Model', desc: '7 layers of network communication from Physical to Application.', icon: <Layers className="w-5 h-5" /> },
-    { title: 'TCP/IP Model', desc: 'The backbone of the modern internet architecture.', icon: <Globe className="w-5 h-5" /> },
-    { title: 'TCP vs UDP', desc: 'Reliable connection-based vs fast connectionless transport.', icon: <Activity className="w-5 h-5" /> },
-    { title: 'LAN vs WAN', desc: 'Local area networks versus wide area connectivity.', icon: <Network className="w-5 h-5" /> },
-    { title: 'Architecture', desc: 'Client-Server and Peer-to-Peer distribution models.', icon: <Server className="w-5 h-5" /> },
+    { title: 'OSI Model', desc: '7 layers of network communication from Physical to Application.' },
+    { title: 'TCP/IP Model', desc: 'The backbone of the modern internet architecture.' },
+    { title: 'TCP vs UDP', desc: 'Reliable connection-based vs fast connectionless transport.' },
+    { title: 'LAN vs WAN', desc: 'Local area networks versus wide area connectivity.' },
+    { title: 'Architecture', desc: 'Client-Server and Peer-to-Peer distribution models.' },
   ]
 
   const devices = [
@@ -55,27 +41,27 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
   ]
 
   const ipAddressing = [
-    { title: 'IPv4 & IPv6', desc: '32-bit and 128-bit addressing schemes for global identification.', icon: <Settings className="w-5 h-5" /> },
-    { title: 'Public vs Private', desc: 'Routable public IPs vs internal private address spaces.', icon: <ShieldCheck className="w-5 h-5" /> },
-    { title: 'CIDR & Subnetting', desc: 'Efficient network division using classless routing notation.', icon: <Zap className="w-5 h-5" /> },
+    { title: 'IPv4 & IPv6', desc: '32-bit and 128-bit addressing schemes for global identification.' },
+    { title: 'Public vs Private', desc: 'Routable public IPs vs internal private address spaces.' },
+    { title: 'CIDR & Subnetting', desc: 'Efficient network division using classless routing notation.' },
   ]
 
   const protocols = [
-    { title: 'HTTP/HTTPS', desc: 'Web protocols with TLS/SSL encryption.', icon: <Globe className="w-4 h-4" /> },
-    { title: 'DNS', desc: 'Domain name resolution service.', icon: <Search className="w-4 h-4" /> },
-    { title: 'DHCP', desc: 'Dynamic IP address allocation.', icon: <Cpu className="w-4 h-4" /> },
-    { title: 'ARP', desc: 'IP to MAC address resolution.', icon: <Database className="w-4 h-4" /> },
-    { title: 'ICMP', desc: 'Network diagnostics and connectivity testing.', icon: <Activity className="w-4 h-4" /> },
-    { title: 'FTP/SSH', desc: 'Secure file transfer and remote access.', icon: <Terminal className="w-4 h-4" /> }
+    { title: 'HTTP/HTTPS', desc: 'Web protocols with TLS/SSL encryption.' },
+    { title: 'DNS', desc: 'Domain name resolution service.' },
+    { title: 'DHCP', desc: 'Dynamic IP address allocation.' },
+    { title: 'ARP', desc: 'IP to MAC address resolution.' },
+    { title: 'ICMP', desc: 'Network diagnostics and connectivity testing.' },
+    { title: 'FTP/SSH', desc: 'Secure file transfer and remote access.' }
   ]
 
   const tools = [
-    { name: 'Cisco Packet Tracer', desc: 'Network simulation', icon: <Terminal className="w-4 h-4" /> },
-    { name: 'Cisco CLI', desc: 'Router/Switch config', icon: <Terminal className="w-4 h-4" /> },
-    { name: 'Wireshark', desc: 'Packet analysis', icon: <Search className="w-4 h-4" /> },
-    { name: 'GNS3', desc: 'Advanced emulation', icon: <Cpu className="w-4 h-4" /> },
-    { name: 'Kali Linux', desc: 'Security testing', icon: <ShieldCheck className="w-4 h-4" /> },
-    { name: 'Network Utilities', desc: 'Ping, Traceroute', icon: <Activity className="w-4 h-4" /> }
+    { name: 'Cisco Packet Tracer', desc: 'Network simulation' },
+    { name: 'Cisco CLI', desc: 'Router/Switch config' },
+    { name: 'Wireshark', desc: 'Packet analysis' },
+    { name: 'GNS3', desc: 'Advanced emulation' },
+    { name: 'Kali Linux', desc: 'Security testing' },
+    { name: 'Network Utilities', desc: 'Ping, Traceroute' }
   ]
 
   return (
@@ -117,14 +103,9 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
                     className="group relative p-5 rounded-2xl border border-neutral-200/60 bg-white/50 dark:border-neutral-800/60 dark:bg-neutral-900/40 backdrop-blur-md overflow-hidden transition-all duration-300"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-shamrock-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative flex items-start gap-4">
-                      <div className="mt-1 p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 group-hover:bg-shamrock-100 dark:group-hover:bg-shamrock-900/30 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
-                        {item.icon}
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">{item.title}</h4>
-                        <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{item.desc}</p>
-                      </div>
+                    <div className="relative">
+                      <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">{item.title}</h4>
+                      <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -149,7 +130,6 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
                     whileHover={{ scale: 1.02 }}
                     className="p-5 rounded-2xl border border-neutral-200/60 bg-white/50 dark:border-neutral-800/60 dark:bg-neutral-900/40 backdrop-blur-md"
                   >
-                    <div className="mb-3 text-shamrock-500">{item.icon}</div>
                     <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">{item.title}</h4>
                     <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{item.desc}</p>
                   </motion.div>
@@ -174,7 +154,6 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
                     variants={itemVariants}
                     className="flex flex-wrap items-center gap-3 p-3 rounded-xl border border-neutral-200/50 bg-white/30 dark:border-neutral-800/50 dark:bg-neutral-900/20 hover:border-shamrock-200 dark:hover:border-shamrock-900/50 transition-colors"
                   >
-                    <span className="text-shamrock-500 shrink-0">{item.icon}</span>
                     <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{item.title}</span>
                   </motion.div>
                 ))}
@@ -229,16 +208,12 @@ export default function NetworkingSection({ onOpenDeviceModal }: NetworkingSecti
               viewport={{ once: true }}
               className="p-6 rounded-2xl border border-neutral-200/70 bg-white/60 dark:border-neutral-800/70 dark:bg-neutral-900/50 backdrop-blur-md"
             >
-              <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-neutral-900 dark:text-white">
-                <Terminal className="w-5 h-5 text-shamrock-500" />
+              <h3 className="text-lg font-bold mb-6 text-neutral-900 dark:text-white">
                 Toolbox
               </h3>
               <div className="space-y-4">
                 {tools.map((tool, i) => (
                   <div key={i} className="flex items-center gap-3 group">
-                    <div className="p-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-shamrock-600 dark:text-shamrock-400 group-hover:bg-shamrock-100 dark:group-hover:bg-shamrock-900/30 transition-colors">
-                      {tool.icon}
-                    </div>
                     <div>
                       <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">{tool.name}</p>
                       <p className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">{tool.desc}</p>

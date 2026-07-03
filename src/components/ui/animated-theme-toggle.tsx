@@ -4,7 +4,7 @@ import { Button } from "./button";
 
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
-import { MoonIcon, SunIcon, SunMoonIcon } from "lucide-react";
+import { MoonIcon, SunIcon, Monitor } from "lucide-react";
 
 type Theme = "system" | "light" | "dark";
 
@@ -14,7 +14,7 @@ const ThemeOption = ({ value, label, icon, selected, onSelect }: { value: Theme;
       className={cn(
         "flex items-center gap-2 w-full px-3 py-2 rounded-md text-sm transition-colors",
         selected
-          ? "bg-accent text-accent-foreground"
+          ? "bg-gray-200 text-foreground dark:bg-muted"
           : "hover:bg-accent/50 hover:text-accent-foreground text-muted-foreground"
       )}
       onClick={onSelect}
@@ -74,7 +74,7 @@ export const AnimatedThemeToggle = ({ className }: { className?: string }) => {
 
   const getThemeIcon = () => {
     if (theme === "system") {
-      return <SunMoonIcon size={16} className={isDark ? "text-muted-foreground" : "text-foreground"} />;
+      return <Monitor size={16} className={isDark ? "text-muted-foreground" : "text-foreground"} />;
     } else if (isDark) {
       return <MoonIcon size={16} className="text-muted-foreground" />;
     } else {
@@ -110,7 +110,7 @@ export const AnimatedThemeToggle = ({ className }: { className?: string }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent 
-        className="w-48 p-2 sm:w-56 sm:p-3" 
+        className="w-48 p-2 sm:w-56 sm:p-3 bg-background" 
         align="end" 
         sideOffset={8}
       >
@@ -118,7 +118,7 @@ export const AnimatedThemeToggle = ({ className }: { className?: string }) => {
           <ThemeOption
             value="system"
             label="System"
-            icon={<SunMoonIcon size={16} className={isDark ? "text-muted-foreground" : "text-foreground"} />}
+            icon={<Monitor size={16} className={isDark ? "text-muted-foreground" : "text-foreground"} />}
             selected={theme === "system"}
             onSelect={() => handleThemeChange("system")}
           />

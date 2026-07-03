@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import emailjs from '@emailjs/browser'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -16,8 +17,9 @@ import CertificateModal from './components/CertificateModal'
 import DeviceModal from './components/DeviceModal'
 import DownloadModal from './components/DownloadModal'
 import ToastNotification from './components/ToastNotification'
+import { NotFound } from './components/NotFound'
 
-function App() {
+function Portfolio() {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalCert, setModalCert] = useState<{ src: string; title: string; issuer: string; year: string; url?: string } | null>(null)
   const [modalDevice, setModalDevice] = useState<{ src: string; title: string; desc: string } | null>(null)
@@ -203,4 +205,11 @@ function App() {
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Portfolio />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  )
+}
