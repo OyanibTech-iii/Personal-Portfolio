@@ -62,12 +62,12 @@ function Hero() {
             <Dock className="max-w-full">
               <DockIcon name="PHP" href="#web-apks" src="https://cdn.simpleicons.org/php" />
               <DockIcon name="Laravel" href="#web-apks" src="https://cdn.simpleicons.org/laravel" />
-              <DockIcon name="Symfony" href="#web-apks" src="https://cdn.simpleicons.org/symfony" />
+              <DockIcon name="Symfony" href="#web-apks" src="https://cdn.simpleicons.org/symfony" darkSrc="https://cdn.simpleicons.org/symfony/f4f4f5" />
               <DockIcon name="Python" href="#python-apps" src="https://cdn.simpleicons.org/python" />
               <DockIcon name="Java" href="#java-desktop" src="https://svgl.app/library/java.svg" />
               <DockIcon name="Go" href="#python-apps" src="https://cdn.simpleicons.org/go" />
               <DockIcon name="C++" href="#python-apps" src="https://cdn.simpleicons.org/cplusplus" />
-              <DockIcon name="Next.js" href="#web-apks" src="https://cdn.simpleicons.org/nextdotjs" />
+              <DockIcon name="Next.js" href="#web-apks" src="https://cdn.simpleicons.org/nextdotjs" darkSrc="https://cdn.simpleicons.org/nextdotjs/f4f4f5" />
               <DockIcon name="React Native" href="#web-apks" src="https://cdn.simpleicons.org/react" />
               <DockIcon name="MySQL" href="#web-apks" src="https://cdn.simpleicons.org/mysql" />
               <DockIcon name="Firebase" href="#web-apks" src="https://cdn.simpleicons.org/firebase" />

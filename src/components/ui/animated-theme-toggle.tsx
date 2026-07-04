@@ -8,7 +8,7 @@ import { MoonIcon, SunIcon, Monitor } from "lucide-react";
 
 type Theme = "system" | "light" | "dark";
 
-const ThemeOption = ({ value, label, icon, selected, onSelect }: { value: Theme; label: string; icon: ReactNode; selected: boolean; onSelect: () => void }) => {
+const ThemeOption = ({label, icon, selected, onSelect }: { value: Theme; label: string; icon: ReactNode; selected: boolean; onSelect: () => void }) => {
   return (
     <button
       className={cn(
@@ -109,9 +109,9 @@ export const AnimatedThemeToggle = ({ className }: { className?: string }) => {
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent 
-        className="w-48 p-2 sm:w-56 sm:p-3 bg-background" 
-        align="end" 
+      <PopoverContent
+        className="w-48 p-2 sm:w-56 sm:p-3 bg-background data-[state=open]:animate-[popover-in_200ms_ease-out] data-[state=closed]:animate-[popover-out_150ms_ease-in]"
+        align="start"
         sideOffset={8}
       >
         <div className="space-y-1">

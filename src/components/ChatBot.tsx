@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MessageCircle, X, Send, Flame, User } from 'lucide-react'
+import { MessageCircle, X, Send, Flame } from 'lucide-react'
 import { Button } from './ui/button'
 
 interface Message {
@@ -134,7 +134,7 @@ export default function ChatFlame() {
                     className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                       msg.sender === 'user'
                         ? 'bg-shamrock-600 text-white rounded-br-md'
-                        : 'bg-neutral-100 text-neutral-900 dark:text-neutral-100 rounded-bl-md'
+                        : 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100 rounded-bl-md'
                     }`}
                   >
                     {msg.text}

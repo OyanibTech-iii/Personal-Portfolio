@@ -135,7 +135,7 @@ export default function ContactSection({
               <div className="absolute inset-0 bg-gradient-to-br from-shamrock-500/20 via-transparent to-shamrock-500/10 blur-3xl -z-10 rounded-full" />
               
               <form
-                className="relative overflow-hidden space-y-6 p-8 md:p-10 rounded-[2.5rem] border border-neutral-200/80 bg-white/80 dark:border-neutral-800/80 dark:bg-neutral-900/80 backdrop-blur-xl"
+                className="relative overflow-hidden space-y-6 p-8 md:p-10 rounded-xl border border-neutral-200/80 bg-white/80 dark:border-neutral-800/80 dark:bg-neutral-900/80 backdrop-blur-xl"
                 onSubmit={onFormSubmit}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -146,7 +146,7 @@ export default function ContactSection({
                       Name
                     </label>
                     <input
-                      className={`w-full rounded-2xl border ${errors.name ? 'border-red-400' : 'border-neutral-200 dark:border-neutral-800'} bg-white dark:bg-neutral-900 px-5 py-4 text-sm outline-none transition-all focus:ring-4 focus:ring-shamrock-500/10 focus:border-shamrock-500 dark:text-white`}
+                      className={`w-full rounded-xl border ${errors.name ? 'border-red-400' : 'border-neutral-200 dark:border-neutral-800'} bg-white dark:bg-neutral-900 px-5 py-4 text-sm outline-none transition-all focus:ring-4 focus:ring-shamrock-500/10 focus:border-shamrock-500 dark:text-white`}
                       type="text"
                       name="name"
                       placeholder="Your full name"
@@ -170,7 +170,7 @@ export default function ContactSection({
                       Email
                     </label>
                     <input
-                      className={`w-full rounded-2xl border ${errors.email ? 'border-red-400' : 'border-neutral-200 dark:border-neutral-800'} bg-white dark:bg-neutral-900 px-5 py-4 text-sm outline-none transition-all focus:ring-4 focus:ring-shamrock-500/10 focus:border-shamrock-500 dark:text-white`}
+                      className={`w-full rounded-xl border ${errors.email ? 'border-red-400' : 'border-neutral-200 dark:border-neutral-800'} bg-white dark:bg-neutral-900 px-5 py-4 text-sm outline-none transition-all focus:ring-4 focus:ring-shamrock-500/10 focus:border-shamrock-500 dark:text-white`}
                       type="email"
                       name="email"
                       placeholder="email@example.com"
@@ -195,7 +195,7 @@ export default function ContactSection({
                     Message
                   </label>
                   <textarea
-                    className={`w-full rounded-2xl border ${errors.message ? 'border-red-400' : 'border-neutral-200 dark:border-neutral-800'} bg-white dark:bg-neutral-900 px-5 py-4 text-sm outline-none transition-all focus:ring-4 focus:ring-shamrock-500/10 focus:border-shamrock-500 min-h-[150px] resize-none dark:text-white`}
+                    className={`w-full rounded-xl border ${errors.message ? 'border-red-400' : 'border-neutral-200 dark:border-neutral-800'} bg-white dark:bg-neutral-900 px-5 py-4 text-sm outline-none transition-all focus:ring-4 focus:ring-shamrock-500/10 focus:border-shamrock-500 min-h-[150px] resize-none dark:text-white`}
                     name="message"
                     placeholder="Tell me about your project or inquiry..."
                     value={formData.message}
@@ -218,7 +218,7 @@ export default function ContactSection({
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className={`flex items-center gap-3 p-4 rounded-2xl ${
+                      className={`flex items-center gap-3 p-4 rounded-xl ${
                         formStatus === 'success' 
                         ? 'bg-green-500/10 text-green-600 border border-green-500/20' 
                         : 'bg-red-500/10 text-red-600 border border-red-500/20'

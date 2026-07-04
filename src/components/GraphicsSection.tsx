@@ -5,9 +5,12 @@ import lanyard from '../assets/lanyard.png'
 import frameBahalaNani from '../assets/Frame Bahala nani.png'
 import lambo from '../assets/lambo.png'
 import liquid from '../assets/LIQUID.png'
+import poster from '../assets/POSTER.png'
+import v3 from '../assets/v3.png'
 import banner00 from '../assets/graphics2/banner 00.png'
 import harvest from '../assets/graphics2/harvest.png'
 import misProject from '../assets/graphics2/Oyanib_Pacifico_MISFinalProject.png'
+import practice from '../assets/practice.png'
 
 interface GraphicsSectionProps {
   onOpenDeviceModal?: (d: { src: string; title: string; desc: string }) => void
@@ -20,9 +23,12 @@ export default function GraphicsSection({ onOpenDeviceModal }: GraphicsSectionPr
     { src: lanyard, title: 'Lanyard Design', desc: 'My own version design of our school lanyard.' },
     { src: harvest, title: 'Harvest Festival', desc: 'Event poster for a local harvest celebration.' },
     { src: frameBahalaNani, title: 'Organization Frame', desc: 'Frame I designed for a school organization.' },
+    { src: practice, title: 'Practice Design', desc: 'Practice graphic design piece.' },
     { src: misProject, title: 'MIS Final Project', desc: 'Comprehensive branding and UI design for a management system.' },
     { src: lambo, title: 'Lambo Poster', desc: 'Modern poster design featuring luxury automotive aesthetics.' },
-    { src: liquid, title: 'Liquid Poster', desc: 'Abstract fluid art poster with dynamic visual effects.' }
+    { src: liquid, title: 'Liquid Poster', desc: 'Abstract fluid art poster with dynamic visual effects.' },
+    { src: poster, title: 'Favorite Cartoon Poster', desc: 'Bold and vibrant poster with striking typography.' },
+    { src: v3, title: 'V3 Design', desc: 'Version 3 concept design with modern aesthetics.' }
   ]
 
   return (
@@ -56,7 +62,6 @@ export default function GraphicsSection({ onOpenDeviceModal }: GraphicsSectionPr
               className={`group relative overflow-hidden rounded-2xl cursor-pointer bg-neutral-100 dark:bg-neutral-800 ${
                 i === 0 ? 'md:col-span-2 md:row-span-2' : 
                 i === 3 ? 'md:col-span-2 md:row-span-2' : 
-                i === 5 ? 'md:col-span-2 md:row-span-1' :
                 'md:col-span-1 md:row-span-1'
               }`}
             >

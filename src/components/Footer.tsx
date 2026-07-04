@@ -48,19 +48,14 @@ export default function Footer() {
     { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
   ];
 
-  const legalLinks = [
-    { name: "Terms and Conditions", href: "#" },
-    { name: "Privacy Policy", href: "#" },
-  ];
 
   return (
     <Footer7
       logo={logo}
       sections={sections}
-      description="I'm a frontend engineer and designer who enjoys making fast, friendly interfaces."
+      description="I'm a junior frontend developer and designer who enjoys making fast, friendly interfaces."
       socialLinks={socialLinks}
-      copyright={`© ${new Date().getFullYear()} Pacifico M. Oyanib III. All rights reserved.`}
-      legalLinks={legalLinks}
+      copyright={` © ${new Date().getFullYear()} Pacifico M. Oyanib III. All rights reserved.`}
     />
   );
 }

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
 interface DockProps {
@@ -12,6 +12,7 @@ interface DockProps {
 interface DockIconProps {
   className?: string
   src?: string
+  darkSrc?: string
   href: string
   name: string
   handleIconHover?: (e: React.MouseEvent<HTMLLIElement>) => void
@@ -34,6 +35,7 @@ export const scaleValue = function (
 export function DockIcon({
   className,
   src,
+  darkSrc,
   href,
   name,
   handleIconHover,
@@ -41,6 +43,19 @@ export function DockIcon({
   iconSize,
 }: DockIconProps) {
   const ref = useRef<HTMLLIElement | null>(null)
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const checkDark = () => {
+      setIsDark(document.documentElement.classList.contains('dark'))
+    }
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
+
+  const imageSrc = isDark && darkSrc ? darkSrc : src
 
   return (
     <>
@@ -113,9 +128,9 @@ export function DockIcon({
           <span className="absolute top-[-40px] left-1/2 -translate-x-1/2 rounded-md border border-gray-100 bg-gradient-to-t from-neutral-100 to-white p-1 px-2 text-xs whitespace-nowrap text-black opacity-0 transition-opacity duration-200 group-hover/li:opacity-100 dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-800 dark:text-white">
             {name}
           </span>
-          {src ? (
+          {imageSrc ? (
             <img
-              src={src}
+              src={imageSrc}
               alt={name}
               className="h-full w-full rounded-[inherit]"
             />
