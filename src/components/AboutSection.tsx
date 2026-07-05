@@ -34,9 +34,12 @@ const skillData = [
 ];
 
 const focusData = [
-  { name: 'Sys Admin', value: 45 },
-  { name: 'Symfony', value: 40 },
+  { name: 'Sys Admin', value: 32 },
+  { name: 'Symfony', value: 74 },
   { name: 'Docker', value: 37 },
+  { name: 'Laravel', value: 23 },
+  { name: 'NextJS React', value: 77 },
+  { name: 'Python', value: 38 },
 ];
 
 export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
@@ -57,15 +60,29 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
 
   return (
     <section id="about" className="relative isolate overflow-hidden rounded-3xl bg-white/70 p-8 backdrop-blur-sm transition-colors duration-300 dark:bg-neutral-900/50 sm:p-12">
+      <svg xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute', width: 0, height: 0 }}>
+        <defs>
+          <clipPath id="profile-inverted" clipPathUnits="objectBoundingBox">
+            <path d="M0.2,0 H0.8929 A0.1071,0.1071,0,0,1,1,0.1071 V0.8 C1,0.85 0.85,1 0.7,1 H0.1 A0.1,0.1,0,0,1,0,0.9 V0.3 C0.15,0.3 0.2,0.15 0.2,0 Z" />
+          </clipPath>
+        </defs>
+      </svg>
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-12 md:grid-cols-3">
-        <div className="md:col-span-1 space-y-6">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ margin: '-50px' }}
+          transition={{ duration: 0.5 }}
+          className="md:col-span-1 space-y-6"
+        >
           <motion.img
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ margin: '-50px' }}
             src={profileImg}
             alt="Profile portrait"
-            className="w-full rounded-2xl object-cover shadow-2xl ring-1 ring-neutral-200/70 dark:ring-neutral-800 aspect-square"
+            className="w-full object-cover shadow-2xl ring-1 ring-neutral-200/70 dark:ring-neutral-800 aspect-square"
+            style={{ clipPath: 'url(#profile-inverted)' }}
             loading="lazy"
           />
           
@@ -97,9 +114,15 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
               </RadarChart>
             </ResponsiveContainer>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="md:col-span-2">
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ margin: '-50px' }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="md:col-span-2"
+        >
           <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">Professional Profile</h2>
           <p className="mt-6 max-w-prose text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed text-balance text-left">
             I'm a versatile software engineer and cybersecurity enthusiast focused on building secure, fast,
@@ -119,15 +142,16 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
             <div className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800">
               <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-8 uppercase tracking-widest text-center">Core Competencies</h3>
               <div className="flex flex-wrap justify-center gap-6">
-                <ProgressBarCircle size="xs" label="Full-Stack Development" min={0} max={100} value={90} />
-                <ProgressBarCircle size="xs" label="Cybersecurity Auditing" min={0} max={100} value={85} />
-                <ProgressBarCircle size="xs" label="Cloud Infrastructure" min={0} max={100} value={75} />
+                <ProgressBarCircle size="xs" label="Full-Stack Development" min={0} max={100} value={70} />
+                <ProgressBarCircle size="xs" label="Cybersecurity" min={0} max={100} value={30} />
+                <ProgressBarCircle size="xs" label="UI/UX Design" min={0} max={100} value={90} />
+                <ProgressBarCircle size="xs" label="Machine Learning" min={0} max={100} value={23} />
               </div>
             </div>
 
             <div className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800">
               <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-6 uppercase tracking-widest text-center">Current Focus</h3>
-              <div className="h-48 w-full">
+              <div className="h-72 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart layout="vertical" data={focusData} margin={{ left: 10, right: 30, top: 10, bottom: 10 }}>
                     <XAxis type="number" hide domain={[0, 100]} />
@@ -164,10 +188,16 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
       
-      <div className="mx-auto mt-16 max-w-5xl">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ margin: '-50px' }}
+        transition={{ duration: 0.5 }}
+        className="mx-auto mt-16 max-w-5xl"
+      >
         <button 
           onClick={() => setShowWorkshops(!showWorkshops)}
           className="flex items-center justify-between w-full mb-8 group"
@@ -197,9 +227,15 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
             ))}
           </div>
         )}
-      </div>
+      </motion.div>
       
-      <div className="mx-auto mt-16 max-w-5xl">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ margin: '-50px' }}
+        transition={{ duration: 0.5 }}
+        className="mx-auto mt-16 max-w-5xl"
+      >
         <button 
           onClick={() => setShowAccreditations(!showAccreditations)}
           className="flex items-center justify-between w-full mb-8 group"
@@ -235,7 +271,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
             ))}
           </div>
         )}
-      </div>
+      </motion.div>
     </section>
   )
 }

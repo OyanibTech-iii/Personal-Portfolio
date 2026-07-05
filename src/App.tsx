@@ -19,6 +19,7 @@ import DownloadModal from './components/DownloadModal'
 import ToastNotification from './components/ToastNotification'
 import ChatBot from './components/ChatBot'
 import { NotFound } from './components/NotFound'
+import { ComingSoon } from './components/ComingSoon'
 
 function Portfolio() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -122,7 +123,7 @@ function Portfolio() {
     e.preventDefault()
     
     if (!validateForm()) {
-      setToast({ type: 'error', message: 'Please fix the errors above' })
+      setToast({ type: 'error', message: 'Please fill in all required fields correctly.' })
       return
     }
 
@@ -149,11 +150,6 @@ function Portfolio() {
       setFormMessage('Message sent successfully! I\'ll get back to you soon.')
       setFormData({ name: '', email: '', message: '' })
       setToast({ type: 'success', message: 'Email sent successfully!' })
-
-      // Clear toast after 2 seconds
-      setTimeout(() => {
-        setToast(null)
-      }, 2000)
     } catch (error: any) {
       console.error('Email send error:', error)
       console.error('Error status:', error?.status)
@@ -169,7 +165,7 @@ function Portfolio() {
       
       setFormStatus('error')
       setFormMessage('Failed to send message. Please check the console or use the email address directly: pacificooyanib@gmail.com')
-      setToast({ type: 'error', message: 'Failed to send email' })
+      setToast({ type: 'error', message: 'Failed to send email. Visit /contact for alternatives.' })
     }
   }
 
@@ -201,7 +197,7 @@ function Portfolio() {
       <CertificateModal cert={modalCert} onClose={closeCertModal} />
       <DeviceModal device={modalDevice} onClose={closeDeviceModal} />
       <DownloadModal project={downloadModalProject} onClose={closeDownloadModal} />
-      <ToastNotification toast={toast} />
+      <ToastNotification toast={toast} onClose={() => setToast(null)} />
       <ChatBot />
     </div>
   )
@@ -211,6 +207,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Portfolio />} />
+      <Route path="/instagram" element={<ComingSoon platform="Instagram" />} />
+      <Route path="/linkedin" element={<ComingSoon platform="LinkedIn" />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

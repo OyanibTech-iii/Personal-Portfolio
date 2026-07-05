@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X, Send, Flame } from 'lucide-react'
 import { Button } from './ui/button'
+import { chatSuggestions, chatWelcomeMessage, chatFallbackResponse } from '@/dataset'
 
 interface Message {
   id: number
@@ -10,26 +11,19 @@ interface Message {
   timestamp: Date
 }
 
-const responses: Record<string, string> = {
-  'who are you': "Hi! I'm Pacifico Oyanib III, a full-stack developer and cybersecurity enthusiast. I specialize in building secure, performant web and mobile applications with React, Next.js, Laravel, and Python.",
-  'what technologies do you use': "I work with React, Next.js, TypeScript, Tailwind CSS, Laravel, Python, Docker, and React Native. I also have experience with cybersecurity auditing and cloud infrastructure.",
-  'how can i contact you': "You can reach me through the contact form on this portfolio, or email me directly at pacificooyanib@gmail.com. I'm also available on GitHub and LinkedIn!",
-}
-
-const fallbackResponse = "I appreciate your interest! This feature is coming soon. Feel free to reach out via the contact form or email me at pacificooyanib@gmail.com for now."
-
 export default function ChatFlame() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 0,
-      text: "Hi there! I'm Pacifico's virtual assistant. Ask me anything about his skills, projects, or how to get in touch!",
+      text: chatWelcomeMessage,
       sender: 'bot',
       timestamp: new Date(),
     },
   ])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [showSuggestions, setShowSuggestions] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToFlametom = () => {
@@ -42,10 +36,37 @@ export default function ChatFlame() {
 
   const getResponse = (userInput: string): string => {
     const lower = userInput.toLowerCase().trim()
-    for (const [key, value] of Object.entries(responses)) {
-      if (lower.includes(key)) return value
+    for (const suggestion of chatSuggestions) {
+      if (lower.includes(suggestion.label.toLowerCase().replace('?', '').replace('!', ''))) {
+        return suggestion.response
+      }
     }
-    return fallbackResponse
+    return chatFallbackResponse
+  }
+
+  const handleSuggestionClick = (label: string) => {
+    setShowSuggestions(false)
+    setInput('')
+    const userMessage: Message = {
+      id: Date.now(),
+      text: label,
+      sender: 'user',
+      timestamp: new Date(),
+    }
+    setMessages((prev) => [...prev, userMessage])
+    setIsTyping(true)
+
+    setTimeout(() => {
+      const suggestion = chatSuggestions.find((s) => s.label === label)
+      const botMessage: Message = {
+        id: Date.now() + 1,
+        text: suggestion?.response ?? chatFallbackResponse,
+        sender: 'bot',
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, botMessage])
+      setIsTyping(false)
+    }, 2000)
   }
 
   const handleSend = () => {
@@ -161,6 +182,28 @@ export default function ChatFlame() {
                       <span className="h-2 w-2 animate-bounce rounded-full bg-neutral-400 [animation-delay:150ms]" />
                       <span className="h-2 w-2 animate-bounce rounded-full bg-neutral-400 [animation-delay:300ms]" />
                     </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Suggestion Chips */}
+              <AnimatePresence>
+                {showSuggestions && messages.length === 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="flex flex-wrap gap-2 pt-1"
+                  >
+                    {chatSuggestions.map((s) => (
+                      <button
+                        key={s.label}
+                        onClick={() => handleSuggestionClick(s.label)}
+                        className="rounded-full border border-shamrock-200 bg-shamrock-50 px-3 py-1.5 text-xs font-medium text-shamrock-700 transition-colors hover:bg-shamrock-100 dark:border-shamrock-800 dark:bg-shamrock-950 dark:text-shamrock-300 dark:hover:bg-shamrock-900"
+                      >
+                        {s.label}
+                      </button>
+                    ))}
                   </motion.div>
                 )}
               </AnimatePresence>

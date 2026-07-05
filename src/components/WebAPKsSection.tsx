@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, Layout, Quote, QrCode, ShieldAlert, Sprout } from 'lucide-react'
+import { ExternalLink, Layout, Quote, ShieldAlert } from 'lucide-react'
 import { Button } from './ui/button'
+import ficoLogo from '../assets/fico.png'
+import styledQrLogo from '../assets/officiallogo.png'
+import styledQrLogoDark from '../assets/officiallogo1.png'
 
 export default function WebAPKsSection() {
   const [showAll, setShowAll] = useState(false)
@@ -10,7 +13,7 @@ export default function WebAPKsSection() {
       name: 'Growfico',
       description: 'An innovative agriculture and sustainability platform designed to optimize crop management and promote eco-friendly farming practices.',
       link: 'https://web-dev-deployment-production.up.railway.app',
-      icon: Sprout,
+      icon: ficoLogo,
       tags: ['Agriculture', 'Sustainability', 'Tech']
     },
     {
@@ -24,7 +27,8 @@ export default function WebAPKsSection() {
       name: 'Styled QR',
       description: 'A sophisticated QR code generator that allows for custom styling, branding, and high-resolution exports for professional use.',
       link: 'https://styledqr.onrender.com',
-      icon: QrCode,
+      icon: styledQrLogo,
+      darkIcon: styledQrLogoDark,
       tags: ['Next.js', 'Utility', 'Design']
     },
     {
@@ -64,7 +68,7 @@ export default function WebAPKsSection() {
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           {apks.slice(0, showAll ? apks.length : 4).map((apk, i) => {
-            const IconComponent = apk.icon
+            const IconComponent = typeof apk.icon === 'string' ? null : apk.icon
             return (
               <motion.div 
                 key={i}
@@ -75,8 +79,17 @@ export default function WebAPKsSection() {
                 className="group relative flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
               >
                 <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400">
-                    <IconComponent className="h-6 w-6" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400 overflow-hidden shadow-inner">
+                    {IconComponent ? (
+                      <IconComponent className="h-6 w-6" />
+                    ) : (
+                      <>
+                        <img src={apk.icon as string} alt={apk.name} className={`h-full w-full object-cover p-1 ${'darkIcon' in apk && apk.darkIcon ? 'dark:hidden' : ''}`} />
+                        {'darkIcon' in apk && apk.darkIcon ? (
+                          <img src={(apk as { darkIcon: string }).darkIcon} alt={apk.name} className="hidden h-full w-full object-cover p-1 dark:block" />
+                        ) : null}
+                      </>
+                    )}
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {apk.tags.map(tag => (

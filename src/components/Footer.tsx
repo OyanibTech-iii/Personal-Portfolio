@@ -44,8 +44,8 @@ export default function Footer() {
   const socialLinks = [
     { icon: <FaFacebook className="size-5" />, href: "https://www.facebook.com/thierd.dhee.morshed/", label: "Facebook" },
     { icon: <FaGithub className="size-5" />, href: "https://github.com/oyanibTech-iii", label: "GitHub" },
-    { icon: <FaInstagram className="size-5" />, href: "#", label: "Instagram" },
-    { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
+    { icon: <FaInstagram className="size-5" />, href: "/instagram", label: "Instagram" },
+    { icon: <FaLinkedin className="size-5" />, href: "/linkedin", label: "LinkedIn" },
   ];
 
 
