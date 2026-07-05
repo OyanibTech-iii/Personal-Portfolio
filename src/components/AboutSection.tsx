@@ -158,7 +158,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                     <YAxis 
                       dataKey="name" 
                       type="category" 
-                      tick={{ fill: 'var(--color-neutral-500)', fontSize: 12, fontWeight: 600 }}
+                      tick={{ fill: 'var(--color-muted-foreground)', fontSize: 12, fontWeight: 600 }}
                       width={100}
                       axisLine={false}
                       tickLine={false}
@@ -166,10 +166,11 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                     <Tooltip 
                       cursor={{ fill: 'transparent' }}
                       contentStyle={{ 
-                        backgroundColor: 'rgba(255, 255, 255, 0.9)', 
+                        backgroundColor: 'var(--color-background)', 
                         borderRadius: '8px', 
-                        border: 'none',
-                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' 
+                        border: '1px solid var(--color-border)',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                        color: 'var(--color-foreground)'
                       }}
                     />
                     <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={24}>
