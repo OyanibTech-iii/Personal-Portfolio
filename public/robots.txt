@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pacificooyanib.dev/sitemap.xml
+Sitemap: https://personal-portfolio-three-lovat-19.vercel.app/sitemap.xml
