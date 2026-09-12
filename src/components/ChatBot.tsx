@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X, Send, Flame } from 'lucide-react'
 import { Button } from './ui/button'
-import { chatSuggestions, chatWelcomeMessage, chatFallbackResponse } from '@/dataset'
+import { chatSuggestions, chatWelcomeMessage, getBotResponse } from '@/dataset'
 
 interface Message {
   id: number
@@ -23,29 +23,20 @@ export default function ChatFlame() {
   ])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
-  const [showSuggestions, setShowSuggestions] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const scrollToFlametom = () => {
+  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
   useEffect(() => {
-    scrollToFlametom()
-  }, [messages, isTyping])
-
-  const getResponse = (userInput: string): string => {
-    const lower = userInput.toLowerCase().trim()
-    for (const suggestion of chatSuggestions) {
-      if (lower.includes(suggestion.label.toLowerCase().replace('?', '').replace('!', ''))) {
-        return suggestion.response
-      }
+    if (isOpen) {
+      scrollToBottom()
     }
-    return chatFallbackResponse
-  }
+  }, [messages, isTyping, isOpen])
 
   const handleSuggestionClick = (label: string) => {
-    setShowSuggestions(false)
+    if (isTyping) return
     setInput('')
     const userMessage: Message = {
       id: Date.now(),
@@ -57,24 +48,24 @@ export default function ChatFlame() {
     setIsTyping(true)
 
     setTimeout(() => {
-      const suggestion = chatSuggestions.find((s) => s.label === label)
+      const botReply = getBotResponse(label)
       const botMessage: Message = {
         id: Date.now() + 1,
-        text: suggestion?.response ?? chatFallbackResponse,
+        text: botReply,
         sender: 'bot',
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, botMessage])
       setIsTyping(false)
-    }, 2000)
+    }, 700)
   }
 
   const handleSend = () => {
-    if (!input.trim()) return
+    if (!input.trim() || isTyping) return
 
     const userMessage: Message = {
       id: Date.now(),
-      text: input,
+      text: input.trim(),
       sender: 'user',
       timestamp: new Date(),
     }
@@ -84,15 +75,16 @@ export default function ChatFlame() {
     setIsTyping(true)
 
     setTimeout(() => {
+      const botReply = getBotResponse(userMessage.text)
       const botMessage: Message = {
         id: Date.now() + 1,
-        text: getResponse(userMessage.text),
+        text: botReply,
         sender: 'bot',
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, botMessage])
       setIsTyping(false)
-    }, 2000)
+    }, 700)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -111,7 +103,8 @@ export default function ChatFlame() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-shamrock-600 text-white shadow-lg shadow-shamrock-600/30 hover:bg-shamrock-700 transition-colors"
+        aria-label={isOpen ? 'Close chat' : 'Open chat'}
+        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-shamrock-600 text-white shadow-lg shadow-shamrock-600/30 hover:bg-shamrock-700 transition-colors cursor-pointer"
       >
         {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </motion.button>
@@ -146,13 +139,8 @@ export default function ChatFlame() {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  {msg.sender === 'bot' && (
-                    <div className="mr-2 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full  ">
-                      {/* <Flame className="h-4 w-4 text-shamrock-600 dark:text-shamrock-400" /> */}
-                    </div>
-                  )}
                   <div
-                    className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-line ${
                       msg.sender === 'user'
                         ? 'bg-shamrock-600 text-white rounded-br-md'
                         : 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100 rounded-bl-md'
@@ -160,11 +148,6 @@ export default function ChatFlame() {
                   >
                     {msg.text}
                   </div>
-                  {msg.sender === 'user' && (
-                    <div className="ml-2 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full ">
-                      {/* <User className="h-4 w-4 text-white" /> */}
-                    </div>
-                  )}
                 </motion.div>
               ))}
 
@@ -188,7 +171,7 @@ export default function ChatFlame() {
 
               {/* Suggestion Chips */}
               <AnimatePresence>
-                {showSuggestions && messages.length === 1 && (
+                {!isTyping && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -199,7 +182,7 @@ export default function ChatFlame() {
                       <button
                         key={s.label}
                         onClick={() => handleSuggestionClick(s.label)}
-                        className="rounded-full border border-shamrock-200 bg-shamrock-50 px-3 py-1.5 text-xs font-medium text-shamrock-700 transition-colors hover:bg-shamrock-100 dark:border-shamrock-800 dark:bg-shamrock-950 dark:text-shamrock-300 dark:hover:bg-shamrock-900"
+                        className="rounded-full border border-shamrock-200 bg-shamrock-50 px-3 py-1.5 text-xs font-medium text-shamrock-700 transition-colors hover:bg-shamrock-100 dark:border-shamrock-800 dark:bg-shamrock-950 dark:text-shamrock-300 dark:hover:bg-shamrock-900 cursor-pointer"
                       >
                         {s.label}
                       </button>
@@ -227,7 +210,7 @@ export default function ChatFlame() {
                   onClick={handleSend}
                   disabled={!input.trim() || isTyping}
                   size="icon"
-                  className="h-10 w-10 rounded-xl bg-shamrock-600 text-white hover:bg-shamrock-700 disabled:opacity-50"
+                  className="h-10 w-10 rounded-xl bg-shamrock-600 text-white hover:bg-shamrock-700 disabled:opacity-50 cursor-pointer"
                 >
                   <Send className="h-4 w-4" />
                 </Button>
