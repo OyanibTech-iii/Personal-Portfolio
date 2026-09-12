@@ -1,28 +1,41 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import emailjs from '@emailjs/browser'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import GraphicsSection from './components/GraphicsSection'
-import FacebookSection from './components/FacebookSection'
-import LayoutsSection from './components/LayoutsSection'
-import WebAPKsSection from './components/WebAPKsSection'
-import YouTubeTutorialsSection from './components/YouTubeTutorialsSection'
-import JavaAppsSection from './components/JavaAppsSection'
-import PythonAppsSection from './components/PythonAppsSection'
-import ReactNativeAppsSection from './components/ReactNativeAppsSection'
-import AboutSection from './components/AboutSection'
-import WorkshopsSection from './components/WorkshopsSection'
-import NetworkingSection from './components/NetworkingSection'
-import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
-import CertificateModal from './components/CertificateModal'
-import DeviceModal from './components/DeviceModal'
-import DownloadModal from './components/DownloadModal'
 import ToastNotification from './components/ToastNotification'
-import ChatBot from './components/ChatBot'
-import { NotFound } from './components/NotFound'
-import { ComingSoon } from './components/ComingSoon'
+
+// Lazy-loaded sections to reduce initial bundle size and optimize LCP/FCP
+const AboutSection = lazy(() => import('./components/AboutSection'))
+const WorkshopsSection = lazy(() => import('./components/WorkshopsSection'))
+const GraphicsSection = lazy(() => import('./components/GraphicsSection'))
+const FacebookSection = lazy(() => import('./components/FacebookSection'))
+const LayoutsSection = lazy(() => import('./components/LayoutsSection'))
+const WebAPKsSection = lazy(() => import('./components/WebAPKsSection'))
+const YouTubeTutorialsSection = lazy(() => import('./components/YouTubeTutorialsSection'))
+const JavaAppsSection = lazy(() => import('./components/JavaAppsSection'))
+const PythonAppsSection = lazy(() => import('./components/PythonAppsSection'))
+const ReactNativeAppsSection = lazy(() => import('./components/ReactNativeAppsSection'))
+const NetworkingSection = lazy(() => import('./components/NetworkingSection'))
+const ContactSection = lazy(() => import('./components/ContactSection'))
+const CertificateModal = lazy(() => import('./components/CertificateModal'))
+const DeviceModal = lazy(() => import('./components/DeviceModal'))
+const DownloadModal = lazy(() => import('./components/DownloadModal'))
+const ChatBot = lazy(() => import('./components/ChatBot'))
+const NotFound = lazy(() => import('./components/NotFound').then(m => ({ default: m.NotFound })))
+const ComingSoon = lazy(() => import('./components/ComingSoon').then(m => ({ default: m.ComingSoon })))
+
+function SectionSkeleton() {
+  return (
+    <div className="w-full py-16 animate-pulse" aria-hidden="true">
+      <div className="h-8 bg-neutral-200 dark:bg-neutral-800 rounded-lg w-48 mx-auto mb-4" />
+      <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-72 mx-auto mb-8" />
+      <div className="h-48 bg-neutral-100 dark:bg-neutral-900 rounded-2xl w-full" />
+    </div>
+  )
+}
+
 
 function Portfolio() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -196,44 +209,50 @@ function Portfolio() {
         <section id="home">
           <Hero />
         </section>
-        <AboutSection onOpenCertModal={openCertModal} />
-        <WorkshopsSection />
-        <GraphicsSection onOpenDeviceModal={openDeviceModal} />
-        <FacebookSection />
-        <LayoutsSection onOpenDeviceModal={openDeviceModal} />
-        <WebAPKsSection />
-        <YouTubeTutorialsSection />
-        <ReactNativeAppsSection onOpenDownloadModal={openDownloadModal} />
-        <JavaAppsSection onOpenDownloadModal={openDownloadModal} />
-        <PythonAppsSection onOpenDownloadModal={openDownloadModal} />
-        <NetworkingSection />
-        <ContactSection
-          formData={formData}
-          formStatus={formStatus}
-          formMessage={formMessage}
-          errors={errors}
-          cooldown={cooldown}
-          onFormChange={handleFormChange}
-          onFormSubmit={handleFormSubmit}
-        />
+        <Suspense fallback={<SectionSkeleton />}>
+          <AboutSection onOpenCertModal={openCertModal} />
+          <WorkshopsSection />
+          <GraphicsSection onOpenDeviceModal={openDeviceModal} />
+          <FacebookSection />
+          <LayoutsSection onOpenDeviceModal={openDeviceModal} />
+          <WebAPKsSection />
+          <YouTubeTutorialsSection />
+          <ReactNativeAppsSection onOpenDownloadModal={openDownloadModal} />
+          <JavaAppsSection onOpenDownloadModal={openDownloadModal} />
+          <PythonAppsSection onOpenDownloadModal={openDownloadModal} />
+          <NetworkingSection />
+          <ContactSection
+            formData={formData}
+            formStatus={formStatus}
+            formMessage={formMessage}
+            errors={errors}
+            cooldown={cooldown}
+            onFormChange={handleFormChange}
+            onFormSubmit={handleFormSubmit}
+          />
+        </Suspense>
       </main>
       <Footer />
-      <CertificateModal cert={modalCert} onClose={closeCertModal} />
-      <DeviceModal device={modalDevice} onClose={closeDeviceModal} />
-      <DownloadModal project={downloadModalProject} onClose={closeDownloadModal} />
+      <Suspense fallback={null}>
+        <CertificateModal cert={modalCert} onClose={closeCertModal} />
+        <DeviceModal device={modalDevice} onClose={closeDeviceModal} />
+        <DownloadModal project={downloadModalProject} onClose={closeDownloadModal} />
+        <ChatBot />
+      </Suspense>
       <ToastNotification toast={toast} onClose={() => setToast(null)} />
-      <ChatBot />
     </div>
   )
 }
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Portfolio />} />
-      <Route path="/instagram" element={<ComingSoon platform="Instagram" />} />
-      <Route path="/linkedin" element={<ComingSoon platform="LinkedIn" />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <Suspense fallback={<SectionSkeleton />}>
+      <Routes>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/instagram" element={<ComingSoon platform="Instagram" />} />
+        <Route path="/linkedin" element={<ComingSoon platform="LinkedIn" />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
   )
 }

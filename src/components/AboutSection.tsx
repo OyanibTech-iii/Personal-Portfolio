@@ -4,16 +4,16 @@ import { FaGithub, FaBehance } from 'react-icons/fa'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
 import { ProgressBarCircle } from "@/components/base/progress-indicators/progress-circles"
 import SpecularButton from "@/components/SpecularButton"
-import profileImg from '../assets/blackprofile.png'
+import profileImg from '../assets/blackprofile.webp'
 
-import certImg from '../assets/e-cert.png'
-import cert2Img from '../assets/e-cert-2.png'
-import cisspCertImg from '../assets/cissp certification.png'
-import isc2Cert1Img from '../assets/isc2 cert/cc domain 1.png'
-import isc2Cert2Img from '../assets/isc2 cert/cc domain 2.png'
-import isc2Cert3Img from '../assets/isc2 cert/cc domain 3.png'
-import isc2Cert4Img from '../assets/isc2 cert/cc domain 4.png'
-import isc2Cert5Img from '../assets/isc2 cert/cc domain 5.png'
+import certImg from '../assets/e-cert.webp'
+import cert2Img from '../assets/e-cert-2.webp'
+import cisspCertImg from '../assets/cissp certification.webp'
+import isc2Cert1Img from '../assets/isc2 cert/cc domain 1.webp'
+import isc2Cert2Img from '../assets/isc2 cert/cc domain 2.webp'
+import isc2Cert3Img from '../assets/isc2 cert/cc domain 3.webp'
+import isc2Cert4Img from '../assets/isc2 cert/cc domain 4.webp'
+import isc2Cert5Img from '../assets/isc2 cert/cc domain 5.webp'
 import { Button } from './ui/button'
 
 interface AboutSectionProps {

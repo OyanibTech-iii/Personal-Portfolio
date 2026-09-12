@@ -4,24 +4,24 @@ import { ImageWithSkeleton } from './ui/image-with-skeleton'
 import { ChevronLeft, ChevronRight, Maximize2, X, Images } from 'lucide-react'
 
 // Import Code Connect photos (6 images)
-import codeConnect01 from '../assets/code connect/01.png'
-import codeConnect02 from '../assets/code connect/02.png'
-import codeConnect03 from '../assets/code connect/03.png'
-import codeConnect04 from '../assets/code connect/04.png'
-import codeConnect05 from '../assets/code connect/05.png'
-import codeConnect06 from '../assets/code connect/06.png'
+import codeConnect01 from '../assets/code connect/01.webp'
+import codeConnect02 from '../assets/code connect/02.webp'
+import codeConnect03 from '../assets/code connect/03.webp'
+import codeConnect04 from '../assets/code connect/04.webp'
+import codeConnect05 from '../assets/code connect/05.webp'
+import codeConnect06 from '../assets/code connect/06.webp'
 
 // Import KOICA training photos (4 images)
-import koica01 from '../assets/KOICA training/752371645_799372853201399_1595168922641361854_n.jpg'
-import koica02 from '../assets/KOICA training/753738443_958106467245049_5368518652102475940_n.jpg'
-import koica03 from '../assets/KOICA training/753932816_1587276313002219_7133902288636821914_n.jpg'
-import koica04 from '../assets/KOICA training/754699820_1026988080247467_1145187470146971317_n.jpg'
+import koica01 from '../assets/KOICA training/752371645_799372853201399_1595168922641361854_n.webp'
+import koica02 from '../assets/KOICA training/753738443_958106467245049_5368518652102475940_n.webp'
+import koica03 from '../assets/KOICA training/753932816_1587276313002219_7133902288636821914_n.webp'
+import koica04 from '../assets/KOICA training/754699820_1026988080247467_1145187470146971317_n.webp'
 
 // Import ILCDB-DICT photos (4 images)
-import ilcdb01 from '../assets/ILCDB-DICT/746661071_122129077755224496_3842201627723828445_n.jpg'
-import ilcdb02 from '../assets/ILCDB-DICT/747536732_122129077809224496_5419325080763265165_n.jpg'
-import ilcdb03 from '../assets/ILCDB-DICT/747561441_122129077743224496_9049096089464338659_n.jpg'
-import ilcdb04 from '../assets/ILCDB-DICT/747573336_122129077827224496_5771217729217214914_n.jpg'
+import ilcdb01 from '../assets/ILCDB-DICT/746661071_122129077755224496_3842201627723828445_n.webp'
+import ilcdb02 from '../assets/ILCDB-DICT/747536732_122129077809224496_5419325080763265165_n.webp'
+import ilcdb03 from '../assets/ILCDB-DICT/747561441_122129077743224496_9049096089464338659_n.webp'
+import ilcdb04 from '../assets/ILCDB-DICT/747573336_122129077827224496_5771217729217214914_n.webp'
 
 interface Program {
   id: string

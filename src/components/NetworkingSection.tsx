@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import multilayerSwitch from '../assets/multilayer-switch.png'
-import routerImg from '../assets/router.png'
+import multilayerSwitch from '../assets/multilayer-switch.webp'
+import routerImg from '../assets/router.webp'
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },

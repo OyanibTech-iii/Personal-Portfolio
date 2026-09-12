@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ImageWithSkeleton } from './ui/image-with-skeleton'
 import { ChevronLeft, ChevronRight, Maximize2, Pause, Play } from 'lucide-react'
-import fashion from '../assets/layouts/FASHION.PNG'
-import step1 from '../assets/layouts/step 1.PNG'
-import step2 from '../assets/layouts/step 2.png'
-import step3 from '../assets/layouts/step 3.png'
+import fashion from '../assets/layouts/FASHION.webp'
+import step1 from '../assets/layouts/step 1.webp'
+import step2 from '../assets/layouts/step 2.webp'
+import step3 from '../assets/layouts/step 3.webp'
 
 interface LayoutsSectionProps {
   onOpenDeviceModal?: (d: { src: string; title: string; desc: string }) => void

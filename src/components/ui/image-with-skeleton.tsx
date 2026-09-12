@@ -30,6 +30,7 @@ export function ImageWithSkeleton({
         )}
         onLoad={() => setIsLoading(false)}
         loading="lazy"
+        decoding="async"
         {...props}
       />
     </div>

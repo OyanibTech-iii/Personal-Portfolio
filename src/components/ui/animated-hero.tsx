@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import SpecularButton from "@/components/SpecularButton";
-import heroAsset from "@/assets/hero asset.svg";
+import heroAsset from "@/assets/hero-asset.svg";
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -139,6 +139,9 @@ function Hero() {
               <img
                 src={heroAsset}
                 alt="Pacifico Portfolio Hero Asset"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-auto max-h-[580px] sm:max-h-[700px] md:max-h-[800px] lg:max-h-[880px] xl:max-h-[940px] object-contain select-none pointer-events-none transform lg:scale-125 xl:scale-130 origin-center"
               />
             </div>

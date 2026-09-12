@@ -8,10 +8,14 @@ export default defineConfig({
   ],
   build: {
     sourcemap: false,
+    chunkSizeWarningLimit: 700,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'framer-motion'],
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'motion': ['framer-motion'],
+          'charts': ['recharts'],
+          'icons': ['lucide-react', 'react-icons'],
         },
       },
     },
