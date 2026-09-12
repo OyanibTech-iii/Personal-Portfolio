@@ -77,7 +77,7 @@ export default function ContactSection({
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white mb-6">
                 Let's <span className="text-shamrock-500">Connect</span>
@@ -91,7 +91,7 @@ export default function ContactSection({
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               className="space-y-4"
             >
               {socialLinks.map((link, i) => (
@@ -123,7 +123,7 @@ export default function ContactSection({
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               className="relative p-1"
             >
               {/* Decorative background */}

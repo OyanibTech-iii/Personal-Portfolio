@@ -83,7 +83,7 @@ export default function LayoutsSection({ onOpenDeviceModal }: LayoutsSectionProp
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             className="text-3xl font-bold tracking-tight sm:text-4xl text-neutral-900 dark:text-white"
           >
             Layouts Portfolio
@@ -91,7 +91,7 @@ export default function LayoutsSection({ onOpenDeviceModal }: LayoutsSectionProp
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
             className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance"
           >
@@ -100,7 +100,11 @@ export default function LayoutsSection({ onOpenDeviceModal }: LayoutsSectionProp
         </div>
 
         {/* Carousel Container */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
           className="relative bg-neutral-900/90 dark:bg-neutral-900/90 border border-neutral-200/50 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-2xl"
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
@@ -205,10 +209,16 @@ export default function LayoutsSection({ onOpenDeviceModal }: LayoutsSectionProp
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Thumbnail Selector Strip */}
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3"
+        >
           {layouts.map((item, index) => {
             const isActive = index === currentIndex
             return (
@@ -236,7 +246,7 @@ export default function LayoutsSection({ onOpenDeviceModal }: LayoutsSectionProp
               </button>
             )
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -100,7 +100,7 @@ export default function NetworkingSection() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           className="mb-12"
         >
           <div className="flex items-center gap-3 mb-4">
@@ -119,7 +119,7 @@ export default function NetworkingSection() {
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, amount: 0.15 }}
             >
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                 Network Fundamentals
@@ -187,7 +187,7 @@ export default function NetworkingSection() {
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, amount: 0.15 }}
             >
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                 IP Addressing & Subnetting
@@ -212,7 +212,7 @@ export default function NetworkingSection() {
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, amount: 0.15 }}
             >
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                 Key Protocols
@@ -237,7 +237,7 @@ export default function NetworkingSection() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
             >
               <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                 Hardware
@@ -315,7 +315,7 @@ export default function NetworkingSection() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               className="p-6 rounded-2xl border border-neutral-200/70 bg-white/60 dark:border-neutral-800/70 dark:bg-neutral-900/50 backdrop-blur-md"
             >
               <h3 className="text-lg font-bold mb-6 text-neutral-900 dark:text-white">

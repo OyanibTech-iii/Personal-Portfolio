@@ -30,7 +30,7 @@ export default function PostsSection({ posts }: PostsSectionProps) {
           variants={staggerItem}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.15 }}
           whileHover={{ y: -8 }}
           className="group card">
           <a href={`#/post/${post.id}`} className="block">
@@ -55,7 +55,7 @@ export default function PostsSection({ posts }: PostsSectionProps) {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
               >
                 {post.tags.map((t) => (
                   <motion.span key={t} variants={staggerItem} className="tag">{t}</motion.span>

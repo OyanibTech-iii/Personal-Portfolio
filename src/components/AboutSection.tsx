@@ -57,14 +57,14 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ margin: '-50px' }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.5 }}
           className="md:col-span-1 space-y-6"
         >
           <motion.img
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ margin: '-50px' }}
+            viewport={{ once: false, amount: 0.2 }}
             src={profileImg}
             alt="Profile portrait"
             className="w-full object-contain rounded-lg"
@@ -149,7 +149,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ margin: '-50px' }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="md:col-span-2"
         >
@@ -223,7 +223,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ margin: '-50px' }}
+        viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.5 }}
         className="mx-auto mt-16 max-w-5xl"
       >

@@ -44,12 +44,12 @@ export default function WebAPKsSection() {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             className="text-3xl font-bold tracking-tight sm:text-4xl">Web Applications</motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
             className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-lg">
             High-performance Progressive Web Apps (PWAs) built with modern frameworks to deliver native-like experiences.
@@ -63,7 +63,7 @@ export default function WebAPKsSection() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.15 }}
                 transition={{ delay: i * 0.1 }}
                 className="group relative flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
               >
@@ -103,7 +103,7 @@ export default function WebAPKsSection() {
           <motion.div 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             className="mt-8 text-center"
           >
             <Button
@@ -119,7 +119,7 @@ export default function WebAPKsSection() {
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           className="mt-12 text-center"
         >
           <p className="text-sm font-medium text-neutral-500 dark:text-neutral-500 animate-pulse">

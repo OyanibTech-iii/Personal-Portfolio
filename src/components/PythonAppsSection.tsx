@@ -23,12 +23,12 @@ export default function PythonAppsSection({ onOpenDownloadModal }: PythonAppsSec
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             className="text-3xl font-bold tracking-tight sm:text-4xl">Python Applications</motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
             className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-lg">
             High-performance scripts and desktop tools developed with Python, showcasing algorithmic complexity and data processing.
@@ -42,7 +42,7 @@ export default function PythonAppsSection({ onOpenDownloadModal }: PythonAppsSec
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ delay: i * 0.1 }}
                 className="group relative flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
               >

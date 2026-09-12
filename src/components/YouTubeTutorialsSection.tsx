@@ -26,23 +26,15 @@ export default function YouTubeTutorialsSection() {
     <section id="youtube-tutorials" className="mt-20 py-12">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col items-center text-center mb-12">
-          {/* <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-red-500/10 text-red-600 dark:bg-red-500/20 dark:text-red-400"
-          >
-            <FaYoutube className="h-7 w-7" />
-          </motion.div> */}
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             className="text-3xl font-bold tracking-tight sm:text-4xl">Technical Tutorials</motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
             className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-lg">
             Practical guides on systems administration, virtualization, and software installation.
@@ -57,7 +49,7 @@ export default function YouTubeTutorialsSection() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.15 }}
                 transition={{ delay: i * 0.1 }}
                 className="group relative overflow-hidden rounded-3xl border border-neutral-200/80 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
               >
@@ -122,7 +114,7 @@ export default function YouTubeTutorialsSection() {
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           className="mt-12 text-center"
         >
           <p className="text-sm font-medium text-neutral-500 dark:text-neutral-500">

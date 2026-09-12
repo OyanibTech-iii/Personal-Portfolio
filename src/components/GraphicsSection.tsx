@@ -116,12 +116,12 @@ export default function GraphicsSection({ onOpenDeviceModal }: GraphicsSectionPr
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             className="text-3xl font-bold tracking-tight sm:text-4xl text-neutral-900 dark:text-white">Graphics Portfolio</motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
             className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance">
             A collection of brand identities, posters, and merchandise designs crafted with precision and creativity.
@@ -160,7 +160,7 @@ export default function GraphicsSection({ onOpenDeviceModal }: GraphicsSectionPr
                   key={item.title}
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.15 }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => onOpenDeviceModal?.({ src: item.src, title: item.title, desc: item.desc, images: item.images })}
                   className={`group relative overflow-hidden rounded-2xl cursor-pointer bg-neutral-100 dark:bg-neutral-800 ${

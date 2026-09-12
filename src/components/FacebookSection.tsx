@@ -26,18 +26,10 @@ export default function FacebookSection() {
     <section id="facebook-posts" className="mt-14 py-12 border-t border-neutral-200 dark:border-neutral-800">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col items-center text-center mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-2 mb-2"
-          >
-          </motion.div>
-          
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.05 }}
             className="text-3xl font-bold tracking-tight sm:text-4xl text-neutral-900 dark:text-white"
           >
@@ -46,7 +38,7 @@ export default function FacebookSection() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
             className="mt-3 text-neutral-600 dark:text-neutral-400 max-w-xl text-balance text-sm sm:text-base"
           >
@@ -60,7 +52,7 @@ export default function FacebookSection() {
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               className="group relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 transition-all duration-300 hover:border-neutral-400 dark:hover:border-neutral-600 shadow-sm"
             >
               <div className="space-y-2 max-w-2xl">
