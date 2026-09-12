@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @reference "tailwindcss";
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap');
 
 @font-face {
   font-family: 'Gondola';
@@ -11,6 +12,7 @@
 
 @theme {
   --font-gondola: "Gondola", sans-serif;
+  --font-clash: "Clash Display", sans-serif;
   --color-shamrock-50: #fafafa;
   --color-shamrock-100: #f5f5f5;
   --color-shamrock-200: #e5e5e5;
@@ -232,5 +234,9 @@
 
   .progress-circle-wrapper text {
     fill: currentColor !important;
+  }
+
+  .font-clash {
+    font-family: var(--font-clash), "Clash Display", sans-serif;
   }
 }

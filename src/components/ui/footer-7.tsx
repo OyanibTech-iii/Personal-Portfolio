@@ -83,7 +83,7 @@ export const Footer7 = ({
             {/* Logo */}
             <div className="flex items-center gap-2 lg:justify-start">
               <a href={logo.url} className="flex items-center">
-                <span className="text-2xl font-bold text-neutral-600 transition-colors hover:text-shamrock-500 dark:text-neutral-300 font-gondola tracking-wide">
+                <span className="text-2xl font-bold text-neutral-600 transition-colors hover:text-shamrock-500 dark:text-neutral-300 font-clash tracking-wide">
                   {logo.title}
                 </span>
               </a>

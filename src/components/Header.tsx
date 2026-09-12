@@ -67,7 +67,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-neutral-200/80 bg-white/70 backdrop-blur-md transition-colors duration-300 dark:border-neutral-800 dark:bg-neutral-950/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#home" className="flex items-center">
-            <span className="ml-2 text-2xl font-bold text-neutral-600 transition-colors hover:text-shamrock-500 dark:text-neutral-300 font-gondola tracking-wide">pacifico</span>
+            <span className="ml-2 text-2xl font-bold text-neutral-600 transition-colors hover:text-shamrock-500 dark:text-neutral-300 font-clash tracking-wide">pacifico</span>
         </a>
         
         {/* Desktop Navigation */}
