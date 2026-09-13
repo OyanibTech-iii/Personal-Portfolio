@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
@@ -12,40 +12,110 @@ const navItems = [
   { label: 'Contact', href: '#contact' },
 ]
 
+// All portfolio sections ordered from bottom to top, mapped to corresponding nav item ID
+const sectionMappings = [
+  { id: 'contact', navId: 'contact' },
+  { id: 'networking', navId: 'web-apks' },
+  { id: 'python-apps', navId: 'web-apks' },
+  { id: 'java-desktop', navId: 'web-apks' },
+  { id: 'mobile-apps', navId: 'web-apks' },
+  { id: 'youtube-tutorials', navId: 'web-apks' },
+  { id: 'web-apks', navId: 'web-apks' },
+  { id: 'layouts', navId: 'graphics' },
+  { id: 'facebook-posts', navId: 'graphics' },
+  { id: 'graphics', navId: 'graphics' },
+  { id: 'workshops', navId: 'about' },
+  { id: 'about', navId: 'about' },
+  { id: 'home', navId: 'home' },
+]
+
 export default function Header() {
-  const [activeSection, setActiveSection] = useState('home')
+  const [activeSection, setActiveSection] = useState(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hash = window.location.hash.replace('#', '')
+      const validNavs = ['home', 'about', 'graphics', 'web-apks', 'contact']
+      if (validNavs.includes(hash)) return hash
+    }
+    return 'home'
+  })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const isManualScroll = useRef(false)
+  const manualScrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-50% 0px -50% 0px',
-      threshold: 0,
-    }
+    let ticking = false
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id)
-        }
-      })
-    }
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions)
-
-    navItems.forEach((item) => {
-      const element = document.getElementById(item.href.replace('#', ''))
-      if (element) {
-        observer.observe(element)
+    const updateActiveSection = () => {
+      if (isManualScroll.current) {
+        ticking = false
+        return
       }
-    })
 
-    return () => observer.disconnect()
+      const scrollY = window.scrollY
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+
+      // Check if near the very top of the page
+      if (scrollY < 120) {
+        setActiveSection('home')
+        ticking = false
+        return
+      }
+
+      // Check if near the bottom of the page
+      if (windowHeight + scrollY >= documentHeight - 60) {
+        setActiveSection('contact')
+        ticking = false
+        return
+      }
+
+      // Check sections from bottom to top
+      const threshold = 180
+      for (const section of sectionMappings) {
+        const el = document.getElementById(section.id)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= threshold) {
+            setActiveSection(section.navId)
+            break
+          }
+        }
+      }
+
+      ticking = false
+    }
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection)
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
+
+    // Initial check
+    updateActiveSection()
+
+    // Re-check after lazy-loaded components mount
+    const timer1 = setTimeout(updateActiveSection, 300)
+    const timer2 = setTimeout(updateActiveSection, 1000)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+      clearTimeout(timer1)
+      clearTimeout(timer2)
+      if (manualScrollTimer.current) {
+        clearTimeout(manualScrollTimer.current)
+      }
+    }
   }, [])
 
   // Close menu when resizing to desktop
@@ -59,10 +129,37 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const targetId = href.replace('#', '')
+    setActiveSection(targetId)
+
+    isManualScroll.current = true
+    if (manualScrollTimer.current) {
+      clearTimeout(manualScrollTimer.current)
+    }
+    manualScrollTimer.current = setTimeout(() => {
+      isManualScroll.current = false
+    }, 800)
+
+    if (targetId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      const element = document.getElementById(targetId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        window.location.hash = href
+      }
+    }
+
+    window.history.pushState(null, '', href)
+  }
+
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200/80 bg-white/70 backdrop-blur-md transition-colors duration-300 dark:border-neutral-800 dark:bg-neutral-950/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#home" className="flex items-center">
+        <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center">
             <span className="ml-2 text-2xl font-bold text-neutral-600 transition-colors hover:text-shamrock-500 dark:text-neutral-300 font-clash tracking-wide">pacifico</span>
         </a>
         
@@ -74,6 +171,7 @@ export default function Header() {
               <a
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className={`relative px-3 py-1.5 font-medium transition-colors duration-300 ${
                   isActive 
                     ? 'text-shamrock-600 dark:text-shamrock-400' 
@@ -151,7 +249,10 @@ export default function Header() {
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.04 }}
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={(e) => {
+                          setIsMenuOpen(false)
+                          handleNavClick(e, item.href)
+                        }}
                         className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-lg font-clash font-medium transition-all duration-200 ${
                           isActive 
                             ? 'bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400' 

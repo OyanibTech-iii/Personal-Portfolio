@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { PiCloudArrowDown } from 'react-icons/pi'
-import { Button } from './ui/button'
+import CtaButton from './CtaButton'
 
 interface JavaAppsSectionProps {
   onOpenDownloadModal: (project: { title: string; downloadLink: string }) => void
@@ -70,19 +69,14 @@ export default function JavaAppsSection({ onOpenDownloadModal }: JavaAppsSection
                 </div>
 
                 <div className="mt-8">
-                  <Button 
+                  <CtaButton
+                    variant="download"
+                    fullWidth
+                    size="md"
                     onClick={() => onOpenDownloadModal({ title: project.title, downloadLink: project.downloadLink })}
-                    variant="outline" 
-                    className="w-full group/btn rounded-xl transition-all duration-300 hover:bg-shamrock-500 hover:text-white dark:hover:bg-shamrock-600 border-neutral-200 dark:border-neutral-700"
                   >
                     Download Project Assets
-                    <motion.div
-                      animate={{ y: [0, 2, 0] }}
-                      transition={{ duration: 1, repeat: Infinity }}
-                    >
-                      <PiCloudArrowDown className="ml-2 h-5 w-5" />
-                    </motion.div>
-                  </Button>
+                  </CtaButton>
                 </div>
               </motion.div>
             )

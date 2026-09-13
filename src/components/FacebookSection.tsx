@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ExternalLink } from 'lucide-react'
+import CtaButton from './CtaButton'
 
 interface FacebookPostLink {
   id: string
@@ -64,16 +64,16 @@ export default function FacebookSection() {
                 </p>
               </div>
 
-              <a
+              <CtaButton
                 href={post.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-neutral-800 active:scale-95 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
+                variant="arrow"
+                size="md"
+                className="shrink-0"
               >
-                {/* <Facebook className="h-4 w-4" /> */}
-                <span>View Post</span>
-                <ExternalLink className="h-4 w-4" />
-              </a>
+                View Post
+              </CtaButton>
             </motion.div>
           ))}
         </div>

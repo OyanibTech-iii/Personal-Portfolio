@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ExternalLink } from 'lucide-react'
-import { Facebook } from 'react-feather'
+import CtaButton from './CtaButton'
 
 interface DeviceModalProps {
   device: {
@@ -82,16 +81,15 @@ export default function DeviceModal({ device, onClose }: DeviceModalProps) {
 
           {device.link && (
             <div className="mt-4">
-              <a
+              <CtaButton
                 href={device.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-blue-600 dark:hover:bg-blue-500"
+                variant="arrow"
+                size="md"
               >
-                <Facebook className="h-4 w-4" />
-                <span>{device.externalText || 'View Post on Facebook'}</span>
-                <ExternalLink className="h-4 w-4" />
-              </a>
+                {device.externalText || 'View Post on Facebook'}
+              </CtaButton>
             </div>
           )}
 

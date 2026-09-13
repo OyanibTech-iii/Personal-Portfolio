@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import HeroImage from "@/components/HeroImage";
+import CtaButton from "@/components/CtaButton";
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -107,19 +108,14 @@ function Hero() {
             </h1>
 
             <div className="mt-8 sm:mt-10 flex justify-center lg:justify-start w-full">
-              <button
+              <CtaButton
+                size="lg"
                 onClick={() => {
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                className="group inline-flex items-center gap-4 rounded-full bg-neutral-900 dark:bg-white pl-8 pr-2 py-2 font-clash font-normal text-lg text-white dark:text-neutral-900 transition-all duration-300 hover:bg-neutral-800 dark:hover:bg-neutral-100 hover:shadow-xl hover:shadow-neutral-900/15 dark:hover:shadow-white/15 active:scale-[0.97]"
               >
                 Let&apos;s work together
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white dark:bg-neutral-900 transition-transform duration-300 group-hover:rotate-[-45deg]">
-                  <svg className="h-5 w-5 text-neutral-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </span>
-              </button>
+              </CtaButton>
             </div>
           </motion.div>
 
