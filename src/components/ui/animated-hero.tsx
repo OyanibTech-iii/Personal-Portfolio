@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import SpecularButton from "@/components/SpecularButton";
-import heroAsset from "@/assets/hero-asset.svg";
+import HeroImage from "@/components/HeroImage";
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -133,16 +133,12 @@ function Hero() {
             </div>
           </motion.div>
 
-          {/* Center Column: Large Hero Asset Image (Shadow Removed) */}
+          {/* Center Column: Hero Image with Robot Reveal */}
           <motion.div variants={centerImageVariants} className="lg:col-span-4 flex items-center justify-center relative z-10 py-4 lg:py-0">
             <div className="relative w-full max-w-[360px] sm:max-w-[460px] md:max-w-[560px] lg:max-w-[650px] xl:max-w-[720px] flex justify-center">
-              <img
-                src={heroAsset}
-                alt="Pacifico Portfolio Hero Asset"
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-                className="w-full h-auto max-h-[580px] sm:max-h-[700px] md:max-h-[800px] lg:max-h-[880px] xl:max-h-[940px] object-contain select-none pointer-events-none transform lg:scale-125 xl:scale-130 origin-center"
+              <HeroImage
+                className="w-full transform lg:scale-125 xl:scale-130 origin-center"
+                revealSize={100}
               />
             </div>
           </motion.div>
