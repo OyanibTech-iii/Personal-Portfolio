@@ -8,11 +8,7 @@ const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Graphics', href: '#graphics' },
-  { label: 'Facebook', href: '#facebook-posts' },
-  { label: 'Layouts', href: '#layouts' },
   { label: 'Web', href: '#web-apks' },
-  { label: 'Mobile', href: '#mobile-apps' },
-  { label: 'Networking', href: '#networking' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -71,14 +67,14 @@ export default function Header() {
         </a>
         
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-1 text-sm md:flex relative">
+        <nav className="hidden items-center gap-1 text-sm md:flex relative font-clash">
           {navItems.map((item) => {
             const isActive = activeSection === item.href.replace('#', '')
             return (
               <a
                 key={item.href}
                 href={item.href}
-                className={`relative px-3 py-1.5 font-bold transition-colors duration-300 ${
+                className={`relative px-3 py-1.5 font-medium transition-colors duration-300 ${
                   isActive 
                     ? 'text-shamrock-600 dark:text-shamrock-400' 
                     : 'text-neutral-600 hover:text-shamrock-500 dark:text-neutral-300'
@@ -156,7 +152,7 @@ export default function Header() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.04 }}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-lg font-bold transition-all duration-200 ${
+                        className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-lg font-clash font-medium transition-all duration-200 ${
                           isActive 
                             ? 'bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400' 
                             : 'text-neutral-700 hover:bg-neutral-100 hover:text-shamrock-500 dark:text-neutral-300 dark:hover:bg-neutral-900'

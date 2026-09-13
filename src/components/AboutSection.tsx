@@ -4,7 +4,7 @@ import { FaGithub, FaBehance } from 'react-icons/fa'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
 import { ProgressBarCircle } from "@/components/base/progress-indicators/progress-circles"
 import SpecularButton from "@/components/SpecularButton"
-import profileImg from '../assets/blackprofile.webp'
+import profileImg from '../assets/prof.webp'
 
 import certImg from '../assets/e-cert.webp'
 import cert2Img from '../assets/e-cert-2.webp'

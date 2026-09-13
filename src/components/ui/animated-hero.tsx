@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Dock, DockIcon } from "@/components/ui/dock";
-import SpecularButton from "@/components/SpecularButton";
 import HeroImage from "@/components/HeroImage";
 
 function Hero() {
@@ -83,16 +82,16 @@ function Hero() {
           
           {/* Left Column: Title & CTA Button */}
           <motion.div variants={leftColumnVariants} className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left z-20">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-neutral-900 dark:text-white w-full">
-              <span className="block text-neutral-400 dark:text-neutral-400 font-normal text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl whitespace-nowrap mb-2">
+            <h1 className="font-clash text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-neutral-900 dark:text-white w-full">
+              <span className="block text-neutral-400 dark:text-neutral-400 font-medium text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl whitespace-nowrap mb-2">
                 Building Solutions in
               </span>
-              <span className="relative flex w-full justify-center lg:justify-start min-h-[1.25em] text-neutral-900 dark:text-white uppercase font-black tracking-normal text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl pr-6 overflow-visible">
+              <span className="relative flex w-full justify-center lg:justify-start min-h-[1.25em] text-neutral-900 dark:text-white uppercase font-bold tracking-normal text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl pr-6 overflow-visible">
                 &nbsp;
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-black left-0 right-0 lg:left-0 text-center lg:text-left whitespace-nowrap pr-8"
+                    className="absolute font-bold left-0 right-0 lg:left-0 text-center lg:text-left whitespace-nowrap pr-8"
                     initial={{ opacity: 0, y: -100 }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     animate={
@@ -108,28 +107,19 @@ function Hero() {
             </h1>
 
             <div className="mt-8 sm:mt-10 flex justify-center lg:justify-start w-full">
-              <SpecularButton
-                size="lg"
-                radius={14}
-                tint="#ffffff"
-                tintOpacity={0}
-                blur={0}
-                lineColor="#ffffff"
-                baseColor="#71717a"
-                intensity={1}
-                shineSize={14}
-                shineFade={45}
-                thickness={1.5}
-                speed={0.35}
-                followMouse
-                proximity={250}
-                autoAnimate={false}
+              <button
                 onClick={() => {
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                 }}
+                className="group inline-flex items-center gap-4 rounded-full bg-neutral-900 dark:bg-white pl-8 pr-2 py-2 font-clash font-normal text-lg text-white dark:text-neutral-900 transition-all duration-300 hover:bg-neutral-800 dark:hover:bg-neutral-100 hover:shadow-xl hover:shadow-neutral-900/15 dark:hover:shadow-white/15 active:scale-[0.97]"
               >
-                Let&apos;s Work Together
-              </SpecularButton>
+                Let&apos;s work together
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white dark:bg-neutral-900 transition-transform duration-300 group-hover:rotate-[-45deg]">
+                  <svg className="h-5 w-5 text-neutral-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              </button>
             </div>
           </motion.div>
 
