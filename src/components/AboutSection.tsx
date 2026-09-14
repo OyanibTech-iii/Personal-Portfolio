@@ -41,18 +41,8 @@ const focusData = [
 ];
 
 export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
-  // Restore user toggle preference from cache
-  const [showAccreditations, setShowAccreditations] = useState(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const saved = localStorage.getItem('portfolio_accreditations_visible')
-        return saved !== null ? JSON.parse(saved) : false
-      } catch {
-        return false
-      }
-    }
-    return false
-  })
+  // Default state is hidden
+  const [showAccreditations, setShowAccreditations] = useState(false)
 
   const certificates = useMemo(() => [
     { src: certImg, title: 'Intellectual Property', issuer: 'Mindoro State University', year: '2025' },
@@ -88,15 +78,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
   }, [handlePreload])
 
   const toggleAccreditations = () => {
-    setShowAccreditations((prev: boolean) => {
-      const next = !prev
-      try {
-        localStorage.setItem('portfolio_accreditations_visible', JSON.stringify(next))
-      } catch {
-        // ignore storage errors
-      }
-      return next
-    })
+    setShowAccreditations((prev) => !prev)
   }
 
   return (
@@ -268,32 +250,33 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
       </div>
 
       
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
-        transition={{ duration: 0.5 }}
-        className="mx-auto mt-16 max-w-5xl"
-      >
-        <button 
-          type="button"
-          onClick={toggleAccreditations}
-          onMouseEnter={handlePreload}
-          onFocus={handlePreload}
-          className="flex items-center justify-between w-full mb-8 group cursor-pointer"
+      <div className="mx-auto mt-16 max-w-5xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="flex items-center gap-2 sm:gap-3">
-            <h3 className="text-base sm:text-xl font-bold text-neutral-900 dark:text-white group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
-              Accreditations
-            </h3>
-            <span className="rounded-full bg-neutral-100 dark:bg-neutral-800/80 px-2 sm:px-2.5 py-0.5 text-[11px] sm:text-xs font-semibold text-neutral-600 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60">
-              {certificates.length}
+          <button 
+            type="button"
+            onClick={toggleAccreditations}
+            onMouseEnter={handlePreload}
+            onFocus={handlePreload}
+            className="flex items-center justify-between w-full mb-8 group cursor-pointer"
+          >
+            <div className="flex items-center gap-2 sm:gap-3">
+              <h3 className="text-base sm:text-xl font-bold text-neutral-900 dark:text-white group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
+                Accreditations
+              </h3>
+              <span className="rounded-full bg-neutral-100 dark:bg-neutral-800/80 px-2 sm:px-2.5 py-0.5 text-[11px] sm:text-xs font-semibold text-neutral-600 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60">
+                {certificates.length}
+              </span>
+            </div>
+            <span className="text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors whitespace-nowrap">
+              {showAccreditations ? 'Hide Images' : 'Show Images'}
             </span>
-          </div>
-          <span className="text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors whitespace-nowrap">
-            {showAccreditations ? 'Hide Images' : 'Show Images'}
-          </span>
-        </button>
+          </button>
+        </motion.div>
         {showAccreditations && (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {certificates.map((c, i) => (
@@ -301,7 +284,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                 key={i} 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
+                transition={{ delay: i * 0.05, duration: 0.3 }}
                 whileHover={{ y: -5 }}
                 className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 p-4 shadow-sm transition-all duration-300 dark:border-neutral-800/70 dark:bg-neutral-900/50"
               >
@@ -328,7 +311,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
             ))}
           </div>
         )}
-      </motion.div>
+      </div>
     </section>
   )
 }
