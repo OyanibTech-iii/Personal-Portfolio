@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ImageWithSkeleton } from './ui/image-with-skeleton'
-import { ChevronLeft, ChevronRight, Maximize2, X, Images, Sparkles, LayoutGrid, Layers } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Maximize2, X, Images, LayoutGrid, Layers } from 'lucide-react'
 
 // Import Code Connect photos (6 images)
 import codeConnect01 from '../assets/code connect/01.webp'
@@ -26,7 +26,6 @@ import ilcdb04 from '../assets/ILCDB-DICT/747573336_122129077827224496_577121772
 interface Program {
   id: string
   title: string
-  subtitle: string
   description: string
   images: string[]
 }
@@ -41,21 +40,18 @@ export default function WorkshopsSection() {
     {
       id: 'code-connect',
       title: 'Code Connect',
-      subtitle: 'Software Development & Bootcamps',
       description: 'Intensive hands-on developer bootcamps and workshops focused on core programming foundations, modern web technologies, and team collaboration.',
       images: [codeConnect01, codeConnect02, codeConnect03, codeConnect04, codeConnect05, codeConnect06],
     },
     {
       id: 'koica',
       title: 'KOICA Training',
-      subtitle: 'Global Capacity Development',
       description: 'International training program sponsored by Korea International Cooperation Agency, enhancing technical skills and sharing digital transformation strategies.',
       images: [koica01, koica02, koica03, koica04],
     },
     {
       id: 'ilcdb',
       title: 'ILCDB-DICT',
-      subtitle: 'Government ICT Competency Training',
       description: 'ICT capability-building training administered by the Department of Information and Communications Technology - ILCDB, focused on advanced networking and system solutions.',
       images: [ilcdb01, ilcdb02, ilcdb03, ilcdb04],
     }
@@ -213,10 +209,7 @@ export default function WorkshopsSection() {
                     className="group flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
                   >
                     <div className="flex-1">
-                      <span className="text-xs font-semibold text-shamrock-500 dark:text-shamrock-400 tracking-wider uppercase block">
-                        {program.subtitle}
-                      </span>
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mt-1">
+                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white">
                         {program.title}
                       </h3>
                       <p className="mt-3 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
@@ -290,11 +283,7 @@ export default function WorkshopsSection() {
               {/* Top Header & Metadata */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-6 dark:border-neutral-800">
                 <div>
-                  <span className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-semibold bg-shamrock-50 dark:bg-shamrock-950/60 text-shamrock-600 dark:text-shamrock-400 border border-shamrock-200/60 dark:border-shamrock-800/40 uppercase tracking-wider">
-                    <Sparkles className="w-3.5 h-3.5 text-shamrock-500" />
-                    {currentProgram.subtitle}
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-neutral-900 dark:text-white tracking-tight mt-3">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
                     {currentProgram.title}
                   </h3>
                 </div>
@@ -333,18 +322,11 @@ export default function WorkshopsSection() {
                 </div>
               </div>
 
-              {/* Program Description & Action Bar */}
-              <div className="py-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              {/* Program Description */}
+              <div className="py-5">
                 <p className="text-neutral-600 dark:text-neutral-300 text-base sm:text-lg leading-relaxed max-w-3xl">
                   {currentProgram.description}
                 </p>
-                <button
-                  type="button"
-                  onClick={() => openLightbox(currentProgram, activeImageIndex)}
-                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-shamrock-600 hover:text-shamrock-500 dark:text-shamrock-400 dark:hover:text-shamrock-300 shrink-0 transition-colors cursor-pointer"
-                >
-                  <Maximize2 className="w-4 h-4" /> Open Fullscreen Slideshow
-                </button>
               </div>
 
               {/* VIEW MODE 1: SPOTLIGHT (Expansive Hero Stage + All Photos Grid) */}
@@ -424,9 +406,6 @@ export default function WorkshopsSection() {
                         <Images className="w-4 h-4 text-shamrock-500" />
                         All Program Photos ({currentProgram.images.length})
                       </span>
-                      <span className="text-xs text-neutral-400">
-                        Click any image to preview or view full resolution
-                      </span>
                     </div>
 
                     <div className={`grid gap-3 sm:gap-4 ${
@@ -476,9 +455,6 @@ export default function WorkshopsSection() {
                     <span className="text-xs sm:text-sm font-semibold text-neutral-600 dark:text-neutral-400 flex items-center gap-1.5">
                       <Images className="w-4 h-4 text-shamrock-500" />
                       All Program Photos ({currentProgram.images.length})
-                    </span>
-                    <span className="text-xs text-neutral-400">
-                      Click any photo to open full resolution
                     </span>
                   </div>
 
