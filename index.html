@@ -1,50 +1,154 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
       <script>
-    (function () {
+  (function () {
+    // ========================================
+    // LAYER 1: Keyboard shortcut prevention
+    // ========================================
+    document.addEventListener('keydown', function (e) {
+      var key = e.key ? e.key.toUpperCase() : '';
+      var blocked =
+        key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && ['I', 'J', 'C', 'K'].includes(key)) ||
+        (e.ctrlKey && key === 'U') ||
+        (e.ctrlKey && key === 'S') ||
+        (e.ctrlKey && key === 'P') ||
+        (e.ctrlKey && key === 'A') ||
+        (e.ctrlKey && key === 'C') ||
+        (e.metaKey && e.altKey && ['I', 'J', 'C'].includes(key)) ||
+        (e.ctrlKey && e.shiftKey && key === 'R');
+      if (blocked) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, true);
 
-      document.addEventListener('keydown', function (e) {
-        const key = e.key ? e.key.toUpperCase() : '';
+    // ========================================
+    // LAYER 2: Context menu, drag, selection, copy/cut prevention
+    // ========================================
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, true);
+    document.addEventListener('dragstart', function(e) { e.preventDefault(); }, true);
+    document.addEventListener('selectstart', function(e) { e.preventDefault(); }, true);
+    document.addEventListener('copy', function(e) { e.preventDefault(); }, true);
+    document.addEventListener('cut', function(e) { e.preventDefault(); }, true);
 
-        const blocked =
-          key === 'F12' ||
-          (e.ctrlKey && e.shiftKey && ['I', 'J', 'C', 'K'].includes(key)) ||
-          (e.ctrlKey && key === 'U') ||
-          (e.ctrlKey && key === 'S') ||
-          (e.ctrlKey && key === 'P') ||
-          (e.ctrlKey && key === 'A') ||
-          (e.ctrlKey && key === 'C') ||
-          (e.metaKey && e.altKey && ['I', 'J', 'C'].includes(key)) ||
-          (e.ctrlKey && e.shiftKey && key === 'R');
+    // ========================================
+    // LAYER 3: Console warnings
+    // ========================================
+    console.log("%cSTOP!", "color: red; font-family: sans-serif; font-size: 60px; font-weight: bold; text-shadow: 1px 1px 3px black;");
+    console.log("%cPrivate property of Pacifico Oyanib III. Do not touch.", "color: white; background: #cc0000; font-size: 16px; padding: 6px 12px; font-weight: bold; border-radius: 4px;");
+    console.warn("%cWARNING: This console is a restricted developer environment.\n\nUnauthorized access, system tampering, reverse engineering, or data interference is strictly prohibited. Any malicious activity targeting this application may be subject to criminal prosecution under the Philippine Cybercrime Prevention Act of 2012 (Republic Act No. 10175).\n\nIf you were told to copy and paste something here, it is likely a scam that will give attackers access to your account. Close this window immediately.", "color: #ffaa00; font-size: 14px; font-weight: bold; line-height: 1.5;");
 
-        if (blocked) {
-          e.preventDefault();
-          e.stopPropagation();
-          return false;
+    // ========================================
+    // DEVTOOLS DETECTION ENGINE
+    // Catches DevTools opened BEFORE or AFTER page load
+    // ========================================
+    var _devtoolsOpen = false;
+
+    function onDevToolsDetected() {
+      if (_devtoolsOpen) return;
+      _devtoolsOpen = true;
+
+      // Nuke page content
+      try {
+        document.documentElement.innerHTML = '';
+      } catch(e) {}
+      document.close();
+    }
+
+    function resetDetection() {
+      _devtoolsOpen = false;
+    }
+
+    // ----------------------------------------
+    // DETECTION METHOD 1: Debugger timing trap
+    // When DevTools is open, the debugger statement pauses execution,
+    // causing measurable delay. This works even if DevTools was opened
+    // BEFORE the page loaded.
+    // ----------------------------------------
+    function debuggerTimingCheck() {
+      var start = performance.now();
+      // This debugger statement will pause if DevTools is open
+      (function(){}).constructor('debugger')();
+      var elapsed = performance.now() - start;
+      // If execution took >100ms, DevTools is intercepting
+      if (elapsed > 100) {
+        onDevToolsDetected();
+      }
+    }
+
+    // ----------------------------------------
+    // DETECTION METHOD 2: Window size differential
+    // Detects docked DevTools panels
+    // ----------------------------------------
+    function sizeCheck() {
+      var threshold = 160;
+      var widthDiff = window.outerWidth - window.innerWidth;
+      var heightDiff = window.outerHeight - window.innerHeight;
+      if (widthDiff > threshold || heightDiff > threshold) {
+        onDevToolsDetected();
+      }
+    }
+
+    // ----------------------------------------
+    // DETECTION METHOD 3: Console object toString trap
+    // DevTools calls toString() on objects logged to console.
+    // We create a trap object that detects this.
+    // ----------------------------------------
+    function consoleProbeCheck() {
+      var _trap = new Image();
+      Object.defineProperty(_trap, 'id', {
+        get: function() {
+          onDevToolsDetected();
+          return '';
         }
-      }, true);
+      });
+      // Regularly push the trap to console — DevTools will read its properties
+      console.debug('%c', _trap);
+    }
 
-      // Right-click / context menu
-      document.addEventListener('contextmenu', e => { e.preventDefault(); }, true);
+    // ----------------------------------------
+    // DETECTION METHOD 4: Element inspection trap
+    // When DevTools inspects DOM elements, it accesses certain getters.
+    // ----------------------------------------
+    function elementInspectTrap() {
+      var _el = document.createElement('div');
+      Object.defineProperty(_el, 'id', {
+        get: function() {
+          onDevToolsDetected();
+          return 'devtools-trap';
+        },
+        configurable: true
+      });
+      // Log element — DevTools reads its properties when inspecting
+      console.debug(_el);
+    }
 
-      // Drag (image/text dragging out of page)
-      document.addEventListener('dragstart', e => { e.preventDefault(); }, true);
+    // ========================================
+    // RUN ALL DETECTION CHECKS
+    // ========================================
 
-      // Text selection (optional — hurts accessibility/usability)
-      document.addEventListener('selectstart', e => { e.preventDefault(); }, true);
+    // Immediate checks on page load (catches pre-opened DevTools)
+    try { debuggerTimingCheck(); } catch(e) {}
+    try { sizeCheck(); } catch(e) {}
+    try { consoleProbeCheck(); } catch(e) {}
+    try { elementInspectTrap(); } catch(e) {}
 
-      // Copy / cut
-      document.addEventListener('copy', e => { e.preventDefault(); }, true);
-      document.addEventListener('cut', e => { e.preventDefault(); }, true);
+    // Continuous monitoring (catches DevTools opened after page load)
+    setInterval(function() {
+      try { debuggerTimingCheck(); } catch(e) {}
+      try { sizeCheck(); } catch(e) {}
+      try { consoleProbeCheck(); } catch(e) {}
+    }, 500);
 
-console.log("%cSTOP!", "color: red; font-family: sans-serif; font-size: 60px; font-weight: bold; text-shadow: 1px 1px 3px black;");
-
-console.log("%cPrivate property of Pacifico Oyanib III. Do not touch.", "color: white; background: #cc0000; font-size: 16px; padding: 6px 12px; font-weight: bold; border-radius: 4px;");
-
-console.log("%cWARNING: This console is a restricted developer environment.\n\nUnauthorized access, system tampering, reverse engineering, or data interference is strictly prohibited. Any malicious activity targeting this application may be subject to criminal prosecution under the Philippine Cybercrime Prevention Act of 2012 (Republic Act No. 10175).\n\nIf you were told to copy and paste something here, it is likely a scam that will give attackers access to your account. Close this window immediately.", "color: #ffaa00; font-size: 14px; font-weight: bold; line-height: 1.5;");
-    })();
-  </script>
+    // Re-run element trap periodically
+    setInterval(function() {
+      try { elementInspectTrap(); } catch(e) {}
+    }, 2000);
+  })();
+</script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,6 +159,7 @@ console.log("%cWARNING: This console is a restricted developer environment.\n\nU
     <meta name="keywords" content="Pacifico Oyanib, full-stack developer, React developer, Next.js, Laravel, Python, cybersecurity, web developer portfolio, frontend developer, backend developer, TypeScript, Tailwind CSS" />
     <meta name="author" content="Pacifico Oyanib III" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="generator" content="Vite + React" />
     <link rel="canonical" href="https://personal-portfolio-three-lovat-19.vercel.app/" />
 
     <!-- Open Graph / Facebook -->
@@ -63,15 +168,18 @@ console.log("%cWARNING: This console is a restricted developer environment.\n\nU
     <meta property="og:title" content="Pacifico Oyanib III — Full-Stack Developer & Cybersecurity Enthusiast" />
     <meta property="og:description" content="Portfolio of Pacifico Oyanib III, a full-stack developer specializing in React, Next.js, Laravel, Python, and cybersecurity." />
     <meta property="og:image" content="https://personal-portfolio-three-lovat-19.vercel.app/profile.png" />
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
     <meta property="og:site_name" content="Pacifico Oyanib Portfolio" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://personal-portfolio-three-lovat-19.vercel.app/" />
-    <meta property="twitter:title" content="Pacifico Oyanib III — Full-Stack Developer & Cybersecurity Enthusiast" />
-    <meta property="twitter:description" content="Portfolio of Pacifico Oyanib III, a full-stack developer specializing in React, Next.js, Laravel, Python, and cybersecurity." />
-    <meta property="twitter:image" content="https://personal-portfolio-three-lovat-19.vercel.app/profile.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://personal-portfolio-three-lovat-19.vercel.app/" />
+    <meta name="twitter:title" content="Pacifico Oyanib III — Full-Stack Developer & Cybersecurity Enthusiast" />
+    <meta name="twitter:description" content="Portfolio of Pacifico Oyanib III, a full-stack developer specializing in React, Next.js, Laravel, Python, and cybersecurity." />
+    <meta name="twitter:image" content="https://personal-portfolio-three-lovat-19.vercel.app/profile.png"/>
+    <meta name="twitter:image:alt" content="Profile picture of Pacifico Oyanib III"/>
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#0a0a0a" />
@@ -93,6 +201,7 @@ console.log("%cWARNING: This console is a restricted developer environment.\n\nU
       "url": "https://personal-portfolio-three-lovat-19.vercel.app/",
       "jobTitle": "Full-Stack Developer",
       "description": "Full-stack developer and cybersecurity enthusiast specializing in React, Next.js, Laravel, Python, and secure web applications.",
+      "image": "https://personal-portfolio-three-lovat-19.vercel.app/profile.png",
       "knowsAbout": ["React", "Next.js", "TypeScript", "Laravel", "Python", "Cybersecurity", "Tailwind CSS", "Docker", "Node.js"],
       "sameAs": [
         "https://github.com/OyanibTech-iii",
@@ -104,6 +213,16 @@ console.log("%cWARNING: This console is a restricted developer environment.\n\nU
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="padding:2rem;text-align:center;font-family:sans-serif;background:#0a0a0a;color:#e5e5e5;min-height:100vh;display:flex;align-items:center;justify-content:center;">
+        <div>
+          <h1 style="font-size:1.5rem;margin-bottom:1rem;">Pacifico Oyanib III — Full-Stack Developer Portfolio</h1>
+          <p style="color:#a3a3a3;line-height:1.6;">This portfolio requires JavaScript to run. Please enable JavaScript in your browser settings to view my work, projects, and contact information.</p>
+          <p style="margin-top:1rem;"><a href="mailto:pacificooyanib@gmail.com" style="color:#4ade80;">Contact me directly: pacificooyanib@gmail.com</a></p>
+        </div>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
