@@ -42,15 +42,7 @@ function Hero() {
     },
   };
 
-  const centerImageVariants = {
-    hidden: { opacity: 0, scale: 0.88, y: 30 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.25, 0.4, 0.25, 1] as const, delay: 0.2 },
-    },
-  };
+
 
   const rightColumnVariants = {
     hidden: { opacity: 0, x: 40 },
@@ -120,14 +112,20 @@ function Hero() {
           </motion.div>
 
           {/* Center Column: Hero Image with Robot Reveal */}
-          <motion.div variants={centerImageVariants} className="lg:col-span-4 flex items-center justify-center relative z-10 py-4 lg:py-0">
-            <div className="relative w-full max-w-[360px] sm:max-w-[460px] md:max-w-[560px] lg:max-w-[650px] xl:max-w-[720px] flex justify-center">
+          <div className="lg:col-span-4 flex items-center justify-center relative z-10 py-4 lg:py-0">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
+              className="relative w-full max-w-[360px] sm:max-w-[460px] md:max-w-[560px] lg:max-w-[650px] xl:max-w-[720px] flex justify-center"
+            >
               <HeroImage
                 className="w-full transform lg:scale-125 xl:scale-130 origin-center"
                 revealSize={100}
               />
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
           {/* Right Column: Description Paragraph */}
           <motion.div variants={rightColumnVariants} className="lg:col-span-3 flex flex-col justify-end items-center lg:items-start text-center lg:text-left z-20 lg:pt-48">
