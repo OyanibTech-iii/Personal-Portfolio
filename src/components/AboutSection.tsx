@@ -282,15 +282,15 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
           onFocus={handlePreload}
           className="flex items-center justify-between w-full mb-8 group cursor-pointer"
         >
-          <div className="flex items-center gap-3">
-            <h3 className="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <h3 className="text-base sm:text-xl font-bold text-neutral-900 dark:text-white group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
               Accreditations
             </h3>
-            <span className="rounded-full bg-neutral-100 dark:bg-neutral-800/80 px-2.5 py-0.5 text-xs font-semibold text-neutral-600 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60">
+            <span className="rounded-full bg-neutral-100 dark:bg-neutral-800/80 px-2 sm:px-2.5 py-0.5 text-[11px] sm:text-xs font-semibold text-neutral-600 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60">
               {certificates.length}
             </span>
           </div>
-          <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
+          <span className="text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors whitespace-nowrap">
             {showAccreditations ? 'Hide Images' : 'Show Images'}
           </span>
         </button>
