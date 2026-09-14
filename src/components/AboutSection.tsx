@@ -43,6 +43,23 @@ const focusData = [
 export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
   // Default state is hidden
   const [showAccreditations, setShowAccreditations] = useState(false)
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down')
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      const diff = currentScrollY - lastScrollY
+      if (Math.abs(diff) > 8) {
+        const nextDirection = diff > 0 ? 'down' : 'up'
+        setScrollDirection((prev) => (prev !== nextDirection ? nextDirection : prev))
+        lastScrollY = currentScrollY
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const certificates = useMemo(() => [
     { src: certImg, title: 'Intellectual Property', issuer: 'Mindoro State University', year: '2025' },
@@ -101,7 +118,13 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
             loading="lazy"
           />
           
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: scrollDirection === 'down' ? 15 : -15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="flex flex-wrap items-center justify-center gap-3"
+          >
             <SpecularButton
               size="sm"
               radius={18}
@@ -144,9 +167,20 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                 OyanibTech-iii
               </span>
             </SpecularButton>
-          </div>
+          </motion.div>
 
-          <div className="h-64 w-full ">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85, y: scrollDirection === 'down' ? 25 : -25 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{
+              duration: 0.6,
+              delay: scrollDirection === 'down' ? 0.2 : 0.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            whileHover={{ scale: 1.02 }}
+            className="h-64 w-full rounded-2xl bg-neutral-50/60 dark:bg-neutral-950/20 p-2 border border-neutral-200/60 dark:border-neutral-800/60 transition-colors duration-300"
+          >
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart cx="50%" cy="50%" outerRadius="70%" data={skillData}>
                 <PolarGrid stroke="var(--color-shamrock-500)" strokeOpacity={0.6} />
@@ -160,6 +194,8 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                   stroke="var(--color-shamrock-500)"
                   fill="var(--color-shamrock-500)"
                   fillOpacity={0.3}
+                  isAnimationActive={true}
+                  animationDuration={1000}
                 />
                 <Tooltip 
                   contentStyle={{ 
@@ -173,7 +209,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                 />
               </RadarChart>
             </ResponsiveContainer>
-          </div>
+          </motion.div>
         </motion.div>
 
         <motion.div
@@ -196,7 +232,18 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            <div className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800">
+            <motion.div
+              initial={{ opacity: 0, y: scrollDirection === 'down' ? 30 : -30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{
+                duration: 0.5,
+                delay: scrollDirection === 'down' ? 0.1 : 0.25,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{ y: -4 }}
+              className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800 shadow-sm transition-all duration-300 hover:shadow-md"
+            >
               <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-8 uppercase tracking-widest text-center">Core Competencies</h3>
               <div className="flex flex-wrap justify-center gap-6">
                 <ProgressBarCircle size="xs" label="Full-Stack Development" min={0} max={100} value={70} />
@@ -204,9 +251,20 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                 <ProgressBarCircle size="xs" label="UI/UX Design" min={0} max={100} value={90} />
                 <ProgressBarCircle size="xs" label="Machine Learning" min={0} max={100} value={23} />
               </div>
-            </div>
+            </motion.div>
 
-            <div className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800">
+            <motion.div
+              initial={{ opacity: 0, y: scrollDirection === 'down' ? 30 : -30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{
+                duration: 0.5,
+                delay: scrollDirection === 'down' ? 0.25 : 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{ y: -4 }}
+              className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800 shadow-sm transition-all duration-300 hover:shadow-md"
+            >
               <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-6 uppercase tracking-widest text-center">Current Focus</h3>
               <div className="h-72 w-full">
                 <ResponsiveContainer width="100%" height="100%">
@@ -230,7 +288,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                         color: 'var(--color-foreground)'
                       }}
                     />
-                    <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={24}>
+                    <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={24} isAnimationActive={true} animationDuration={1000}>
                       {focusData.map((_, index) => (
                         <Cell key={`cell-${index}`} fill="var(--color-shamrock-500)" fillOpacity={0.6 + (index * 0.1)} />
                       ))}
@@ -244,7 +302,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
