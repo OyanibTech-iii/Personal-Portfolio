@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { FaGithub, FaBehance } from 'react-icons/fa'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
@@ -15,6 +15,8 @@ import isc2Cert3Img from '../assets/isc2 cert/cc domain 3.webp'
 import isc2Cert4Img from '../assets/isc2 cert/cc domain 4.webp'
 import isc2Cert5Img from '../assets/isc2 cert/cc domain 5.webp'
 import { Button } from './ui/button'
+import { ImageWithSkeleton } from './ui/image-with-skeleton'
+import { preloadImages } from '@/lib/image-cache'
 
 interface AboutSectionProps {
   onOpenCertModal: (cert: { src: string; title: string; issuer: string; year: string; url?: string }) => void
@@ -39,8 +41,20 @@ const focusData = [
 ];
 
 export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
-  const [showAccreditations, setShowAccreditations] = useState(false)
-  const certificates = [
+  // Restore user toggle preference from cache
+  const [showAccreditations, setShowAccreditations] = useState(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('portfolio_accreditations_visible')
+        return saved !== null ? JSON.parse(saved) : false
+      } catch {
+        return false
+      }
+    }
+    return false
+  })
+
+  const certificates = useMemo(() => [
     { src: certImg, title: 'Intellectual Property', issuer: 'Mindoro State University', year: '2025' },
     { src: cert2Img, title: 'Internet of Things', issuer: 'Mindoro State University', year: '2025' },
     { src: cisspCertImg, title: 'CISSP Certification', issuer: 'Cisco', year: '2025' },
@@ -49,7 +63,41 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
     { src: isc2Cert3Img, title: 'Certified in Cybersecurity Domain 3', issuer: 'ISC2', year: '2026' },
     { src: isc2Cert4Img, title: 'Certified in Cybersecurity Domain 4', issuer: 'ISC2', year: '2026' },
     { src: isc2Cert5Img, title: 'Certified in Cybersecurity Domain 5', issuer: 'ISC2', year: '2026' }
-  ]
+  ], [])
+
+  // Pre-cache certificate images into browser and memory cache
+  const handlePreload = useCallback(() => {
+    preloadImages(certificates.map((c) => c.src))
+  }, [certificates])
+
+  // Preload on idle so images are ready before user clicks
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const handle = (window as Window & { requestIdleCallback: (cb: () => void) => number }).requestIdleCallback(() => {
+        handlePreload()
+      })
+      return () => {
+        if ('cancelIdleCallback' in window) {
+          (window as Window & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(handle)
+        }
+      }
+    } else {
+      const timer = setTimeout(handlePreload, 1200)
+      return () => clearTimeout(timer)
+    }
+  }, [handlePreload])
+
+  const toggleAccreditations = () => {
+    setShowAccreditations((prev: boolean) => {
+      const next = !prev
+      try {
+        localStorage.setItem('portfolio_accreditations_visible', JSON.stringify(next))
+      } catch {
+        // ignore storage errors
+      }
+      return next
+    })
+  }
 
   return (
     <section id="about" className="relative isolate overflow-hidden rounded-3xl bg-white/70 p-8 backdrop-blur-sm transition-colors duration-300 dark:bg-neutral-900/50 sm:p-12">
@@ -228,11 +276,23 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
         className="mx-auto mt-16 max-w-5xl"
       >
         <button 
-          onClick={() => setShowAccreditations(!showAccreditations)}
-          className="flex items-center justify-between w-full mb-8 group"
+          type="button"
+          onClick={toggleAccreditations}
+          onMouseEnter={handlePreload}
+          onFocus={handlePreload}
+          className="flex items-center justify-between w-full mb-8 group cursor-pointer"
         >
-          <h3 className="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">Accreditations</h3>
-          <span className="text-sm text-neutral-500 dark:text-neutral-400 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">{showAccreditations ? 'Hide' : 'Show'} Images</span>
+          <div className="flex items-center gap-3">
+            <h3 className="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
+              Accreditations
+            </h3>
+            <span className="rounded-full bg-neutral-100 dark:bg-neutral-800/80 px-2.5 py-0.5 text-xs font-semibold text-neutral-600 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60">
+              {certificates.length}
+            </span>
+          </div>
+          <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
+            {showAccreditations ? 'Hide Images' : 'Show Images'}
+          </span>
         </button>
         {showAccreditations && (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -241,11 +301,17 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                 key={i} 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.08 }}
                 whileHover={{ y: -5 }}
                 className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 p-4 shadow-sm transition-all duration-300 dark:border-neutral-800/70 dark:bg-neutral-900/50"
               >
-                <img src={c.src} alt={c.title} className="h-40 w-full object-cover rounded-xl mb-4" loading="lazy" />
+                <ImageWithSkeleton
+                  src={c.src}
+                  alt={c.title}
+                  containerClassName="h-40 w-full rounded-xl mb-4"
+                  className="h-full w-full object-cover rounded-xl"
+                  loading="lazy"
+                />
                 <figcaption>
                   <p className="text-sm font-bold text-neutral-900 dark:text-white line-clamp-1">{c.title}</p>
                   <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{c.issuer} • {c.year}</p>
@@ -253,7 +319,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                     onClick={() => onOpenCertModal(c)}
                     variant="outline"
                     size="sm"
-                    className="mt-4 w-full rounded-xl hover:bg-shamrock-500 hover:text-white"
+                    className="mt-4 w-full rounded-xl hover:bg-shamrock-500 hover:text-white cursor-pointer"
                   >
                     View Credential
                   </Button>

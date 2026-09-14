@@ -1,3 +1,5 @@
+import { ImageWithSkeleton } from './ui/image-with-skeleton'
+
 interface CertificateModalProps {
   cert: { src: string; title: string; issuer: string; year: string; url?: string } | null
   onClose: () => void
@@ -12,13 +14,18 @@ export default function CertificateModal({ cert, onClose }: CertificateModalProp
       <div className="relative z-50 mx-4 w-full max-w-3xl rounded-xl bg-white p-6 shadow-xl dark:bg-neutral-900">
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md bg-neutral-100 text-neutral-700 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-100"
+          className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md bg-neutral-100 text-neutral-700 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-100 cursor-pointer"
           aria-label="Close"
         >
           ✕
         </button>
         <div className="grid gap-4 md:grid-cols-2">
-          <img src={cert.src} alt={cert.title} className="h-64 w-full rounded-md object-cover" />
+          <ImageWithSkeleton
+            src={cert.src}
+            alt={cert.title}
+            containerClassName="h-64 w-full rounded-md"
+            className="h-full w-full rounded-md object-cover"
+          />
           <div>
             <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">{cert.title}</h3>
             <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{cert.issuer} • {cert.year}</p>
