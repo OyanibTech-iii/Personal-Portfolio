@@ -20,6 +20,7 @@ const sectionMappings = [
   { id: 'java-desktop', navId: 'web-apks' },
   { id: 'mobile-apps', navId: 'web-apks' },
   { id: 'youtube-tutorials', navId: 'web-apks' },
+  { id: 'third-gen', navId: 'web-apks' },
   { id: 'web-apks', navId: 'web-apks' },
   { id: 'layouts', navId: 'graphics' },
   { id: 'facebook-posts', navId: 'graphics' },

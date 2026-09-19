@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import emailjs from '@emailjs/browser'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -13,6 +14,7 @@ const GraphicsSection = lazy(() => import('./components/GraphicsSection'))
 const FacebookSection = lazy(() => import('./components/FacebookSection'))
 const LayoutsSection = lazy(() => import('./components/LayoutsSection'))
 const WebAPKsSection = lazy(() => import('./components/WebAPKsSection'))
+const ThirdGenSection = lazy(() => import('./components/ThirdGenSection'))
 const YouTubeTutorialsSection = lazy(() => import('./components/YouTubeTutorialsSection'))
 const JavaAppsSection = lazy(() => import('./components/JavaAppsSection'))
 const PythonAppsSection = lazy(() => import('./components/PythonAppsSection'))
@@ -216,6 +218,7 @@ function Portfolio() {
           <FacebookSection />
           <LayoutsSection onOpenDeviceModal={openDeviceModal} />
           <WebAPKsSection />
+          <ThirdGenSection />
           <YouTubeTutorialsSection />
           <ReactNativeAppsSection onOpenDownloadModal={openDownloadModal} />
           <JavaAppsSection onOpenDownloadModal={openDownloadModal} />
@@ -246,13 +249,16 @@ function Portfolio() {
 
 export default function App() {
   return (
-    <Suspense fallback={<SectionSkeleton />}>
-      <Routes>
-        <Route path="/" element={<Portfolio />} />
-        <Route path="/instagram" element={<ComingSoon platform="Instagram" />} />
-        <Route path="/linkedin" element={<ComingSoon platform="LinkedIn" />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
+    <>
+      <Suspense fallback={<SectionSkeleton />}>
+        <Routes>
+          <Route path="/" element={<Portfolio />} />
+          <Route path="/instagram" element={<ComingSoon platform="Instagram" />} />
+          <Route path="/linkedin" element={<ComingSoon platform="LinkedIn" />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+      <SpeedInsights />
+    </>
   )
 }
