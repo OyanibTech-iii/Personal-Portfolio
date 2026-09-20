@@ -46,16 +46,29 @@ import oversizeShirt from '../assets/t-shirt design/oversize.webp'
 import campusShirt from '../assets/t-shirt design/campus.webp'
 import bsitTribalShirt from '../assets/t-shirt design/bsint tribal concept.webp'
 import kababaihanSweatshirt from '../assets/t-shirt design/kababaihan sweetshirt.webp'
+import admaxPoloAll from '../assets/t-shirt design/ALL.webp'
+import admaxPoloFront from '../assets/t-shirt design/FRONT.webp'
+import admaxPoloBack from '../assets/t-shirt design/BACK.webp'
 
 interface GraphicsSectionProps {
-  onOpenDeviceModal?: (d: { src: string; title: string; desc: string; images?: string[] }) => void
+  onOpenDeviceModal?: (d: { src: string; title: string; desc: string; images?: string[]; imageLabels?: string[] }) => void
 }
 
 export type GraphicsCategory = 'All' | 'Logo' | 'Social Media' | 'Website UI' | 'Posters' | 'Branding' | 'T-Shirt'
 
 const categories: GraphicsCategory[] = ['All', 'Logo', 'Social Media', 'Website UI', 'Posters', 'Branding', 'T-Shirt']
 
-const graphics = [
+interface GraphicItem {
+  src: string
+  title: string
+  desc: string
+  category: GraphicsCategory
+  images?: string[]
+  imageLabels?: string[]
+  disclaimer?: string
+}
+
+const graphics: GraphicItem[] = [
   { src: harvest, title: 'Harvest Festival', desc: 'Event poster for a local harvest celebration.', category: 'Posters' as GraphicsCategory },
   { src: artboard1, title: 'Brand Logo', desc: 'Brand logo I designed for a vegan restaurant.', category: 'Branding' as GraphicsCategory },
   { src: coloredLogo, title: 'Colored Logo', desc: 'Full-color logo mark with its complete identity.', category: 'Logo' as GraphicsCategory },
@@ -94,7 +107,8 @@ const graphics = [
   { src: avocadoIcecream, title: 'Avocado Ice Cream', desc: 'Vibrant avocado ice cream poster design with a fresh and tropical aesthetic.', category: 'Posters' as GraphicsCategory },
   { src: strawberryIcecream, title: 'Strawberry Ice Cream', desc: 'Sweet and luscious strawberry ice cream poster with a bold, colorful design.', category: 'Posters' as GraphicsCategory },
   { src: vanillaIcecream, title: 'Vanilla Ice Cream', desc: 'Classic and elegant vanilla ice cream poster with a clean, minimalist look.', category: 'Posters' as GraphicsCategory },
-  { src: bsitPlainWhole, images: [bsitPlainWhole, bsitPlain], title: 'BSIT T-Shirt Design Concept', desc: 'Concept BSIT shirt design showcasing full and detailed views from multiple angles.', category: 'T-Shirt' as GraphicsCategory },
+  { src: admaxPoloAll, images: [admaxPoloAll, admaxPoloFront, admaxPoloBack], imageLabels: ['All Views', 'Front Design', 'Back Design'], title: 'ADMAX Polo Shirt Design', desc: 'Custom corporate polo shirt design for ADMAX featuring complete overview, front design, and back design perspectives.', category: 'T-Shirt' as GraphicsCategory },
+  { src: bsitPlainWhole, images: [bsitPlainWhole, bsitPlain], imageLabels: ['Full Concept', 'Detail View'], title: 'BSIT T-Shirt Design Concept', desc: 'Concept BSIT shirt design showcasing full and detailed views from multiple angles.', category: 'T-Shirt' as GraphicsCategory },
   { src: campusShirt, title: 'Campus T-Shirt Design Concept', desc: 'Concept t-shirt graphic design for campus streetwear.', category: 'T-Shirt' as GraphicsCategory },
   { src: oversizeShirt, title: 'Oversize T-Shirt Design', desc: 'Modern streetwear oversized fit custom t-shirt graphic design.', category: 'T-Shirt' as GraphicsCategory },
   { src: bsitTribalShirt, title: 'BSIT Tribal Concept T-Shirt', desc: 'Tribal-inspired concept t-shirt graphic design for BSIT.', category: 'T-Shirt' as GraphicsCategory },
@@ -162,7 +176,7 @@ export default function GraphicsSection({ onOpenDeviceModal }: GraphicsSectionPr
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: false, amount: 0.15 }}
                   transition={{ delay: i * 0.05 }}
-                  onClick={() => onOpenDeviceModal?.({ src: item.src, title: item.title, desc: item.desc, images: item.images })}
+                  onClick={() => onOpenDeviceModal?.({ src: item.src, title: item.title, desc: item.desc, images: item.images, imageLabels: item.imageLabels })}
                   className={`group relative overflow-hidden rounded-2xl cursor-pointer bg-neutral-100 dark:bg-neutral-800 ${
                     activeCategory === 'All'
                       ? isLarge

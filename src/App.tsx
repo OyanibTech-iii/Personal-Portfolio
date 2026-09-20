@@ -42,7 +42,7 @@ function SectionSkeleton() {
 function Portfolio() {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalCert, setModalCert] = useState<{ src: string; title: string; issuer: string; year: string; url?: string } | null>(null)
-  const [modalDevice, setModalDevice] = useState<{ src: string; title: string; desc: string; images?: string[] } | null>(null)
+  const [modalDevice, setModalDevice] = useState<{ src: string; title: string; desc: string; images?: string[]; imageLabels?: string[] } | null>(null)
   const [downloadModalProject, setDownloadModalProject] = useState<{ title: string; downloadLink: string } | null>(null)
 
   // Contact form states
@@ -106,7 +106,7 @@ function Portfolio() {
     setTimeout(() => setModalCert(null), 200)
   }
 
-  const openDeviceModal = (d: { src: string; title: string; desc: string; images?: string[] }) => {
+  const openDeviceModal = (d: { src: string; title: string; desc: string; images?: string[]; imageLabels?: string[] }) => {
     setModalDevice(d)
     setModalOpen(true)
   }

@@ -7,6 +7,7 @@ interface DeviceModalProps {
     title: string
     desc: string
     images?: string[]
+    imageLabels?: string[]
     link?: string
     externalText?: string
   } | null
@@ -66,6 +67,10 @@ export default function DeviceModal({ device, onClose }: DeviceModalProps) {
               >
                 ›
               </button>
+
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-[11px] sm:text-xs font-semibold text-white/95 shadow-md backdrop-blur-sm ring-1 ring-white/20 pointer-events-none">
+                {device.imageLabels?.[activeIdx] ? `${device.imageLabels[activeIdx]} (${activeIdx + 1} of ${images.length})` : `View ${activeIdx + 1} of ${images.length}`}
+              </div>
             </>
           )}
         </div>
@@ -94,23 +99,34 @@ export default function DeviceModal({ device, onClose }: DeviceModalProps) {
           )}
 
           {images.length > 1 && (
-            <div className="mt-5 flex items-center gap-3">
+            <div className="mt-5 flex flex-wrap items-center gap-3">
               <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">Angles / Views:</span>
-              <div className="flex gap-2">
-                {images.map((img, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveIdx(idx)}
-                    className={`h-12 w-12 overflow-hidden rounded-xl border-2 transition-all p-1 bg-neutral-100 dark:bg-neutral-800 cursor-pointer ${
-                      activeIdx === idx
-                        ? 'border-shamrock-500 ring-2 ring-shamrock-500/20 scale-105'
-                        : 'border-transparent opacity-60 hover:opacity-100'
-                    }`}
-                  >
-                    <img src={img} alt={`View ${idx + 1}`} className="h-full w-full object-contain" />
-                  </button>
-                ))}
+              <div className="flex flex-wrap gap-2">
+                {images.map((img, idx) => {
+                  const label = device.imageLabels?.[idx]
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setActiveIdx(idx)}
+                      title={label || `View ${idx + 1}`}
+                      className={`flex items-center gap-2 overflow-hidden rounded-xl border-2 transition-all p-1.5 bg-neutral-100 dark:bg-neutral-800 cursor-pointer ${
+                        activeIdx === idx
+                          ? 'border-shamrock-500 ring-2 ring-shamrock-500/20 scale-105 shadow-sm'
+                          : 'border-transparent opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <div className="h-9 w-9 shrink-0 overflow-hidden rounded-lg">
+                        <img src={img} alt={label || `View ${idx + 1}`} className="h-full w-full object-contain" />
+                      </div>
+                      {label && (
+                        <span className="text-xs font-medium text-neutral-700 dark:text-neutral-300 pr-1.5 whitespace-nowrap">
+                          {label}
+                        </span>
+                      )}
+                    </button>
+                  )
+                })}
               </div>
             </div>
           )}
