@@ -49,6 +49,13 @@ import kababaihanSweatshirt from '../assets/t-shirt design/kababaihan sweetshirt
 import admaxPoloAll from '../assets/t-shirt design/ALL.webp'
 import admaxPoloFront from '../assets/t-shirt design/FRONT.webp'
 import admaxPoloBack from '../assets/t-shirt design/BACK.webp'
+import orgPoloMockupFront from '../assets/t-shirt design/org polo/mockup.png'
+import orgPoloMockupBack from '../assets/t-shirt design/org polo/mockup2.png'
+import orgPoloTemplate from '../assets/t-shirt design/org polo/template org.png'
+import orgPoloFrontFull from '../assets/t-shirt design/org polo/front design full.png'
+import orgPoloBackFull from '../assets/t-shirt design/org polo/back design.png'
+import orgPoloFrontClose from '../assets/t-shirt design/org polo/front org.png'
+import orgPoloBackClose from '../assets/t-shirt design/org polo/back org.png'
 
 interface GraphicsSectionProps {
   onOpenDeviceModal?: (d: { src: string; title: string; desc: string; images?: string[]; imageLabels?: string[] }) => void
@@ -107,6 +114,7 @@ const graphics: GraphicItem[] = [
   { src: avocadoIcecream, title: 'Avocado Ice Cream', desc: 'Vibrant avocado ice cream poster design with a fresh and tropical aesthetic.', category: 'Posters' as GraphicsCategory },
   { src: strawberryIcecream, title: 'Strawberry Ice Cream', desc: 'Sweet and luscious strawberry ice cream poster with a bold, colorful design.', category: 'Posters' as GraphicsCategory },
   { src: vanillaIcecream, title: 'Vanilla Ice Cream', desc: 'Classic and elegant vanilla ice cream poster with a clean, minimalist look.', category: 'Posters' as GraphicsCategory },
+  { src: orgPoloMockupFront, images: [orgPoloMockupFront, orgPoloMockupBack, orgPoloTemplate, orgPoloFrontFull, orgPoloBackFull, orgPoloFrontClose, orgPoloBackClose], imageLabels: ['Front Mockup', 'Back Mockup', 'Design Template', 'Front View', 'Back View', 'Front Detail', 'Back Detail'], title: 'Organization Polo Shirt Design', desc: 'University organization polo shirt design featuring realistic front and back on-model mockups, 3D apparel renders, and template layouts.', category: 'T-Shirt' as GraphicsCategory },
   { src: admaxPoloAll, images: [admaxPoloAll, admaxPoloFront, admaxPoloBack], imageLabels: ['All Views', 'Front Design', 'Back Design'], title: 'ADMAX Polo Shirt Design', desc: 'Custom corporate polo shirt design for ADMAX featuring complete overview, front design, and back design perspectives.', category: 'T-Shirt' as GraphicsCategory },
   { src: bsitPlainWhole, images: [bsitPlainWhole, bsitPlain], imageLabels: ['Full Concept', 'Detail View'], title: 'BSIT T-Shirt Design Concept', desc: 'Concept BSIT shirt design showcasing full and detailed views from multiple angles.', category: 'T-Shirt' as GraphicsCategory },
   { src: campusShirt, title: 'Campus T-Shirt Design Concept', desc: 'Concept t-shirt graphic design for campus streetwear.', category: 'T-Shirt' as GraphicsCategory },
