@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import CtaButton from './CtaButton'
 
 interface DeviceModalProps {
@@ -21,10 +22,27 @@ export default function DeviceModal({ device, onClose }: DeviceModalProps) {
     setActiveIdx(0)
   }, [device])
 
-  if (!device) return null
+  const images = device?.images && device.images.length > 0 ? device.images : (device ? [device.src] : [])
+  const currentSrc = images[activeIdx] || device?.src || ''
 
-  const images = device.images && device.images.length > 0 ? device.images : [device.src]
-  const currentSrc = images[activeIdx] || device.src
+  useEffect(() => {
+    if (!device) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+      } else if (images.length > 1) {
+        if (e.key === 'ArrowLeft') {
+          setActiveIdx((prev) => (prev - 1 + images.length) % images.length)
+        } else if (e.key === 'ArrowRight') {
+          setActiveIdx((prev) => (prev + 1) % images.length)
+        }
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [device, images.length, onClose])
+
+  if (!device) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -33,10 +51,10 @@ export default function DeviceModal({ device, onClose }: DeviceModalProps) {
       <div className="relative z-50 w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white shadow-2xl dark:bg-neutral-900 transition-all duration-300 ease-out">
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/10 text-neutral-700 backdrop-blur-md hover:bg-black/20 hover:text-neutral-900 dark:bg-white/10 dark:text-neutral-300 dark:hover:bg-white/20 dark:hover:text-white cursor-pointer"
+          className="absolute right-3.5 top-3.5 sm:right-4 sm:top-4 z-20 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full aspect-square shrink-0 p-0 bg-black/10 text-neutral-700 backdrop-blur-md hover:bg-black/20 hover:text-neutral-900 dark:bg-white/10 dark:text-neutral-300 dark:hover:bg-white/20 dark:hover:text-white cursor-pointer transition-all border border-black/5 dark:border-white/10"
           aria-label="Close"
         >
-          ✕
+          <X className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
 
         {/* Fixed aspect image container */}
@@ -54,18 +72,18 @@ export default function DeviceModal({ device, onClose }: DeviceModalProps) {
               <button
                 type="button"
                 onClick={() => setActiveIdx((prev) => (prev - 1 + images.length) % images.length)}
-                className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2.5 text-white hover:bg-black/70 backdrop-blur-sm transition-all cursor-pointer"
+                className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 items-center justify-center rounded-full aspect-square shrink-0 p-0 bg-black/60 text-white backdrop-blur-md border border-white/15 transition-all duration-200 hover:bg-black/80 hover:scale-105 active:scale-95 shadow-lg cursor-pointer select-none"
                 aria-label="Previous image"
               >
-                ‹
+                <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 shrink-0" />
               </button>
               <button
                 type="button"
                 onClick={() => setActiveIdx((prev) => (prev + 1) % images.length)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2.5 text-white hover:bg-black/70 backdrop-blur-sm transition-all cursor-pointer"
+                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 items-center justify-center rounded-full aspect-square shrink-0 p-0 bg-black/60 text-white backdrop-blur-md border border-white/15 transition-all duration-200 hover:bg-black/80 hover:scale-105 active:scale-95 shadow-lg cursor-pointer select-none"
                 aria-label="Next image"
               >
-                ›
+                <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 shrink-0" />
               </button>
 
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-[11px] sm:text-xs font-semibold text-white/95 shadow-md backdrop-blur-sm ring-1 ring-white/20 pointer-events-none">

@@ -49,13 +49,13 @@ import kababaihanSweatshirt from '../assets/t-shirt design/kababaihan sweetshirt
 import admaxPoloAll from '../assets/t-shirt design/ALL.webp'
 import admaxPoloFront from '../assets/t-shirt design/FRONT.webp'
 import admaxPoloBack from '../assets/t-shirt design/BACK.webp'
-import orgPoloMockupFront from '../assets/t-shirt design/org polo/mockup.png'
-import orgPoloMockupBack from '../assets/t-shirt design/org polo/mockup2.png'
-import orgPoloTemplate from '../assets/t-shirt design/org polo/template org.png'
-import orgPoloFrontFull from '../assets/t-shirt design/org polo/front design full.png'
-import orgPoloBackFull from '../assets/t-shirt design/org polo/back design.png'
-import orgPoloFrontClose from '../assets/t-shirt design/org polo/front org.png'
-import orgPoloBackClose from '../assets/t-shirt design/org polo/back org.png'
+import orgPoloMockupFront from '../assets/t-shirt design/org polo/mockup.webp'
+import orgPoloMockupBack from '../assets/t-shirt design/org polo/mockup2.webp'
+import orgPoloTemplate from '../assets/t-shirt design/org polo/template org.webp'
+import orgPoloFrontFull from '../assets/t-shirt design/org polo/front design full.webp'
+import orgPoloBackFull from '../assets/t-shirt design/org polo/back design.webp'
+import orgPoloFrontClose from '../assets/t-shirt design/org polo/front org.webp'
+import orgPoloBackClose from '../assets/t-shirt design/org polo/back org.webp'
 
 interface GraphicsSectionProps {
   onOpenDeviceModal?: (d: { src: string; title: string; desc: string; images?: string[]; imageLabels?: string[] }) => void
