@@ -230,12 +230,12 @@ export default function Header() {
                 className="fixed bottom-0 top-auto left-0 right-0 z-[9999] rounded-t-3xl border-t border-neutral-200/80 bg-white/95 p-6 pb-8 shadow-2xl backdrop-blur-xl dark:border-neutral-800 dark:bg-neutral-950/95 md:hidden max-h-[85vh] overflow-y-auto"
                 style={{ position: 'fixed' }}
               >
-                <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-neutral-300 dark:bg-neutral-700" />
-                <div className="flex items-center justify-between mb-4 pb-2 border-b border-neutral-100 dark:border-neutral-900">
-                  <span className="text-sm font-semibold text-neutral-400 uppercase tracking-wider">Navigation</span>
+                <div className="relative flex items-center justify-center mb-4">
+                  <div className="h-1.5 w-12 rounded-full bg-neutral-300 dark:bg-neutral-700" />
                   <button
                     onClick={() => setIsMenuOpen(false)}
-                    className="rounded-full p-1.5 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600 dark:hover:bg-neutral-900 dark:hover:text-neutral-200 transition-colors"
+                    className="absolute right-0 rounded-full p-1.5 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600 dark:hover:bg-neutral-900 dark:hover:text-neutral-200 transition-colors cursor-pointer"
+                    aria-label="Close menu"
                   >
                     <X className="h-5 w-5" />
                   </button>
