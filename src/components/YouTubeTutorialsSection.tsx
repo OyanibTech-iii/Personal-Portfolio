@@ -25,18 +25,18 @@ export default function YouTubeTutorialsSection() {
   return (
     <section id="youtube-tutorials" className="mt-20 py-12">
       <div className="mx-auto max-w-5xl">
-        <div className="flex flex-col items-center text-center mb-12">
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-12">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
-            className="text-3xl font-bold tracking-tight sm:text-4xl">Technical Tutorials</motion.h2>
+            className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Technical Tutorials</motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-lg">
+            className="mt-3 sm:mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-sm sm:text-base md:text-lg">
             Practical guides on systems administration, virtualization, and software installation.
           </motion.p>
         </div>
@@ -51,7 +51,7 @@ export default function YouTubeTutorialsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.15 }}
                 transition={{ delay: i * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-neutral-200/80 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
+                className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-neutral-200/80 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
               >
                 <a href={tutorial.link} target="_blank" rel="noreferrer" className="block">
                   {/* Thumbnail Container */}
@@ -75,7 +75,7 @@ export default function YouTubeTutorialsSection() {
                   </div>
 
                   {/* Content Area */}
-                  <div className="p-8">
+                  <div className="p-5 sm:p-8">
                     <div className="mb-4 flex items-center justify-between">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-shamrock-500/10 text-shamrock-600 dark:bg-shamrock-500/20 dark:text-shamrock-400">
                         <IconComponent className="h-5 w-5" />
@@ -89,10 +89,10 @@ export default function YouTubeTutorialsSection() {
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white transition-colors group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400">
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white transition-colors group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400">
                       {tutorial.name}
                     </h3>
-                    <p className="mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">
+                    <p className="mt-2 sm:mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed text-xs sm:text-sm">
                       {tutorial.description}
                     </p>
 

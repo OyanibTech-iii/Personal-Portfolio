@@ -79,10 +79,10 @@ export default function ContactSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white mb-4 sm:mb-6">
                 Let's <span className="text-shamrock-500">Connect</span>
               </h2>
-              <p className="text-base md:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 Have a project in mind or just want to discuss some networking concepts? I'm always open to new opportunities and collaborations.
               </p>
             </motion.div>

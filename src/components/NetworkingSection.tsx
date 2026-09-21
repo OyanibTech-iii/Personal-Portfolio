@@ -101,12 +101,12 @@ export default function NetworkingSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
-          className="mb-12"
+          className="mb-8 sm:mb-12"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">Core Networking</h2>
+          <div className="flex items-center gap-3 mb-2 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white">Core Networking</h2>
           </div>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
+          <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
             Specializing in Cisco network design and implementation, covering everything from fundamental theory to advanced practical configurations.
           </p>
         </motion.div>
@@ -121,7 +121,7 @@ export default function NetworkingSection() {
               whileInView="visible"
               viewport={{ once: false, amount: 0.15 }}
             >
-              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+              <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                 Network Fundamentals
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -189,7 +189,7 @@ export default function NetworkingSection() {
               whileInView="visible"
               viewport={{ once: false, amount: 0.15 }}
             >
-              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+              <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                 IP Addressing & Subnetting
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -214,7 +214,7 @@ export default function NetworkingSection() {
               whileInView="visible"
               viewport={{ once: false, amount: 0.15 }}
             >
-              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+              <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                 Key Protocols
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -239,7 +239,7 @@ export default function NetworkingSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: false, amount: 0.15 }}
             >
-              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+              <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                 Hardware
               </h3>
               <div className="space-y-4">

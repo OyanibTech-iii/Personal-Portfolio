@@ -99,7 +99,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
   }
 
   return (
-    <section id="about" className="relative isolate overflow-hidden rounded-3xl bg-white/70 p-8 backdrop-blur-sm transition-colors duration-300 dark:bg-neutral-900/50 sm:p-12">
+    <section id="about" className="relative isolate overflow-hidden rounded-3xl bg-white/70 p-5 sm:p-8 md:p-12 backdrop-blur-sm transition-colors duration-300 dark:bg-neutral-900/50">
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-12 md:grid-cols-3">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -219,19 +219,19 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="md:col-span-2"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">Professional Profile</h2>
-          <p className="mt-6 max-w-prose text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed text-balance text-left">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white">Professional Profile</h2>
+          <p className="mt-3 sm:mt-6 max-w-prose text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed text-balance text-left">
             I'm a versatile software engineer and cybersecurity enthusiast focused on building secure, fast,
             and visually cohesive digital ecosystems. I specialize in bridging the gap between robust backend 
             logic and delightful user experiences through clean code and modern design systems.
           </p>
           
-          <div className="mt-8">
-            <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Bachelor of Information Technology</h3>
-            <p className="text-sm font-medium text-shamrock-600 dark:text-shamrock-400 mt-1">Negros Oriental State University</p>
+          <div className="mt-6 sm:mt-8">
+            <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white">Bachelor of Information Technology</h3>
+            <p className="text-xs sm:text-sm font-medium text-shamrock-600 dark:text-shamrock-400 mt-1">Negros Oriental State University</p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          <div className="mt-8 sm:mt-12 grid gap-6 sm:grid-cols-2">
             <motion.div
               initial={{ opacity: 0, y: scrollDirection === 'down' ? 30 : -30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -242,9 +242,9 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                 ease: [0.22, 1, 0.36, 1],
               }}
               whileHover={{ y: -4 }}
-              className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800 shadow-sm transition-all duration-300 hover:shadow-md"
+              className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800 shadow-sm transition-all duration-300 hover:shadow-md"
             >
-              <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-8 uppercase tracking-widest text-center">Core Competencies</h3>
+              <h3 className="text-xs sm:text-sm font-bold text-neutral-900 dark:text-white mb-6 sm:mb-8 uppercase tracking-widest text-center">Core Competencies</h3>
               <div className="flex flex-wrap justify-center gap-6">
                 <ProgressBarCircle size="xs" label="Full-Stack Development" min={0} max={100} value={70} />
                 <ProgressBarCircle size="xs" label="Cybersecurity" min={0} max={100} value={30} />
@@ -263,9 +263,9 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                 ease: [0.22, 1, 0.36, 1],
               }}
               whileHover={{ y: -4 }}
-              className="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800 shadow-sm transition-all duration-300 hover:shadow-md"
+              className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-neutral-50 dark:bg-neutral-950/30 border border-neutral-200 dark:border-neutral-800 shadow-sm transition-all duration-300 hover:shadow-md"
             >
-              <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-6 uppercase tracking-widest text-center">Current Focus</h3>
+              <h3 className="text-xs sm:text-sm font-bold text-neutral-900 dark:text-white mb-4 sm:mb-6 uppercase tracking-widest text-center">Current Focus</h3>
               <div className="h-72 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart layout="vertical" data={focusData} margin={{ left: 10, right: 30, top: 10, bottom: 10 }}>

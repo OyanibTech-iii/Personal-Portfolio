@@ -31,7 +31,7 @@ export default function FacebookSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.05 }}
-            className="text-3xl font-bold tracking-tight sm:text-4xl text-neutral-900 dark:text-white"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
           >
             Facebook Posts & Projects
           </motion.h2>
@@ -40,7 +40,7 @@ export default function FacebookSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-neutral-600 dark:text-neutral-400 max-w-xl text-balance text-sm sm:text-base"
+            className="mt-2.5 sm:mt-3 text-neutral-600 dark:text-neutral-400 max-w-xl text-balance text-xs sm:text-sm md:text-base"
           >
             Direct links to graphic design projects and portfolio work published on Facebook.
           </motion.p>
@@ -53,13 +53,13 @@ export default function FacebookSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.15 }}
-              className="group relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 transition-all duration-300 hover:border-neutral-400 dark:hover:border-neutral-600 shadow-sm"
+              className="group relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 sm:p-8 transition-all duration-300 hover:border-neutral-400 dark:hover:border-neutral-600 shadow-sm"
             >
               <div className="space-y-2 max-w-2xl">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors">
+                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors">
                   {post.title}
                 </h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                   {post.description}
                 </p>
               </div>

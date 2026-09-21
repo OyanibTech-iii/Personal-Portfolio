@@ -16,12 +16,12 @@ export default function ThirdGenSection() {
   return (
     <section id="third-gen" className="mt-20 py-12">
       <div className="mx-auto max-w-5xl">
-        <div className="flex flex-col items-center text-center mb-12">
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
-            className="text-3xl font-bold tracking-tight sm:text-4xl text-neutral-900 dark:text-white"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
           >
             Featured Website
           </motion.h2>
@@ -30,7 +30,7 @@ export default function ThirdGenSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-lg"
+            className="mt-3 sm:mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-sm sm:text-base md:text-lg"
           >
             Interactive live preview of THIRD GEN. Explore 3D character figurines directly below or visit the website in a new tab.
           </motion.p>
@@ -107,12 +107,12 @@ export default function ThirdGenSection() {
           </div>
 
           {/* Bottom Information and CTA Action */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 sm:p-8 border-t border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-neutral-900/20">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 sm:p-8 border-t border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-neutral-900/20">
             <div className="space-y-1">
-              <h3 className="text-xl font-bold text-neutral-900 dark:text-white">
+              <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white">
                 THIRD GEN
               </h3>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-xl">
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-xl">
                 An interactive 3D character figurine showcase website built with modern web technologies, smooth carousel animations, and dynamic transitions.
               </p>
             </div>

@@ -41,18 +41,18 @@ export default function WebAPKsSection() {
   return (
     <section id="web-apks" className="mt-20 py-12">
       <div className="mx-auto max-w-5xl">
-        <div className="flex flex-col items-center text-center mb-12">
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-12">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
-            className="text-3xl font-bold tracking-tight sm:text-4xl">Web Applications</motion.h2>
+            className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Web Applications</motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-lg">
+            className="mt-3 sm:mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-sm sm:text-base md:text-lg">
             High-performance Progressive Web Apps (PWAs) built with modern frameworks to deliver native-like experiences.
           </motion.p>
         </div>
@@ -66,7 +66,7 @@ export default function WebAPKsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.15 }}
                 transition={{ delay: i * 0.1 }}
-                className="group relative flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
+                className="group relative flex flex-col rounded-2xl sm:rounded-3xl border border-neutral-200/80 bg-white p-6 sm:p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
               >
                 <div className="mb-6 flex flex-wrap gap-2">
                   {apk.tags.map(tag => (
@@ -77,10 +77,10 @@ export default function WebAPKsSection() {
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white transition-colors group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400">
+                  <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white transition-colors group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400">
                     {apk.name}
                   </h3>
-                  <p className="mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                  <p className="mt-2 sm:mt-3 text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed">
                     {apk.description}
                   </p>
                 </div>

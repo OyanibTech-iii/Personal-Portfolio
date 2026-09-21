@@ -84,7 +84,7 @@ export default function LayoutsSection({ onOpenDeviceModal }: LayoutsSectionProp
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
-            className="text-3xl font-bold tracking-tight sm:text-4xl text-neutral-900 dark:text-white"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white"
           >
             Layouts Portfolio
           </motion.h2>
@@ -93,7 +93,7 @@ export default function LayoutsSection({ onOpenDeviceModal }: LayoutsSectionProp
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance"
+            className="mt-3 sm:mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-sm sm:text-base"
           >
             A selection of editorial and page layout designs presented in a compact, interactive carousel.
           </motion.p>
@@ -189,8 +189,8 @@ export default function LayoutsSection({ onOpenDeviceModal }: LayoutsSectionProp
           {/* Bottom Info Bar & Indicators */}
           <div className="p-4 sm:p-6 bg-neutral-900 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
-              <h3 className="text-white font-bold text-lg">{currentItem.title}</h3>
-              <p className="text-neutral-400 text-sm mt-1 max-w-xl">{currentItem.desc}</p>
+              <h3 className="text-white font-bold text-base sm:text-lg">{currentItem.title}</h3>
+              <p className="text-neutral-400 text-xs sm:text-sm mt-1 max-w-xl">{currentItem.desc}</p>
             </div>
 
             {/* Slide Pagination Dots */}

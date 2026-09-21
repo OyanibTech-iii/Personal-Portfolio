@@ -151,17 +151,17 @@ export default function WorkshopsSection() {
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         {/* Header */}
-        <motion.div variants={headerVariants} className="flex flex-col items-center text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <motion.div variants={headerVariants} className="flex flex-col items-center text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
             Workshops & Training
           </h2>
-          <p className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-lg">
+          <p className="mt-3 sm:mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-sm sm:text-base md:text-lg">
             A compilation of professional training courses, technical bootcamps, and specialized programs completed to continuously sharpen my technical skills.
           </p>
         </motion.div>
 
         {/* Categories Tab Selector Chips */}
-        <motion.div variants={tabVariants} className="flex flex-wrap justify-center gap-2 mb-10">
+        <motion.div variants={tabVariants} className="flex flex-wrap justify-center gap-2 mb-8 sm:mb-10">
           {categories.map((cat) => {
             const isActive = activeCategory === cat.id
             return (
@@ -170,7 +170,7 @@ export default function WorkshopsSection() {
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => handleCategoryChange(cat.id as 'all' | 'code-connect' | 'koica' | 'ilcdb')}
-                className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 cursor-pointer select-none ${
+                className={`rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer select-none ${
                   isActive
                     ? 'bg-shamrock-500 text-white shadow-md scale-105'
                     : 'bg-white/80 text-neutral-600 border border-neutral-200/80 hover:bg-neutral-100 dark:bg-neutral-900/60 dark:text-neutral-300 dark:border-neutral-800 dark:hover:bg-neutral-800'
@@ -206,13 +206,13 @@ export default function WorkshopsSection() {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: -20 }}
                     transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="group flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
+                    className="group flex flex-col rounded-2xl sm:rounded-3xl border border-neutral-200/80 bg-white p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
                   >
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white">
+                      <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white">
                         {program.title}
                       </h3>
-                      <p className="mt-3 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                      <p className="mt-2 sm:mt-3 text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed">
                         {program.description}
                       </p>
                     </div>
@@ -281,9 +281,9 @@ export default function WorkshopsSection() {
               className="flex flex-col rounded-3xl border border-neutral-200/80 bg-white p-6 sm:p-8 md:p-10 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
             >
               {/* Top Header & Metadata */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-6 dark:border-neutral-800">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-5 sm:pb-6 dark:border-neutral-800">
                 <div>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
                     {currentProgram.title}
                   </h3>
                 </div>
@@ -299,7 +299,7 @@ export default function WorkshopsSection() {
                     <button
                       type="button"
                       onClick={() => setViewMode('spotlight')}
-                      className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                         viewMode === 'spotlight'
                           ? 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-xs'
                           : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
@@ -310,7 +310,7 @@ export default function WorkshopsSection() {
                     <button
                       type="button"
                       onClick={() => setViewMode('grid')}
-                      className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                         viewMode === 'grid'
                           ? 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-xs'
                           : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
@@ -323,8 +323,8 @@ export default function WorkshopsSection() {
               </div>
 
               {/* Program Description */}
-              <div className="py-5">
-                <p className="text-neutral-600 dark:text-neutral-300 text-base sm:text-lg leading-relaxed max-w-3xl">
+              <div className="py-4 sm:py-5">
+                <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl">
                   {currentProgram.description}
                 </p>
               </div>

@@ -139,13 +139,13 @@ export default function GraphicsSection({ onOpenDeviceModal }: GraphicsSectionPr
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
-            className="text-3xl font-bold tracking-tight sm:text-4xl text-neutral-900 dark:text-white">Graphics Portfolio</motion.h2>
+            className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white">Graphics Portfolio</motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance">
+            className="mt-3 sm:mt-4 text-neutral-600 dark:text-neutral-400 max-w-2xl text-balance text-sm sm:text-base">
             A collection of brand identities, posters, and merchandise designs crafted with precision and creativity.
           </motion.p>
         </div>
@@ -157,7 +157,7 @@ export default function GraphicsSection({ onOpenDeviceModal }: GraphicsSectionPr
               type="button"
               aria-pressed={activeCategory === category}
               onClick={() => setActiveCategory(category)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 cursor-pointer select-none ${
+              className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer select-none ${
                 activeCategory === category
                   ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 shadow-sm scale-105'
                   : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700'
