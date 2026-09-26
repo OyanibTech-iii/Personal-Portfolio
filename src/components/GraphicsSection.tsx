@@ -27,6 +27,7 @@ import avocadoIcecream from '../assets/posters/avocado icecream.webp'
 import strawberryIcecream from '../assets/posters/strawberry icecream.webp'
 import vanillaIcecream from '../assets/posters/vanilla icecream.webp'
 import lanyard from '../assets/social media posts/lanyard.webp'
+import admaxLanyard from '../assets/social media posts/admax lanyard.webp'
 import websiteUi1 from '../assets/website ui/services.webp'
 import techwear from '../assets/website ui/techwear.webp'
 import brandTypography1 from '../assets/branding/brand_typography1.webp'
@@ -83,7 +84,8 @@ const graphics: GraphicItem[] = [
   { src: laptopbagSketch, title: 'Laptopbag Sketch Logo', desc: 'Concept sketch logo design for a laptop bag brand.', category: 'Logo' as GraphicsCategory },
   { src: laptopbagBalance, title: 'Laptopbag Logo', desc: 'Balanced logo design for a laptop bag brand.', category: 'Logo' as GraphicsCategory },
   { src: branding, title: 'Brand Identity', desc: 'Complete brand identity system and application.', category: 'Branding' as GraphicsCategory },
-  { src: lanyard, title: 'Lanyard Design', desc: 'My own version design of our school lanyard.', category: 'Social Media' as GraphicsCategory },
+  { src: admaxLanyard, title: 'ADMAX Lanyard Design', desc: 'Latest lanyard design concept for ADMAX Visual Designs and Publication Layouts.', category: 'Social Media' as GraphicsCategory },
+  { src: lanyard, title: 'School Lanyard Design', desc: 'My own version design of our school lanyard.', category: 'Social Media' as GraphicsCategory },
   { src: misProject, title: 'MIS Final Project', desc: 'Comprehensive branding and UI design for a management system.', category: 'Posters' as GraphicsCategory },
   { src: frameBahalaNani, title: 'Organization Frame', desc: 'Frame I designed for a school organization.', category: 'Social Media' as GraphicsCategory },
   { src: banner00, title: 'Fresh Safe Banner', desc: 'Organic produce promotional banner design.', category: 'Social Media' as GraphicsCategory },
