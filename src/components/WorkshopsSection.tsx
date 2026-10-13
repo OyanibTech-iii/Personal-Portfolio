@@ -23,6 +23,13 @@ import ilcdb02 from '../assets/ILCDB-DICT/747536732_122129077809224496_541932508
 import ilcdb03 from '../assets/ILCDB-DICT/747561441_122129077743224496_9049096089464338659_n.webp'
 import ilcdb04 from '../assets/ILCDB-DICT/747573336_122129077827224496_5771217729217214914_n.webp'
 
+// Import Hack For Gov 2026 photos (3 images)
+import hackforgov01 from '../assets/HackforGov2026/839707429_1087533214254296_6540111223228615373_n.jpg'
+import hackforgov02 from '../assets/HackforGov2026/841734977_1580536403815483_9078866932961339779_n.jpg'
+import hackforgov03 from '../assets/HackforGov2026/841803865_1795958174658089_7569580574821200613_n.jpg'
+
+export type ProgramCategory = 'all' | 'hackforgov' | 'code-connect' | 'koica' | 'ilcdb'
+
 interface Program {
   id: string
   title: string
@@ -31,12 +38,18 @@ interface Program {
 }
 
 export default function WorkshopsSection() {
-  const [activeCategory, setActiveCategory] = useState<'all' | 'code-connect' | 'koica' | 'ilcdb'>('all')
+  const [activeCategory, setActiveCategory] = useState<ProgramCategory>('all')
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0)
   const [viewMode, setViewMode] = useState<'spotlight' | 'grid'>('spotlight')
   const [selectedGallery, setSelectedGallery] = useState<{ programTitle: string; images: string[]; activeIndex: number } | null>(null)
 
   const programs: Program[] = [
+    {
+      id: 'hackforgov',
+      title: 'Hack For Gov 5',
+      description: "National Capture The Flag (CTF) cybersecurity drill and competition organized by DICT and CERT-PH at Roy's Hotel, Bacolod City on October 12, 2026. Represented Negros Oriental State University (NORSU) in team-based cyber defense, packet analysis, cryptography, and web exploitation under the theme: 'Decoding Youth Innovation, Anchoring One Nation's Digital Defense.'",
+      images: [hackforgov01, hackforgov02, hackforgov03],
+    },
     {
       id: 'code-connect',
       title: 'Code Connect',
@@ -57,7 +70,7 @@ export default function WorkshopsSection() {
     }
   ]
 
-  const handleCategoryChange = (catId: 'all' | 'code-connect' | 'koica' | 'ilcdb') => {
+  const handleCategoryChange = (catId: ProgramCategory) => {
     setActiveCategory(catId)
     setActiveImageIndex(0)
   }
@@ -129,8 +142,9 @@ export default function WorkshopsSection() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [selectedGallery, handlePrevImage, handleNextImage])
 
-  const categories = [
+  const categories: { id: ProgramCategory; label: string }[] = [
     { id: 'all', label: 'Show All' },
+    { id: 'hackforgov', label: 'Hack For Gov 5' },
     { id: 'code-connect', label: 'Code Connect' },
     { id: 'koica', label: 'KOICA Training' },
     { id: 'ilcdb', label: 'ILCDB-DICT' },
@@ -169,7 +183,7 @@ export default function WorkshopsSection() {
                 key={cat.id}
                 type="button"
                 aria-pressed={isActive}
-                onClick={() => handleCategoryChange(cat.id as 'all' | 'code-connect' | 'koica' | 'ilcdb')}
+                onClick={() => handleCategoryChange(cat.id)}
                 className={`rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer select-none ${
                   isActive
                     ? 'bg-shamrock-500 text-white shadow-md scale-105'
@@ -184,7 +198,7 @@ export default function WorkshopsSection() {
 
         {/* Dynamic Display Area */}
         <AnimatePresence mode="wait">
-          {/* CASE 1: 'Show All' Tab - Preserved 3-Column Overview Grid */}
+          {/* CASE 1: 'Show All' Tab - 2x2 Responsive Overview Grid */}
           {activeCategory === 'all' && (
             <motion.div
               key="all-grid"
@@ -192,7 +206,7 @@ export default function WorkshopsSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
-              className="grid grid-cols-1 gap-8 md:grid-cols-3"
+              className="grid grid-cols-1 gap-8 sm:grid-cols-2"
             >
               {programs.map((program) => {
                 const previewImages = program.images.slice(0, 3)

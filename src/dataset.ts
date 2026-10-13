@@ -279,7 +279,30 @@ export function getBotResponse(rawInput: string): string {
   }
 
   // ==========================================
-  // 9. GREETINGS & INTRODUCTIONS
+  // 9. HACK4GOV & CYBERSECURITY COMPETITIONS
+  // ==========================================
+  const hack4govPatterns = [
+    /\b(hack\s*4\s*gov|hackforgov|hack\s*for\s*gov|bacolod|ctf|cyber\s*drill|cyber\s*security\s*competition|capture\s*the\s*flag)\b/,
+  ]
+
+  for (const pattern of hack4govPatterns) {
+    if (pattern.test(query)) {
+      return (
+        "Hack For Gov 5 — Bacolod City (Negros Island Region):\n\n" +
+        "- Event: Hack For Gov 5 Regional Qualifier & CTF Competition\n" +
+        "- Date: October 12, 2026\n" +
+        "- Venue: Roy's Hotel, Bacolod City, Negros Occidental\n" +
+        "- Organizers: DICT (Department of Information and Communications Technology) and CERT-PH\n" +
+        "- Delegation: Represented Negros Oriental State University (NORSU - Main)\n" +
+        "- Theme: 'Decoding Youth Innovation, Anchoring One Nation's Digital Defense.'\n" +
+        "- Challenges Tackled: Web Application Exploitation, Network Forensics (PCAP), Cryptography/Steganography, and Reverse Engineering.\n\n" +
+        "You can explore the photos and full event details in the 'Workshops & Training' section under the 'Hack For Gov 5' tab ('#workshops')."
+      )
+    }
+  }
+
+  // ==========================================
+  // 10. GREETINGS & INTRODUCTIONS
   // ==========================================
   const greetingPatterns = [
     /\b(hi|hello|hey|good\s*(morning|afternoon|evening)|sup|howdy|yo|who\s*are\s*you)\b/,
