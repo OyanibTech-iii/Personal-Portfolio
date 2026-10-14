@@ -1,2 +1,3 @@
-export * from './ui/cta-button'
-export { default } from './ui/cta-button'
+import CtaButton from './ui/cta-button'
+
+export default CtaButton

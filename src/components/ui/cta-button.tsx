@@ -184,7 +184,6 @@ export const CtaButton = forwardRef<HTMLElement, CtaButtonProps>(function CtaBut
     .join(' ')
 
   const commonProps = {
-    ref: ref as React.Ref<any>,
     className: baseClasses,
     onClick,
     ...rest,
@@ -201,6 +200,7 @@ export const CtaButton = forwardRef<HTMLElement, CtaButtonProps>(function CtaBut
   if (Tag === 'a') {
     return (
       <a
+        ref={ref as React.Ref<HTMLAnchorElement>}
         {...commonProps}
         href={href}
         target={target}
@@ -214,13 +214,18 @@ export const CtaButton = forwardRef<HTMLElement, CtaButtonProps>(function CtaBut
 
   if (Tag === 'button') {
     return (
-      <button {...commonProps} type={type} disabled={disabled}>
+      <button
+        ref={ref as React.Ref<HTMLButtonElement>}
+        {...commonProps}
+        type={type}
+        disabled={disabled}
+      >
         {content}
       </button>
     )
   }
 
-  return React.createElement(Tag, commonProps, content)
+  return React.createElement(Tag, { ref: ref as React.Ref<HTMLElement>, ...commonProps }, content)
 })
 
 export default CtaButton
