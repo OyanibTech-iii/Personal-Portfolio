@@ -257,3 +257,10 @@
     font-family: var(--font-clash), "Clash Display", sans-serif;
   }
 }
+
+/* View Transition API override for theme toggling */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}

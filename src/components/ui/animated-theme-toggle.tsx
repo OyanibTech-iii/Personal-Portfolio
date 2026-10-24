@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useState, useEffect, type ReactNode } from "react";
-import { createPortal } from "react-dom";
+import { createPortal, flushSync } from "react-dom";
 import { Button } from "./button";
 
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
@@ -58,32 +58,122 @@ export const AnimatedThemeToggle = ({ className }: { className?: string }) => {
   }, []);
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    
-    if (theme === "system") {
-      const systemIsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setIsDark(systemIsDark);
-      if (systemIsDark) {
-        root.classList.add("dark");
-      } else {
-        root.classList.remove("dark");
-      }
-    } else {
-      setIsDark(theme === "dark");
-      if (theme === "dark") {
-        root.classList.add("dark");
-      } else {
-        root.classList.remove("dark");
-      }
+    let styleElement = document.getElementById("toggle-theme-vt-override") as HTMLStyleElement | null;
+    if (!styleElement) {
+      styleElement = document.createElement("style");
+      styleElement.id = "toggle-theme-vt-override";
+      styleElement.textContent = `
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+          animation: none;
+          mix-blend-mode: normal;
+        }
+      `;
+      document.head.appendChild(styleElement);
     }
-    
+  }, []);
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const syncTheme = () => {
+      if (theme === "system") {
+        const systemIsDark = mediaQuery.matches;
+        setIsDark(systemIsDark);
+        if (systemIsDark) {
+          root.classList.add("dark");
+        } else {
+          root.classList.remove("dark");
+        }
+      } else {
+        const isDarkTheme = theme === "dark";
+        setIsDark(isDarkTheme);
+        if (isDarkTheme) {
+          root.classList.add("dark");
+        } else {
+          root.classList.remove("dark");
+        }
+      }
+    };
+
+    syncTheme();
     localStorage.setItem("theme", theme);
+
+    const handleMediaChange = () => {
+      if (theme === "system") {
+        syncTheme();
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleMediaChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaChange);
   }, [theme]);
 
-  const handleThemeChange = (newTheme: Theme) => {
-    setTheme(newTheme);
-    setIsDark(newTheme === "dark" || (newTheme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches));
-    setOpen(false);
+  const handleThemeChange = async (newTheme: Theme) => {
+    if (newTheme === theme) {
+      setOpen(false);
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const newIsDark =
+      newTheme === "dark" ||
+      (newTheme === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    // If visual appearance does not change, or view transitions are unsupported/reduced motion, update directly
+    if (!("startViewTransition" in document) || !document.startViewTransition || prefersReducedMotion || newIsDark === isDark) {
+      setTheme(newTheme);
+      setIsDark(newIsDark);
+      const root = document.documentElement;
+      if (newIsDark) {
+        root.classList.add("dark");
+      } else {
+        root.classList.remove("dark");
+      }
+      localStorage.setItem("theme", newTheme);
+      setOpen(false);
+      return;
+    }
+
+    // Trigger View Transition with diag-down-right polygon clip-path
+    const transition = document.startViewTransition(() => {
+      flushSync(() => {
+        setTheme(newTheme);
+        setIsDark(newIsDark);
+        const root = document.documentElement;
+        if (newIsDark) {
+          root.classList.add("dark");
+        } else {
+          root.classList.remove("dark");
+        }
+        localStorage.setItem("theme", newTheme);
+        setOpen(false);
+      });
+    });
+
+    try {
+      await transition.ready;
+      document.documentElement.animate(
+        {
+          clipPath: [
+            "polygon(0 0, 0 0, 0 0, 0 0)",
+            "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          ],
+        },
+        {
+          duration: 600,
+          easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+          pseudoElement: "::view-transition-new(root)",
+        }
+      );
+    } catch {
+      // Gracefully handle transition cancellation or unhandled animation exceptions
+    }
   };
 
   const getThemeIcon = () => {
