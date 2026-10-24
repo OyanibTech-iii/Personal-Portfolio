@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ImageWithSkeleton } from './ui/image-with-skeleton'
-import { ChevronLeft, ChevronRight, Maximize2, X, Images, LayoutGrid, Layers } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Maximize2, X, Images, LayoutGrid, Layers, ExternalLink } from 'lucide-react'
 
 // Import Code Connect photos (6 images)
 import codeConnect01 from '../assets/code connect/01.webp'
@@ -35,6 +35,10 @@ interface Program {
   title: string
   description: string
   images: string[]
+  externalLink?: {
+    label: string
+    url: string
+  }
 }
 
 export default function WorkshopsSection() {
@@ -49,6 +53,10 @@ export default function WorkshopsSection() {
       title: 'Hack For Gov 5',
       description: "National Capture The Flag (CTF) cybersecurity drill and competition organized by DICT and CERT-PH at Roy's Hotel, Bacolod City on October 12, 2026. Represented Negros Oriental State University (NORSU) in team-based cyber defense, packet analysis, cryptography, and web exploitation under the theme: 'Decoding Youth Innovation, Anchoring One Nation's Digital Defense.'",
       images: [hackforgov01, hackforgov02, hackforgov03],
+      externalLink: {
+        label: 'View picoCTF Profile (doejohn)',
+        url: 'https://learn.cylabacademy.org/users/doejohn',
+      },
     },
     {
       id: 'code-connect',
@@ -229,6 +237,19 @@ export default function WorkshopsSection() {
                       <p className="mt-2 sm:mt-3 text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed">
                         {program.description}
                       </p>
+                      {program.externalLink && (
+                        <div className="mt-3">
+                          <a
+                            href={program.externalLink.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-shamrock-600 hover:text-shamrock-500 dark:text-shamrock-400 dark:hover:text-shamrock-300 transition-colors"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                            {program.externalLink.label}
+                          </a>
+                        </div>
+                      )}
                     </div>
 
                     {/* Immediate Photo Preview Strip */}
@@ -337,10 +358,21 @@ export default function WorkshopsSection() {
               </div>
 
               {/* Program Description */}
-              <div className="py-4 sm:py-5">
+              <div className="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl">
                   {currentProgram.description}
                 </p>
+                {currentProgram.externalLink && (
+                  <a
+                    href={currentProgram.externalLink.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 hover:opacity-90 transition-opacity shrink-0 self-start sm:self-center"
+                  >
+                    <ExternalLink className="w-4 h-4 text-shamrock-400 dark:text-shamrock-600" />
+                    {currentProgram.externalLink.label}
+                  </a>
+                )}
               </div>
 
               {/* VIEW MODE 1: SPOTLIGHT (Expansive Hero Stage + All Photos Grid) */}

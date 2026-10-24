@@ -36,6 +36,7 @@ This repository contains the source code for my professional portfolio, showcasi
 *   **Deployment:** Optimized for modern cloud environments
 
 ## Accreditations
+*   HackForGov 5 – Negros Island Region (DICT & CERT-PH)
 *   Certified in Cybersecurity (ISC2) - Domains 1 through 5
 *   CISSP Certification (Cisco)
 *   Intellectual Property and IoT Certifications (Mindoro State University)

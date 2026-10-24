@@ -9,6 +9,10 @@
   -webkit-user-select: none;
 }
 
+.hero-image-container--loading {
+  cursor: default;
+}
+
 .hero-image-base,
 .hero-image-reveal {
   display: block;

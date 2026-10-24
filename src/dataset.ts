@@ -54,7 +54,8 @@ export const chatSuggestions: ChatSuggestion[] = [
       "1. Fill out the contact form located in the 'Let's Connect' section of this portfolio.\n" +
       "2. Email directly at: pacificooyanib@gmail.com\n" +
       "3. Connect on LinkedIn: linkedin.com/in/pacifico-oyanib\n" +
-      "4. Check code repositories on GitHub: github.com/OyanibTech-iii\n\n" +
+      "4. Check code repositories on GitHub: github.com/OyanibTech-iii\n" +
+      "5. View cybersecurity drills on picoCTF: learn.cylabacademy.org/users/doejohn\n\n" +
       "Share your project requirements, scope, or questions to receive a prompt proposal.",
   },
 ]
@@ -97,7 +98,8 @@ export function getBotResponse(rawInput: string): string {
         "- The Contact Form on this site (scroll to 'Let's Connect')\n" +
         "- Email: pacificooyanib@gmail.com\n" +
         "- LinkedIn: linkedin.com/in/pacifico-oyanib\n" +
-        "- GitHub: github.com/OyanibTech-iii\n\n" +
+        "- GitHub: github.com/OyanibTech-iii\n" +
+        "- picoCTF: learn.cylabacademy.org/users/doejohn\n\n" +
         "Pacifico is based in the Philippines and collaborates with clients remotely worldwide."
       )
     }
@@ -223,12 +225,15 @@ export function getBotResponse(rawInput: string): string {
       return (
         "Education & Professional Certifications:\n\n" +
         "- Degree: Bachelor of Information Technology from Negros Oriental State University (NORSU)\n" +
+        "- HackForGov 5 (NIR): Regional Cybersecurity CTF Competition Certificate of Participation (DICT & CERT-PH)\n" +
         "- ISC2 Certified in Cybersecurity (CC):\n" +
         "  - Security Principles (Domain 1)\n" +
         "  - Business Continuity, Incident Response & DR (Domain 2)\n" +
         "  - Access Controls Concepts (Domain 3)\n" +
         "  - Network Security (Domain 4)\n" +
         "  - Security Operations (Domain 5)\n" +
+        "- Cisco: CISSP Certification\n" +
+        "- Mindoro State University: Intellectual Property & IoT Certifications\n" +
         "- Specialized Training: DICT-ILCDB government technical training, KOICA digital transformation training, and Code Connect workshops.\n\n" +
         "Credentials can be viewed with official certificates in the 'About' section."
       )
@@ -272,7 +277,8 @@ export function getBotResponse(rawInput: string): string {
         "- Contact Form: Scroll to the 'Let's Connect' section at the bottom of the page\n" +
         "- LinkedIn: linkedin.com/in/pacifico-oyanib\n" +
         "- GitHub: github.com/OyanibTech-iii\n" +
-        "- Behance: behance.net/pacificooyanibcreate\n\n" +
+        "- Behance: behance.net/pacificooyanibcreate\n" +
+        "- picoCTF: learn.cylabacademy.org/users/doejohn\n\n" +
         "Messages sent through the contact form are forwarded directly to his inbox."
       )
     }
@@ -282,20 +288,21 @@ export function getBotResponse(rawInput: string): string {
   // 9. HACK4GOV & CYBERSECURITY COMPETITIONS
   // ==========================================
   const hack4govPatterns = [
-    /\b(hack\s*4\s*gov|hackforgov|hack\s*for\s*gov|bacolod|ctf|cyber\s*drill|cyber\s*security\s*competition|capture\s*the\s*flag)\b/,
+    /\b(hack\s*4\s*gov|hackforgov|hack\s*for\s*gov|bacolod|ctf|cyber\s*drill|cyber\s*security\s*competition|capture\s*the\s*flag|pico\s*ctf|picoctf|cylab)\b/,
   ]
 
   for (const pattern of hack4govPatterns) {
     if (pattern.test(query)) {
       return (
-        "Hack For Gov 5 — Bacolod City (Negros Island Region):\n\n" +
+        "Hack For Gov 5 & Cybersecurity Practice:\n\n" +
         "- Event: Hack For Gov 5 Regional Qualifier & CTF Competition\n" +
         "- Date: October 12, 2026\n" +
         "- Venue: Roy's Hotel, Bacolod City, Negros Occidental\n" +
         "- Organizers: DICT (Department of Information and Communications Technology) and CERT-PH\n" +
         "- Delegation: Represented Negros Oriental State University (NORSU - Main)\n" +
         "- Theme: 'Decoding Youth Innovation, Anchoring One Nation's Digital Defense.'\n" +
-        "- Challenges Tackled: Web Application Exploitation, Network Forensics (PCAP), Cryptography/Steganography, and Reverse Engineering.\n\n" +
+        "- Challenges Tackled: Web Application Exploitation, Network Forensics (PCAP), Cryptography/Steganography, and Reverse Engineering.\n" +
+        "- picoCTF Profile: https://learn.cylabacademy.org/users/doejohn (Carnegie Mellon CyLab - doejohn)\n\n" +
         "You can explore the photos and full event details in the 'Workshops & Training' section under the 'Hack For Gov 5' tab ('#workshops')."
       )
     }

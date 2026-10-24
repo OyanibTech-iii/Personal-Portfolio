@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { FaGithub, FaBehance } from 'react-icons/fa'
+import { FaGithub, FaBehance, FaFlag, FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
 import { ProgressBarCircle } from "@/components/base/progress-indicators/progress-circles"
 import SpecularButton from "@/components/SpecularButton"
@@ -14,6 +14,7 @@ import isc2Cert2Img from '../assets/isc2 cert/cc domain 2.webp'
 import isc2Cert3Img from '../assets/isc2 cert/cc domain 3.webp'
 import isc2Cert4Img from '../assets/isc2 cert/cc domain 4.webp'
 import isc2Cert5Img from '../assets/isc2 cert/cc domain 5.webp'
+import hackForGovCertImg from '../assets/hackforgov-certificate.webp'
 import { Button } from './ui/button'
 import { ImageWithSkeleton } from './ui/image-with-skeleton'
 import { preloadImages } from '@/lib/image-cache'
@@ -21,6 +22,42 @@ import { preloadImages } from '@/lib/image-cache'
 interface AboutSectionProps {
   onOpenCertModal: (cert: { src: string; title: string; issuer: string; year: string; url?: string }) => void
 }
+
+interface ProfileLink {
+  id: string
+  name: string
+  url: string
+  baseColor: string
+  icon: React.ComponentType<{ className?: string }>
+  iconColor?: string
+}
+
+const DEFAULT_VISIBLE_PROFILE_LINKS = 2
+
+const profileLinks: ProfileLink[] = [
+  {
+    id: 'behance',
+    name: 'pacificooyanibcreate',
+    url: 'https://www.behance.net/pacificooyanibcreate',
+    baseColor: '#71717a',
+    icon: FaBehance,
+  },
+  {
+    id: 'github',
+    name: 'OyanibTech-iii',
+    url: 'https://github.com/OyanibTech-iii',
+    baseColor: '#24292f',
+    icon: FaGithub,
+  },
+  {
+    id: 'picoctf',
+    name: 'picoCTF (doejohn)',
+    url: 'https://learn.cylabacademy.org/users/doejohn',
+    baseColor: '#1e293b',
+    icon: FaFlag,
+    iconColor: 'text-red-500',
+  },
+]
 
 const skillData = [
   { subject: 'Frontend', A: 95, fullMark: 100 },
@@ -43,6 +80,7 @@ const focusData = [
 export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
   // Default state is hidden
   const [showAccreditations, setShowAccreditations] = useState(false)
+  const [showAllLinks, setShowAllLinks] = useState(false)
   const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down')
 
   useEffect(() => {
@@ -62,6 +100,7 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
   }, [])
 
   const certificates = useMemo(() => [
+    { src: hackForGovCertImg, title: 'HackForGov 5 – Negros Island Region', issuer: 'DICT & CERT-PH', year: '2026' },
     { src: certImg, title: 'Intellectual Property', issuer: 'Mindoro State University', year: '2025' },
     { src: cert2Img, title: 'Internet of Things', issuer: 'Mindoro State University', year: '2025' },
     { src: cisspCertImg, title: 'CISSP Certification', issuer: 'Cisco', year: '2025' },
@@ -72,9 +111,9 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
     { src: isc2Cert5Img, title: 'Certified in Cybersecurity Domain 5', issuer: 'ISC2', year: '2026' }
   ], [])
 
-  // Pre-cache certificate images into browser and memory cache
+  // Pre-cache profile and certificate images into browser and memory cache
   const handlePreload = useCallback(() => {
-    preloadImages(certificates.map((c) => c.src))
+    preloadImages([profileImg, ...certificates.map((c) => c.src)])
   }, [certificates])
 
   // Preload on idle so images are ready before user clicks
@@ -98,6 +137,8 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
     setShowAccreditations((prev) => !prev)
   }
 
+  const displayedLinks = showAllLinks ? profileLinks : profileLinks.slice(0, DEFAULT_VISIBLE_PROFILE_LINKS)
+
   return (
     <section id="about" className="relative isolate overflow-hidden rounded-3xl bg-white/70 p-5 sm:p-8 md:p-12 backdrop-blur-sm transition-colors duration-300 dark:bg-neutral-900/50">
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-12 md:grid-cols-3">
@@ -108,15 +149,23 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
           transition={{ duration: 0.5 }}
           className="md:col-span-1 space-y-6"
         >
-          <motion.img
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: false, amount: 0.2 }}
-            src={profileImg}
-            alt="Profile portrait"
-            className="w-full object-contain rounded-lg"
-            loading="lazy"
-          />
+            className="w-full"
+          >
+            <div className="relative w-full aspect-square rounded-2xl overflow-hidden border border-neutral-200/60 dark:border-neutral-800/60 bg-neutral-100/50 dark:bg-neutral-900/50 shadow-sm">
+              <ImageWithSkeleton
+                src={profileImg}
+                alt="Profile portrait"
+                containerClassName="w-full h-full"
+                className="w-full h-full object-contain rounded-2xl"
+                skeletonClassName="w-full h-full rounded-2xl bg-neutral-200/80 dark:bg-neutral-800/80"
+                loading="eager"
+              />
+            </div>
+          </motion.div>
           
           <motion.div
             initial={{ opacity: 0, y: scrollDirection === 'down' ? 15 : -15 }}
@@ -125,48 +174,57 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="flex flex-wrap items-center justify-center gap-3"
           >
-            <SpecularButton
-              size="sm"
-              radius={18}
-              tintOpacity={0}
-              blur={0}
-              lineColor="#ffffff"
-              baseColor="#71717a"
-              intensity={1}
-              shineSize={12}
-              shineFade={40}
-              thickness={1}
-              followMouse
-              proximity={250}
-              autoAnimate={false}
-              onClick={() => window.open('https://www.behance.net/pacificooyanibcreate', '_blank', 'noreferrer')}
-            >
-              <span className="inline-flex items-center gap-2">
-                <FaBehance className="h-4 w-4" />
-                pacificooyanibcreate
-              </span>
-            </SpecularButton>
-            <SpecularButton
-              size="sm"
-              radius={18}
-              tintOpacity={0}
-              blur={0}
-              lineColor="#ffffff"
-              baseColor="#24292f"
-              intensity={1}
-              shineSize={12}
-              shineFade={40}
-              thickness={1}
-              followMouse
-              proximity={250}
-              autoAnimate={false}
-              onClick={() => window.open('https://github.com/OyanibTech-iii', '_blank', 'noreferrer')}
-            >
-              <span className="inline-flex items-center gap-2">
-                <FaGithub className="h-4 w-4" />
-                OyanibTech-iii
-              </span>
-            </SpecularButton>
+            {displayedLinks.map((link) => {
+              const IconComponent = link.icon
+              return (
+                <SpecularButton
+                  key={link.id}
+                  size="sm"
+                  radius={18}
+                  tintOpacity={0}
+                  blur={0}
+                  lineColor="#ffffff"
+                  baseColor={link.baseColor}
+                  intensity={1}
+                  shineSize={12}
+                  shineFade={40}
+                  thickness={1}
+                  followMouse
+                  proximity={250}
+                  autoAnimate={false}
+                  onClick={() => window.open(link.url, '_blank', 'noreferrer')}
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <IconComponent className={`h-4 w-4 ${link.iconColor ?? ''}`.trim()} />
+                    {link.name}
+                  </span>
+                </SpecularButton>
+              )
+            })}
+            {profileLinks.length > DEFAULT_VISIBLE_PROFILE_LINKS && (
+              <SpecularButton
+                size="sm"
+                radius={18}
+                tintOpacity={0}
+                blur={0}
+                lineColor="#ffffff"
+                baseColor="#27272a"
+                intensity={1}
+                shineSize={12}
+                shineFade={40}
+                thickness={1}
+                followMouse
+                proximity={250}
+                autoAnimate={false}
+                onClick={() => setShowAllLinks((prev) => !prev)}
+                className="cursor-pointer"
+              >
+                <span className="inline-flex items-center gap-1.5 font-medium text-xs sm:text-sm">
+                  {showAllLinks ? 'See Less' : 'See More'}
+                  {showAllLinks ? <FaChevronUp className="h-3 w-3" /> : <FaChevronDown className="h-3 w-3" />}
+                </span>
+              </SpecularButton>
+            )}
           </motion.div>
 
           <motion.div

@@ -1,5 +1,5 @@
 import { Footer7 } from "./ui/footer-7";
-import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaFlag } from "react-icons/fa";
 
 export default function Footer() {
   const logo = {
@@ -37,6 +37,7 @@ export default function Footer() {
       links: [
         { name: "YouTube Tutorials", href: "#youtube-tutorials" },
         { name: "GitHub Analytics", href: "#about" },
+        { name: "picoCTF Profile", href: "https://learn.cylabacademy.org/users/doejohn" },
       ],
     },
   ];
@@ -44,6 +45,7 @@ export default function Footer() {
   const socialLinks = [
     { icon: <FaFacebook className="size-5" />, href: "https://www.facebook.com/thierd.dhee.morshed/", label: "Facebook" },
     { icon: <FaGithub className="size-5" />, href: "https://github.com/oyanibTech-iii", label: "GitHub" },
+    { icon: <FaFlag className="size-5" />, href: "https://learn.cylabacademy.org/users/doejohn", label: "picoCTF" },
     { icon: <FaInstagram className="size-5" />, href: "/instagram", label: "Instagram" },
     { icon: <FaLinkedin className="size-5" />, href: "/linkedin", label: "LinkedIn" },
   ];

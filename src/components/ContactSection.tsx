@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Loader2, 
 } from 'lucide-react'
-import { Facebook, GitHub as Github, Mail } from 'react-feather'
+import { Facebook, GitHub as Github, Mail, Flag } from 'react-feather'
 import SpecularButton from "@/components/SpecularButton"
 
 interface ContactSectionProps {
@@ -59,6 +59,13 @@ export default function ContactSection({
       color: 'hover:text-neutral-900 dark:hover:text-white'
     },
     { 
+      name: 'picoCTF', 
+      icon: <Flag className="w-5 h-5" />, 
+      handle: 'doejohn',
+      url: 'https://learn.cylabacademy.org/users/doejohn',
+      color: 'hover:text-red-600 dark:hover:text-red-400'
+    },
+    { 
       name: 'Email', 
       icon: <Mail className="w-5 h-5" />, 
       handle: 'pacificooyanib@gmail.com',
@@ -105,6 +112,9 @@ export default function ContactSection({
                   className={`group flex items-center justify-between p-4 rounded-2xl border border-neutral-200/60 bg-white/50 dark:border-neutral-800/60 dark:bg-neutral-900/40 backdrop-blur-md transition-all duration-300 ${link.color}`}
                 >
                   <div className="flex items-center gap-4">
+                    <div className="text-neutral-500 dark:text-neutral-400 group-hover:text-current transition-colors">
+                      {link.icon}
+                    </div>
                     <div>
                       <p className="text-xs font-bold uppercase tracking-wider text-neutral-400 group-hover:text-neutral-500 transition-colors">{link.name}</p>
                       <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">{link.handle}</p>
