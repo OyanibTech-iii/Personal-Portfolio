@@ -216,7 +216,7 @@ export default function WorkshopsSection() {
               transition={{ duration: 0.35, ease: "easeOut" }}
               className="grid grid-cols-1 gap-8 sm:grid-cols-2"
             >
-              {programs.map((program) => {
+              {programs.map((program, index) => {
                 const previewImages = program.images.slice(0, 3)
                 const remainingCount = program.images.length - 3
 
@@ -224,11 +224,16 @@ export default function WorkshopsSection() {
                   <motion.div
                     layout
                     key={program.id}
-                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="group flex flex-col rounded-2xl sm:rounded-3xl border border-neutral-200/80 bg-white p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
+                    initial={{ opacity: 0, y: 35, scale: 0.96 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: false, amount: 0.15 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: index * 0.1,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                    className="group flex flex-col rounded-2xl sm:rounded-3xl border border-neutral-200/80 bg-white p-5 sm:p-6 shadow-sm transition-shadow duration-300 hover:shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/40 backdrop-blur-sm"
                   >
                     <div className="flex-1">
                       <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white">
@@ -510,12 +515,17 @@ export default function WorkshopsSection() {
                       : 'grid-cols-1 sm:grid-cols-2'
                   }`}>
                     {currentProgram.images.map((imgSrc, idx) => (
-                      <button
+                      <motion.button
                         key={idx}
                         type="button"
+                        initial={{ opacity: 0, y: 20, scale: 0.96 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        viewport={{ once: false, amount: 0.15 }}
+                        transition={{ duration: 0.4, delay: idx * 0.08 }}
+                        whileHover={{ y: -4, scale: 1.02 }}
                         onClick={() => openLightbox(currentProgram, idx)}
                         aria-label={`Open ${currentProgram.title} photo ${idx + 1}`}
-                        className="group relative rounded-2xl overflow-hidden border border-neutral-200/80 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-950 aspect-[16/10] focus:outline-none cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                        className="group relative rounded-2xl overflow-hidden border border-neutral-200/80 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-950 aspect-[16/10] focus:outline-none cursor-pointer shadow-sm hover:shadow-xl"
                       >
                         <ImageWithSkeleton
                           src={imgSrc}
@@ -524,14 +534,14 @@ export default function WorkshopsSection() {
                           containerClassName="h-full w-full"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 opacity-40 group-hover:opacity-80 transition-opacity" />
-                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-xs font-semibold border border-white/10">
+                        <div className="absolute inset-0 bg-black/30 opacity-40 group-hover:opacity-70 transition-opacity" />
+                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-semibold border border-white/10">
                           Photo {idx + 1} of {currentProgram.images.length}
                         </div>
                         <div className="absolute bottom-3 right-3 p-2 rounded-full bg-black/60 backdrop-blur-md text-white opacity-0 group-hover:opacity-100 transition-opacity">
                           <Maximize2 className="w-4 h-4 text-shamrock-400" />
                         </div>
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 </div>

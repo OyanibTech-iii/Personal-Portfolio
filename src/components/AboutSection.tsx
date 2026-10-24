@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
-import { motion } from 'framer-motion'
-import { FaGithub, FaBehance, FaFlag, FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FaGithub, FaBehance, FaFlag, FaChevronDown, FaChevronUp, FaChevronRight } from 'react-icons/fa'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
 import { ProgressBarCircle } from "@/components/base/progress-indicators/progress-circles"
 import SpecularButton from "@/components/SpecularButton"
@@ -82,6 +82,8 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
   const [showAccreditations, setShowAccreditations] = useState(false)
   const [showAllLinks, setShowAllLinks] = useState(false)
   const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down')
+  const [isFloatingPillVisible, setIsFloatingPillVisible] = useState(false)
+  const accreditationsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     let lastScrollY = window.scrollY
@@ -133,9 +135,55 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
     }
   }, [handlePreload])
 
+  const handleCollapseAccreditations = (smoothScroll = true) => {
+    if (smoothScroll && accreditationsRef.current) {
+      const rect = accreditationsRef.current.getBoundingClientRect();
+      const isScrolledPast = rect.top < 40;
+      if (isScrolledPast) {
+        const yOffset = -90;
+        const y = rect.top + window.scrollY + yOffset;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        setTimeout(() => {
+          setShowAccreditations(false);
+        }, 350);
+        return;
+      }
+    }
+    setShowAccreditations(false);
+  };
+
   const toggleAccreditations = () => {
-    setShowAccreditations((prev) => !prev)
-  }
+    if (showAccreditations) {
+      handleCollapseAccreditations(true);
+    } else {
+      setShowAccreditations(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!showAccreditations) {
+      setIsFloatingPillVisible(false);
+      return;
+    }
+
+    const checkVisibility = () => {
+      if (!accreditationsRef.current) return;
+      const rect = accreditationsRef.current.getBoundingClientRect();
+      // Show floating pill when top header is scrolled above viewport (top < 50)
+      // and user is still within the accreditations section (bottom > 180)
+      const isPastHeader = rect.top < 50;
+      const isStillInSection = rect.bottom > 180;
+      setIsFloatingPillVisible(isPastHeader && isStillInSection);
+    };
+
+    window.addEventListener('scroll', checkVisibility, { passive: true });
+    window.addEventListener('resize', checkVisibility, { passive: true });
+    checkVisibility();
+    return () => {
+      window.removeEventListener('scroll', checkVisibility);
+      window.removeEventListener('resize', checkVisibility);
+    };
+  }, [showAccreditations]);
 
   const displayedLinks = showAllLinks ? profileLinks : profileLinks.slice(0, DEFAULT_VISIBLE_PROFILE_LINKS)
 
@@ -366,68 +414,142 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
       </div>
 
       
-      <div className="mx-auto mt-16 max-w-5xl">
+      <div ref={accreditationsRef} className="mx-auto mt-16 max-w-5xl scroll-mt-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
+          className="mb-8 flex items-center justify-start"
         >
-          <button 
-            type="button"
+          <SpecularButton
+            size="md"
+            radius={20}
+            tintOpacity={0}
+            blur={0}
+            lineColor="#ffffff"
+            baseColor="#27272a"
+            intensity={1}
+            shineSize={14}
+            shineFade={40}
+            thickness={1}
+            followMouse
+            proximity={250}
+            autoAnimate={false}
             onClick={toggleAccreditations}
-            onMouseEnter={handlePreload}
-            onFocus={handlePreload}
-            className="flex items-center justify-between w-full mb-8 group cursor-pointer"
+            className="cursor-pointer"
           >
-            <div className="flex items-center gap-2 sm:gap-3">
-              <h3 className="text-base sm:text-xl font-bold text-neutral-900 dark:text-white group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors">
-                Accreditations
-              </h3>
-              <span className="rounded-full bg-neutral-100 dark:bg-neutral-800/80 px-2 sm:px-2.5 py-0.5 text-[11px] sm:text-xs font-semibold text-neutral-600 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60">
+            <span className="inline-flex items-center gap-2.5 font-bold text-sm sm:text-base">
+              <span>Accreditations</span>
+              <span className="rounded-full bg-neutral-100/20 px-2 py-0.5 text-xs font-semibold text-neutral-200 border border-neutral-400/20">
                 {certificates.length}
               </span>
-            </div>
-            <span className="text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 group-hover:text-shamrock-600 dark:group-hover:text-shamrock-400 transition-colors whitespace-nowrap">
-              {showAccreditations ? 'Hide Images' : 'Show Images'}
+              {showAccreditations ? (
+                <FaChevronUp className="h-3.5 w-3.5" />
+              ) : (
+                <FaChevronRight className="h-3.5 w-3.5" />
+              )}
             </span>
-          </button>
+          </SpecularButton>
         </motion.div>
         {showAccreditations && (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {certificates.map((c, i) => (
-              <motion.figure 
-                key={i} 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05, duration: 0.3 }}
-                whileHover={{ y: -5 }}
-                className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 p-4 shadow-sm transition-all duration-300 dark:border-neutral-800/70 dark:bg-neutral-900/50"
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {certificates.map((c, i) => (
+                <motion.figure 
+                  key={i} 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.3 }}
+                  whileHover={{ y: -5 }}
+                  className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/60 p-4 shadow-sm transition-all duration-300 dark:border-neutral-800/70 dark:bg-neutral-900/50"
+                >
+                  <ImageWithSkeleton
+                    src={c.src}
+                    alt={c.title}
+                    containerClassName="h-40 w-full rounded-xl mb-4"
+                    className="h-full w-full object-cover rounded-xl"
+                    loading="lazy"
+                  />
+                  <figcaption>
+                    <p className="text-sm font-bold text-neutral-900 dark:text-white line-clamp-1">{c.title}</p>
+                    <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{c.issuer} • {c.year}</p>
+                    <Button
+                      onClick={() => onOpenCertModal(c)}
+                      variant="outline"
+                      size="sm"
+                      className="mt-4 w-full rounded-xl hover:bg-shamrock-500 hover:text-white cursor-pointer"
+                    >
+                      View Credential
+                    </Button>
+                  </figcaption>
+                </motion.figure>
+              ))}
+            </div>
+
+            {/* Bottom Collapse Button */}
+            <div className="flex justify-center pt-2">
+              <SpecularButton
+                size="sm"
+                radius={18}
+                tintOpacity={0}
+                blur={0}
+                lineColor="#ffffff"
+                baseColor="#27272a"
+                intensity={1}
+                shineSize={12}
+                shineFade={40}
+                thickness={1}
+                followMouse
+                proximity={250}
+                autoAnimate={false}
+                onClick={() => handleCollapseAccreditations(true)}
+                className="cursor-pointer"
               >
-                <ImageWithSkeleton
-                  src={c.src}
-                  alt={c.title}
-                  containerClassName="h-40 w-full rounded-xl mb-4"
-                  className="h-full w-full object-cover rounded-xl"
-                  loading="lazy"
-                />
-                <figcaption>
-                  <p className="text-sm font-bold text-neutral-900 dark:text-white line-clamp-1">{c.title}</p>
-                  <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{c.issuer} • {c.year}</p>
-                  <Button
-                    onClick={() => onOpenCertModal(c)}
-                    variant="outline"
-                    size="sm"
-                    className="mt-4 w-full rounded-xl hover:bg-shamrock-500 hover:text-white cursor-pointer"
-                  >
-                    View Credential
-                  </Button>
-                </figcaption>
-              </motion.figure>
-            ))}
+                <span className="inline-flex items-center gap-2 font-medium text-xs sm:text-sm">
+                  <span>Hide Accreditations</span>
+                  <FaChevronUp className="h-3 w-3" />
+                </span>
+              </SpecularButton>
+            </div>
           </div>
         )}
       </div>
+
+      {/* Floating Mobile Collapse Pill */}
+      <AnimatePresence>
+        {showAccreditations && isFloatingPillVisible && (
+          <motion.div
+            initial={{ opacity: 0, y: 25, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 md:hidden pointer-events-auto"
+          >
+            <SpecularButton
+              size="sm"
+              radius={24}
+              tintOpacity={0}
+              blur={0}
+              lineColor="#ffffff"
+              baseColor="#18181b"
+              intensity={1.2}
+              shineSize={14}
+              shineFade={35}
+              thickness={1.2}
+              followMouse={false}
+              autoAnimate={true}
+              onClick={() => handleCollapseAccreditations(true)}
+              className="cursor-pointer shadow-2xl"
+            >
+              <span className="inline-flex items-center gap-2 font-semibold text-xs py-0.5 px-1">
+                <span>Hide Accreditations</span>
+                <FaChevronUp className="h-3 w-3" />
+              </span>
+            </SpecularButton>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
