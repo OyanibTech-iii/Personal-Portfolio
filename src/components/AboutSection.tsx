@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaGithub, FaBehance, FaFlag, FaShieldAlt, FaChevronDown, FaChevronUp, FaChevronRight } from 'react-icons/fa'
+import { FaGithub, FaBehance, FaChevronDown, FaChevronUp, FaChevronRight } from 'react-icons/fa'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
 import { ProgressBarCircle } from "@/components/base/progress-indicators/progress-circles"
 import SpecularButton from "@/components/SpecularButton"
@@ -28,8 +28,9 @@ interface ProfileLink {
   name: string
   url: string
   baseColor: string
-  icon: React.ComponentType<{ className?: string }>
+  icon?: React.ComponentType<{ className?: string }>
   iconColor?: string
+  imageSrc?: string
 }
 
 const DEFAULT_VISIBLE_PROFILE_LINKS = 2
@@ -54,16 +55,14 @@ const profileLinks: ProfileLink[] = [
     name: 'picoCTF (doejohn)',
     url: 'https://learn.cylabacademy.org/users/doejohn',
     baseColor: '#1e293b',
-    icon: FaFlag,
-    iconColor: 'text-red-500',
+    imageSrc: '/picoCTF.png',
   },
   {
     id: 'codelivly',
     name: 'CodeLivly (zhs4tra)',
     url: 'https://codelivly.com/profile/zhs4tra',
     baseColor: '#1e293b',
-    icon: FaShieldAlt,
-    iconColor: 'text-emerald-400',
+    imageSrc: '/codelivly.png',
   },
 ]
 
@@ -251,7 +250,11 @@ export default function AboutSection({ onOpenCertModal }: AboutSectionProps) {
                   onClick={() => window.open(link.url, '_blank', 'noreferrer')}
                 >
                   <span className="inline-flex items-center gap-2">
-                    <IconComponent className={`h-4 w-4 ${link.iconColor ?? ''}`.trim()} />
+                    {link.imageSrc ? (
+                      <img src={link.imageSrc} alt={link.name} className="h-8 w-8 object-contain" />
+                    ) : IconComponent ? (
+                      <IconComponent className={`h-4 w-4 ${link.iconColor ?? ''}`.trim()} />
+                    ) : null}
                     {link.name}
                   </span>
                 </SpecularButton>
