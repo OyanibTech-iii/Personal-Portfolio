@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaGithub, FaBehance, FaFlag, FaChevronDown, FaChevronUp, FaChevronRight } from 'react-icons/fa'
+import { FaGithub, FaBehance, FaFlag, FaShieldAlt, FaChevronDown, FaChevronUp, FaChevronRight } from 'react-icons/fa'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
 import { ProgressBarCircle } from "@/components/base/progress-indicators/progress-circles"
 import SpecularButton from "@/components/SpecularButton"
@@ -56,6 +56,14 @@ const profileLinks: ProfileLink[] = [
     baseColor: '#1e293b',
     icon: FaFlag,
     iconColor: 'text-red-500',
+  },
+  {
+    id: 'codelivly',
+    name: 'CodeLivly (zhs4tra)',
+    url: 'https://codelivly.com/profile/zhs4tra',
+    baseColor: '#1e293b',
+    icon: FaShieldAlt,
+    iconColor: 'text-emerald-400',
   },
 ]
 
