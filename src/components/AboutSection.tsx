@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaGithub, FaBehance, FaChevronDown, FaChevronUp, FaChevronRight } from 'react-icons/fa'
+import { SiTryhackme } from 'react-icons/si'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, Cell, LabelList } from 'recharts'
 import { ProgressBarCircle } from "@/components/base/progress-indicators/progress-circles"
 import SpecularButton from "@/components/SpecularButton"
@@ -63,6 +64,14 @@ const profileLinks: ProfileLink[] = [
     url: 'https://codelivly.com/profile/zhs4tra',
     baseColor: '#1e293b',
     imageSrc: '/codelivly.png',
+  },
+  {
+    id: 'tryhackme',
+    name: 'TryHackMe (zhs4tra)',
+    url: 'https://tryhackme.com/p/zhs4tra?utm_campaign=social_share&utm_medium=social&utm_content=profile&cardVersion=f1b470bd3b25&utm_source=copy&sharerId=6ade34c570ddb2917938afb8',
+    baseColor: '#1e293b',
+    icon: SiTryhackme,
+    iconColor: 'text-red-500',
   },
 ]
 
